@@ -1,5 +1,10 @@
 package cafeapi.requests;
 
+/**
+ * A static class used for {@link RequestType}.
+ *
+ * @author beanbeanjuice
+ */
 public enum RequestType {
 
     POST,
