@@ -1,5 +1,5 @@
 import cafeapi.CafeAPI;
-import cafeapi.exception.UnauthorizedException;
+import cafeapi.exception.AuthorizationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,12 +18,12 @@ public class UserTest {
         Assertions.assertEquals(1, cafeAPI.users().getUser("beanbeanjuice").getID());
 
         // Making sure that exception is thrown when a user does not exist.
-        Assertions.assertThrows(UnauthorizedException.class, () -> {
+        Assertions.assertThrows(AuthorizationException.class, () -> {
             cafeAPI.users().getUser("beanbeanjuiceTest");
         });
 
         // Making sure that an exception is thrown when trying to sign up with an existing user.
-        Assertions.assertThrows(UnauthorizedException.class, () -> {
+        Assertions.assertThrows(AuthorizationException.class, () -> {
             cafeAPI.users().signUp("beanbeanjuice", "passwordtesttest");
         });
 

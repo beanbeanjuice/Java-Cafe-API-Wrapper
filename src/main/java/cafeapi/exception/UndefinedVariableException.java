@@ -1,5 +1,6 @@
 package cafeapi.exception;
 
+import cafeapi.requests.Request;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -11,11 +12,10 @@ public class UndefinedVariableException extends CafeException {
 
     /**
      * Creates a new {@link UndefinedVariableException}.
-     * @param statusCode The {@link Integer statusCode} of the {@link CafeException}.
-     * @param message The {@link String message} for the {@link CafeException}.
+     * @param request The {@link Request} that threw the {@link CafeException}.
      */
-    public UndefinedVariableException(@NotNull Integer statusCode, @NotNull String message) {
-        super(statusCode, message);
+    public UndefinedVariableException(@NotNull Request request) {
+        super(request);
     }
 
 }

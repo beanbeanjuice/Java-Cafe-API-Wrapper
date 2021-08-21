@@ -1,5 +1,6 @@
 package cafeapi.exception;
 
+import cafeapi.requests.Request;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -11,11 +12,10 @@ public class NotFoundException extends CafeException {
 
     /**
      * Creates a new {@link NotFoundException}.
-     * @param statusCode The {@link Integer statusCode} for the {@link CafeException}.
-     * @param message The {@link String message} for the {@link CafeException}.
+     * @param request The {@link Request} that threw the {@link CafeException}.
      */
-    public NotFoundException(@NotNull Integer statusCode, @NotNull String message) {
-        super(statusCode, message);
+    public NotFoundException(@NotNull Request request) {
+        super(request);
     }
 
 }

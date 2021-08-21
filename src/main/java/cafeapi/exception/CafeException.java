@@ -1,5 +1,6 @@
 package cafeapi.exception;
 
+import cafeapi.requests.Request;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -12,16 +13,14 @@ public class CafeException extends RuntimeException {
     private final Integer statusCode;
     private final String message;
 
-    /**
-     * Creates a new {@link CafeException}.
-     * @param statusCode The {@link Integer statusCode} of the {@link RuntimeException}.
-     * @param message The {@link String message} of the {@link RuntimeException}.
-     */
-    public CafeException(@NotNull Integer statusCode, @NotNull String message) {
-        super("Error " + statusCode + ": " + message);
+    private final Request request;
 
-        this.statusCode = statusCode;
-        this.message = message;
+    public CafeException(@NotNull Request request) {
+        super("Error " + request.getStatusCode() + ": " + request.getData().get("message").asText());
+
+        this.statusCode = request.getStatusCode();
+        this.message = request.getData().get("message").asText();
+        this.request = request;
     }
 
     /**
@@ -39,5 +38,12 @@ public class CafeException extends RuntimeException {
     @Override
     public String getMessage() {
         return message;
+    }
+
+    /**
+     * @return The {@link Request} that threw the {@link CafeException}.
+     */
+    public Request getRequest() {
+        return request;
     }
 }
