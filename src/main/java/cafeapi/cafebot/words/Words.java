@@ -3,7 +3,7 @@ package cafeapi.cafebot.words;
 import cafeapi.api.CafeAPI;
 import cafeapi.exception.NotFoundException;
 import cafeapi.exception.ResponseException;
-import cafeapi.exception.UnauthorizedException;
+import cafeapi.exception.AuthorizationException;
 import cafeapi.exception.UndefinedVariableException;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
@@ -40,6 +40,7 @@ public class Words implements CafeAPI {
     public ArrayList<Word> getAllWords() throws ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/words")
+                .setAuthorization(apiKey)
                 .build();
 
         ArrayList<Word> wordList = new ArrayList<>();
@@ -62,6 +63,7 @@ public class Words implements CafeAPI {
     public Word getWord(@NotNull String word) throws NotFoundException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/words/" + word)
+                .setAuthorization(apiKey)
                 .build();
 
         return new Word(word, request.getData().get("word").get("uses").asInt());
@@ -74,11 +76,11 @@ public class Words implements CafeAPI {
      * @return True, if successful.
      * @throws NotFoundException Thrown when the word was not found.
      * @throws ResponseException Thrown when there is a generic server-side exception.
-     * @throws UnauthorizedException Thrown when the current API key is invalid.
+     * @throws AuthorizationException Thrown when the current API key is invalid.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
     @NotNull
-    public Boolean updateWord(@NotNull String word, @NotNull Integer uses) throws NotFoundException, ResponseException, UnauthorizedException, UndefinedVariableException {
+    public Boolean updateWord(@NotNull String word, @NotNull Integer uses) throws NotFoundException, ResponseException, AuthorizationException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/words/" + word)
                 .addParameter("uses", uses.toString())

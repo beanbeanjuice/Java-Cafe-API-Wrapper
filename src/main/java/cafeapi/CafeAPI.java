@@ -1,5 +1,6 @@
 package cafeapi;
 
+import cafeapi.cafebot.welcomes.Welcomes;
 import cafeapi.cafebot.words.Words;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
@@ -17,6 +18,7 @@ public class CafeAPI {
     private Users users;
 
     private Words words;
+    private Welcomes welcomes;
 
     public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
@@ -31,6 +33,7 @@ public class CafeAPI {
 
         // cafeBot
         words = new Words(apiKey);
+        welcomes = new Welcomes(apiKey);
     }
 
     // TODO: Reset API Key
@@ -51,6 +54,10 @@ public class CafeAPI {
 
     public Words words() {
         return words;
+    }
+
+    public Welcomes welcomes() {
+        return welcomes;
     }
 
 }

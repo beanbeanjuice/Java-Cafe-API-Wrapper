@@ -1,9 +1,6 @@
 package cafeapi.requests;
 
-import cafeapi.exception.NotFoundException;
-import cafeapi.exception.ResponseException;
-import cafeapi.exception.UnauthorizedException;
-import cafeapi.exception.UndefinedVariableException;
+import cafeapi.exception.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -127,19 +124,23 @@ public class RequestBuilder {
 
                 // Catching Status Codes
                 if (request.getStatusCode() == 400) {
-                    throw new UndefinedVariableException(request.getStatusCode(), request.getData().get("message").textValue());
+                    throw new UndefinedVariableException(request);
                 }
 
                 if (request.getStatusCode() == 401) {
-                    throw new UnauthorizedException(request.getStatusCode(), request.getData().get("message").textValue());
+                    throw new AuthorizationException(request);
                 }
 
                 if (request.getStatusCode() == 404) {
-                    throw new NotFoundException(request.getStatusCode(), request.getData().get("message").textValue());
+                    throw new NotFoundException(request);
+                }
+
+                if (request.getStatusCode() == 409) {
+                    throw new ConflictException(request);
                 }
 
                 if (request.getStatusCode() == 500) {
-                    throw new ResponseException(request.getStatusCode(), request.getData().get("message").textValue());
+                    throw new ResponseException(request);
                 }
 
 

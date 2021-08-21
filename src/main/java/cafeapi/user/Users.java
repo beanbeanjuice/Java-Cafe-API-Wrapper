@@ -2,7 +2,7 @@ package cafeapi.user;
 
 import cafeapi.api.CafeAPI;
 import cafeapi.exception.ResponseException;
-import cafeapi.exception.UnauthorizedException;
+import cafeapi.exception.AuthorizationException;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
 import cafeapi.requests.RequestRoute;
@@ -31,9 +31,9 @@ public class Users implements CafeAPI {
 
     /**
      * @return The {@link ArrayList} of {@link User users} in the API database.
-     * @throws UnauthorizedException Thrown when the logged in account does not have access to view all users.
+     * @throws AuthorizationException Thrown when the logged in account does not have access to view all users.
      */
-    public ArrayList<User> getUsers() throws UnauthorizedException, ResponseException {
+    public ArrayList<User> getUsers() throws AuthorizationException, ResponseException {
         ArrayList<User> users = new ArrayList<>();
 
         Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.GET)
@@ -66,7 +66,7 @@ public class Users implements CafeAPI {
         return request.getStatusCode() == 201;
     }
 
-    public User getUser(@NotNull String username) throws UnauthorizedException, ResponseException {
+    public User getUser(@NotNull String username) throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.GET)
                 .setRoute("/user/" + username)
                 .setAuthorization(apiKey)
