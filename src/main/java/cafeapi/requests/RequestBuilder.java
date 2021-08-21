@@ -1,7 +1,9 @@
 package cafeapi.requests;
 
+import cafeapi.exception.NotFoundException;
 import cafeapi.exception.ResponseException;
 import cafeapi.exception.UnauthorizedException;
+import cafeapi.exception.UndefinedVariableException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -29,7 +31,7 @@ import java.util.HashMap;
  */
 public class RequestBuilder {
 
-    private final String apiURL = "http://localhost:4101/cafe/api/v1";
+    private String apiURL = "http://localhost:4101";
 
     private RequestType requestType;
     private String route;
@@ -45,9 +47,11 @@ public class RequestBuilder {
      * Creates a new {@link RequestBuilder}.
      * @param requestType The {@link RequestType type} of {@link Request}.
      */
-    public RequestBuilder(@NotNull RequestType requestType) {
+    public RequestBuilder(@NotNull RequestRoute requestRoute, @NotNull RequestType requestType) {
         this.requestType = requestType;
         parameters = new HashMap<>();
+
+        apiURL += requestRoute.getRoute();
     }
 
     /**
@@ -79,7 +83,7 @@ public class RequestBuilder {
      * @return The new {@link RequestBuilder}.
      */
     @NotNull
-    public RequestBuilder setAPIKey(@NotNull String apiKey) {
+    public RequestBuilder setAuthorization(@NotNull String apiKey) {
         this.apiKey = apiKey;
         return this;
     }
@@ -122,13 +126,22 @@ public class RequestBuilder {
                 Request request = new Request(statusCode, new ObjectMapper().readTree(inputStream));
 
                 // Catching Status Codes
+                if (request.getStatusCode() == 400) {
+                    throw new UndefinedVariableException(request.getStatusCode(), request.getData().get("message").textValue());
+                }
+
                 if (request.getStatusCode() == 401) {
                     throw new UnauthorizedException(request.getStatusCode(), request.getData().get("message").textValue());
+                }
+
+                if (request.getStatusCode() == 404) {
+                    throw new NotFoundException(request.getStatusCode(), request.getData().get("message").textValue());
                 }
 
                 if (request.getStatusCode() == 500) {
                     throw new ResponseException(request.getStatusCode(), request.getData().get("message").textValue());
                 }
+
 
                 return request;
             }

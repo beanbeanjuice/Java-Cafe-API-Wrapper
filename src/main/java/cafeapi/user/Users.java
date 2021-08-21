@@ -1,8 +1,11 @@
 package cafeapi.user;
 
+import cafeapi.api.CafeAPI;
+import cafeapi.exception.ResponseException;
 import cafeapi.exception.UnauthorizedException;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
+import cafeapi.requests.RequestRoute;
 import cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author beanbeanjuice
  */
-public class Users {
+public class Users implements CafeAPI {
 
     private String apiKey; // TODO: Make something for updating the API key
 
@@ -30,12 +33,12 @@ public class Users {
      * @return The {@link ArrayList} of {@link User users} in the API database.
      * @throws UnauthorizedException Thrown when the logged in account does not have access to view all users.
      */
-    public ArrayList<User> getUsers() throws UnauthorizedException {
+    public ArrayList<User> getUsers() throws UnauthorizedException, ResponseException {
         ArrayList<User> users = new ArrayList<>();
 
-        Request request = new RequestBuilder(RequestType.GET)
+        Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.GET)
                 .setRoute("/users")
-                .setAPIKey(apiKey)
+                .setAuthorization(apiKey)
                 .build();
 
         for (JsonNode user : request.getData().get("users")) {
@@ -54,7 +57,7 @@ public class Users {
      * @return True, if successfully signed up.
      */
     public Boolean signUp(@NotNull String username, @NotNull String password) {
-        Request request = new RequestBuilder(RequestType.POST)
+        Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.POST)
                 .setRoute("/user/signup")
                 .addParameter("username", username)
                 .addParameter("password", password)
@@ -63,23 +66,26 @@ public class Users {
         return request.getStatusCode() == 201;
     }
 
-    public User getUser(@NotNull Integer userID) {
-        Request request = new RequestBuilder(RequestType.GET)
-                .setRoute("/user/" + userID)
-                .setAPIKey(apiKey)
+    public User getUser(@NotNull String username) throws UnauthorizedException, ResponseException {
+        Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.GET)
+                .setRoute("/user/" + username)
+                .setAuthorization(apiKey)
                 .build();
 
-        Integer ID = request.getData().get("user").get(0).get("user_id").intValue();
-        String username = request.getData().get("user").get(0).get("username").textValue();
-        UserType userType = UserType.valueOf(request.getData().get("user").get(0).get("user_type").textValue());
+        Integer ID = request.getData().get("user").get("user_id").intValue();
+        UserType userType = UserType.valueOf(request.getData().get("user").get("user_type").textValue());
         return new User(ID, username, userType);
     }
 
-    public Boolean deleteUser(@NotNull Integer userID) {
-        RequestBuilder requestBuilder = new RequestBuilder(RequestType.DELETE)
-                .setRoute("/user/" + userID + "/delete")
-                .setAPIKey(apiKey);
+    public Boolean deleteUser(@NotNull String username) {
+        RequestBuilder requestBuilder = new RequestBuilder(RequestRoute.CAFE, RequestType.DELETE)
+                .setRoute("/user/" + username)
+                .setAuthorization(apiKey);
         return requestBuilder.build().getStatusCode() == 200;
     }
 
+    @Override
+    public void updateAPIKey(@NotNull String apiKey) {
+        this.apiKey = apiKey;
+    }
 }
