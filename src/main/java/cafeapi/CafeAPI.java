@@ -1,5 +1,6 @@
 package cafeapi;
 
+import cafeapi.cafebot.voicebinds.VoiceChannelBinds;
 import cafeapi.cafebot.welcomes.Welcomes;
 import cafeapi.cafebot.words.Words;
 import cafeapi.requests.Request;
@@ -19,6 +20,7 @@ public class CafeAPI {
 
     private Words words;
     private Welcomes welcomes;
+    private VoiceChannelBinds voiceChannelBinds;
 
     public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
@@ -34,6 +36,7 @@ public class CafeAPI {
         // cafeBot
         words = new Words(apiKey);
         welcomes = new Welcomes(apiKey);
+        voiceChannelBinds = new VoiceChannelBinds(apiKey);
     }
 
     // TODO: Reset API Key
@@ -58,6 +61,10 @@ public class CafeAPI {
 
     public Welcomes welcomes() {
         return welcomes;
+    }
+
+    public VoiceChannelBinds voiceChannelBinds() {
+        return voiceChannelBinds;
     }
 
 }
