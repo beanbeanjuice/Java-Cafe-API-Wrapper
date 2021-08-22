@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * A test class used to test all aspects of the {@link cafeapi.user.Users Users} module.
+ *
+ * @author beanbeanjuice
+ */
 public class UserTest {
 
     @Test
