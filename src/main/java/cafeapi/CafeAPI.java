@@ -1,5 +1,6 @@
 package cafeapi;
 
+import cafeapi.cafebot.interactions.Interactions;
 import cafeapi.cafebot.minigames.winstreaks.WinStreaks;
 import cafeapi.cafebot.polls.Polls;
 import cafeapi.cafebot.raffles.Raffles;
@@ -27,6 +28,7 @@ public class CafeAPI {
     private Raffles raffles;
     private Polls polls;
     private WinStreaks winstreaks;
+    private Interactions interactions;
 
     public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
@@ -46,6 +48,7 @@ public class CafeAPI {
         raffles = new Raffles(apiKey);
         polls = new Polls(apiKey);
         winstreaks = new WinStreaks(apiKey);
+        interactions = new Interactions(apiKey);
     }
 
     // TODO: Reset API Key
@@ -86,6 +89,10 @@ public class CafeAPI {
 
     public WinStreaks winStreaks() {
         return winstreaks;
+    }
+
+    public Interactions interactions() {
+        return interactions;
     }
 
 }
