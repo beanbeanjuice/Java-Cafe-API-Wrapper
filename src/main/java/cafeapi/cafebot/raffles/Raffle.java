@@ -1,5 +1,6 @@
 package cafeapi.cafebot.raffles;
 
+import cafeapi.generic.Generic;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Timestamp;
@@ -18,7 +19,7 @@ public class Raffle {
     /**
      * Creates a new {@link Raffle} object.
      * @param messageID The {@link String messageID} of the {@link Raffle}.
-     * @param endingTime The {@link Timestamp endingTime} of the {@link Raffle}.
+     * @param endingTime The {@link Timestamp endingTime} of the {@link Raffle}. UTC timezone.
      * @param winnerAmount The {@link Integer winnerAmount} of the {@link Raffle}.
      */
     public Raffle(@NotNull String messageID, @NotNull Timestamp endingTime, @NotNull Integer winnerAmount) {
@@ -36,7 +37,7 @@ public class Raffle {
     }
 
     /**
-     * @return The {@link Timestamp endingTime} of the {@link Raffle}.
+     * @return The {@link Timestamp endingTime} of the {@link Raffle}. UTC timezone.
      */
     @NotNull
     public Timestamp getEndingTime() {
