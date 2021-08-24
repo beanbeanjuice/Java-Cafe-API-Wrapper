@@ -1,6 +1,7 @@
 import cafeapi.CafeAPI;
 import cafeapi.cafebot.raffles.Raffle;
 import cafeapi.exception.ConflictException;
+import cafeapi.generic.Generic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,17 +16,20 @@ public class RaffleTest {
     public void rafflesAPITest() {
         CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
 
+        long currentTime = System.currentTimeMillis();
+        Timestamp currentTimestamp = Generic.parseTimestamp(new Timestamp(currentTime).toString());
+
         // Makes sure a raffle can be created.
         Assertions.assertTrue(() -> cafeAPI.raffles().createRaffle("798830792938881024", new Raffle(
                 "878895791081676831",
-                new Timestamp(System.currentTimeMillis()),
+                currentTimestamp,
                 3
         )));
 
         // Makes sure creating the same raffle throws an exception.
         Assertions.assertThrows(ConflictException.class, () -> cafeAPI.raffles().createRaffle("798830792938881024", new Raffle(
                 "878895791081676831",
-                new Timestamp(System.currentTimeMillis()),
+                currentTimestamp,
                 3
         )));
 
@@ -35,6 +39,19 @@ public class RaffleTest {
 
             for (Raffle raffle : raffles) {
                 if (raffle.getMessageID().equals("878895791081676831")) {
+                    return true;
+                }
+            }
+
+            return false;
+        });
+
+        // Makes sure that retrieving the timestamp of the poll works.
+        Assertions.assertTrue(() -> {
+            ArrayList<Raffle> raffles = cafeAPI.raffles().getGuildRaffles("798830792938881024");
+
+            for (Raffle raffle : raffles) {
+                if (raffle.getEndingTime().equals(currentTimestamp)) {
                     return true;
                 }
             }
@@ -61,6 +78,10 @@ public class RaffleTest {
         // Makes sure the newly created raffle that was deleted no longer shows up in the API.
         Assertions.assertFalse(() -> {
             ArrayList<Raffle> raffles = cafeAPI.raffles().getAllRaffles().get("798830792938881024");
+
+            if (raffles == null) {
+                return false;
+            }
 
             for (Raffle raffle : raffles) {
                 if (raffle.getMessageID().equals("878895791081676831")) {
