@@ -139,6 +139,10 @@ public class RequestBuilder {
                     throw new ConflictException(request);
                 }
 
+                if (request.getStatusCode() == 418) {
+                    throw new TeaPotException(request);
+                }
+
                 if (request.getStatusCode() == 500) {
                     throw new ResponseException(request);
                 }
