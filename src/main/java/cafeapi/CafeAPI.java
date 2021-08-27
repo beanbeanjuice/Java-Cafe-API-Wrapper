@@ -4,6 +4,7 @@ import cafeapi.cafebot.interactions.Interactions;
 import cafeapi.cafebot.minigames.winstreaks.WinStreaks;
 import cafeapi.cafebot.polls.Polls;
 import cafeapi.cafebot.raffles.Raffles;
+import cafeapi.cafebot.twitches.GuildTwitches;
 import cafeapi.cafebot.voicebinds.VoiceChannelBinds;
 import cafeapi.cafebot.welcomes.Welcomes;
 import cafeapi.cafebot.words.Words;
@@ -29,6 +30,7 @@ public class CafeAPI {
     private Polls polls;
     private WinStreaks winstreaks;
     private Interactions interactions;
+    private GuildTwitches guildTwitches;
 
     public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
@@ -49,6 +51,7 @@ public class CafeAPI {
         polls = new Polls(apiKey);
         winstreaks = new WinStreaks(apiKey);
         interactions = new Interactions(apiKey);
+        guildTwitches = new GuildTwitches(apiKey);
     }
 
     // TODO: Reset API Key
@@ -93,6 +96,10 @@ public class CafeAPI {
 
     public Interactions interactions() {
         return interactions;
+    }
+
+    public GuildTwitches guildTwitches() {
+        return guildTwitches;
     }
 
 }
