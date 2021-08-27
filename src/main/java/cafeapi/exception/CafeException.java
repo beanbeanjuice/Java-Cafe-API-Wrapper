@@ -2,6 +2,7 @@ package cafeapi.exception;
 
 import cafeapi.requests.Request;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A generic {@link RuntimeException} used for {@link cafeapi.CafeAPI CafeAPI} exceptions.
@@ -15,12 +16,29 @@ public class CafeException extends RuntimeException {
 
     private final Request request;
 
+    /**
+     * Creates a new {@link CafeException}.
+     * @param request The {@link Request} that threw the {@link Exception}.
+     */
     public CafeException(@NotNull Request request) {
         super("Error " + request.getStatusCode() + ": " + request.getData().get("message").asText());
 
         this.statusCode = request.getStatusCode();
         this.message = request.getData().get("message").asText();
         this.request = request;
+    }
+
+    /**
+     * Creates a new {@link CafeException}.
+     * @param statusCode The {@link Integer statusCode} for the {@link Exception}.
+     * @param message The {@link String message} for the {@link Exception}.
+     */
+    public CafeException(@NotNull Integer statusCode, @NotNull String message) {
+        super("Error " + statusCode + ": " + message);
+
+        this.statusCode = statusCode;
+        this.message = message;
+        this.request = null;
     }
 
     /**
@@ -43,6 +61,7 @@ public class CafeException extends RuntimeException {
     /**
      * @return The {@link Request} that threw the {@link CafeException}.
      */
+    @Nullable
     public Request getRequest() {
         return request;
     }
