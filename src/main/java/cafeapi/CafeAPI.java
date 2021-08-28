@@ -1,6 +1,7 @@
 package cafeapi;
 
 import cafeapi.cafebot.codes.GeneratedCodes;
+import cafeapi.cafebot.counting.CountingInformations;
 import cafeapi.cafebot.guilds.GuildInformations;
 import cafeapi.cafebot.interactions.Interactions;
 import cafeapi.cafebot.minigames.winstreaks.WinStreaks;
@@ -37,6 +38,7 @@ public class CafeAPI {
     private GuildInformations guildInformations;
     private GeneratedCodes generatedCodes;
     private Versions versions;
+    private CountingInformations countingInformations;
 
     public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
@@ -61,6 +63,7 @@ public class CafeAPI {
         guildInformations = new GuildInformations(apiKey);
         generatedCodes = new GeneratedCodes(apiKey);
         versions = new Versions(apiKey);
+        countingInformations = new CountingInformations(apiKey);
     }
 
     // TODO: Reset API Key
@@ -123,4 +126,7 @@ public class CafeAPI {
         return versions;
     }
 
+    public CountingInformations countingInformations() {
+        return countingInformations;
+    }
 }
