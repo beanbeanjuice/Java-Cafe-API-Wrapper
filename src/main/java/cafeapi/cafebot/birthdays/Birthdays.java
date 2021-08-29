@@ -2,7 +2,7 @@ package cafeapi.cafebot.birthdays;
 
 import cafeapi.api.CafeAPI;
 import cafeapi.exception.*;
-import cafeapi.generic.Generic;
+import cafeapi.generic.CafeGeneric;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
 import cafeapi.requests.RequestRoute;
@@ -190,7 +190,7 @@ public class Birthdays implements CafeAPI {
      */
     @NotNull
     private Birthday parseBirthday(@NotNull JsonNode birthday) {
-        Date date = Generic.parseDate(birthday.get("birth_date").asText());
+        Date date = CafeGeneric.parseDate(birthday.get("birth_date").asText());
         Boolean alreadyMentioned = birthday.get("already_mentioned").asBoolean();
 
         Calendar calendar = Calendar.getInstance();

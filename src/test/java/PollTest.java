@@ -1,7 +1,7 @@
 import cafeapi.CafeAPI;
 import cafeapi.cafebot.polls.Poll;
 import cafeapi.exception.ConflictException;
-import cafeapi.generic.Generic;
+import cafeapi.generic.CafeGeneric;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ public class PollTest {
         CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
 
         long currentTime = System.currentTimeMillis();
-        Timestamp currentTimestamp = Generic.parseTimestamp(new Timestamp(currentTime).toString());
+        Timestamp currentTimestamp = CafeGeneric.parseTimestamp(new Timestamp(currentTime).toString());
 
         // Makes sure the poll doesn't exist before starting the test.
         Assertions.assertTrue(() -> cafeAPI.polls().deletePoll("798830792938881024", "879519824424890438"));

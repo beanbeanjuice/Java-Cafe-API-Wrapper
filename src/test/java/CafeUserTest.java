@@ -4,7 +4,7 @@ import cafeapi.cafebot.cafe.CafeUser;
 import cafeapi.exception.ConflictException;
 import cafeapi.exception.NotFoundException;
 import cafeapi.exception.TeaPotException;
-import cafeapi.generic.Generic;
+import cafeapi.generic.CafeGeneric;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ public class CafeUserTest {
         Assertions.assertEquals(100.0, cafeAPI.cafeUsers().getCafeUser("236654580300120064").getBeanCoins());
 
         // Makes sure the timestamp can be changed.
-        Timestamp currentTimeStamp = Generic.parseTimestamp(new Timestamp(System.currentTimeMillis()).toString());
+        Timestamp currentTimeStamp = CafeGeneric.parseTimestamp(new Timestamp(System.currentTimeMillis()).toString());
         Assertions.assertTrue(cafeAPI.cafeUsers().updateCafeUser("236654580300120064", CafeType.LAST_SERVING_TIME, currentTimeStamp));
         Assertions.assertEquals(currentTimeStamp, cafeAPI.cafeUsers().getCafeUser("236654580300120064").getLastServingTime());
 

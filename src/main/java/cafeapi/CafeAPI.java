@@ -1,5 +1,6 @@
 package cafeapi;
 
+import cafeapi.cafebot.beancoins.users.DonationUsers;
 import cafeapi.cafebot.birthdays.Birthdays;
 import cafeapi.cafebot.cafe.CafeUsers;
 import cafeapi.cafebot.codes.GeneratedCodes;
@@ -43,6 +44,7 @@ public class CafeAPI {
     private CountingInformations countingInformations;
     private CafeUsers cafeUsers;
     private Birthdays birthdays;
+    private DonationUsers donationUsers;
 
     public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
@@ -70,6 +72,7 @@ public class CafeAPI {
         countingInformations = new CountingInformations(apiKey);
         cafeUsers = new CafeUsers(apiKey);
         birthdays = new Birthdays(apiKey);
+        donationUsers = new DonationUsers(apiKey);
     }
 
     // TODO: Reset API Key
@@ -142,5 +145,9 @@ public class CafeAPI {
 
     public Birthdays birthdays() {
         return birthdays;
+    }
+
+    public DonationUsers donationUsers() {
+        return donationUsers;
     }
 }

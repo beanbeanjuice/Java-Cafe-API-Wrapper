@@ -5,7 +5,7 @@ import cafeapi.exception.AuthorizationException;
 import cafeapi.exception.ConflictException;
 import cafeapi.exception.ResponseException;
 import cafeapi.exception.UndefinedVariableException;
-import cafeapi.generic.Generic;
+import cafeapi.generic.CafeGeneric;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
 import cafeapi.requests.RequestRoute;
@@ -53,7 +53,7 @@ public class Polls implements CafeAPI {
         for (JsonNode poll : request.getData().get("polls")) {
             String guildID = poll.get("guild_id").asText();
             String messageID = poll.get("message_id").asText();
-            Timestamp endingTime = Generic.parseTimestamp(poll.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestamp(poll.get("ending_time").asText());
 
             if (!polls.containsKey(guildID)) {
                 polls.put(guildID, new ArrayList<>());
@@ -84,7 +84,7 @@ public class Polls implements CafeAPI {
 
         for (JsonNode poll : request.getData().get("polls")) {
             String messageID = poll.get("message_id").asText();
-            Timestamp endingTime = Generic.parseTimestamp(poll.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestamp(poll.get("ending_time").asText());
 
             polls.add(new Poll(messageID, endingTime));
         }
