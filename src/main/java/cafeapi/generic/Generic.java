@@ -3,6 +3,7 @@ package cafeapi.generic;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ public class Generic {
      * @param timestampString The {@link String timestampString} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.
      * @return The parsed {@link Timestamp timestamp} retrieved from the {@link cafeapi.CafeAPI CafeAPI}. UTC Timezone.
      * Null if timestamp was incorrectly entered.
+     * @throws IllegalArgumentException - Thrown when the pattern given is invalid.
      */
     @Nullable
     public static Timestamp parseTimestamp(@NotNull String timestampString) throws IllegalArgumentException {
@@ -31,6 +33,38 @@ public class Generic {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    /**
+     * Parses a {@link Date} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.
+     * @param dateString The {@link String dateString} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.
+     * @return The parsed {@link Date} retrieved from the {@link cafeapi.CafeAPI CafeAPI}. UTC Timezone.
+     * Null if the date was incorrectly entered.
+     * @throws IllegalArgumentException - Thrown when the pattern given is invalid.
+     */
+    @Nullable
+    public static Date parseDate(@NotNull String dateString) throws IllegalArgumentException {
+        dateString = dateString.replace("T", " ").replace("Z", "");
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return new Date(simpleDateFormat.parse(dateString).getTime());
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Parses a {@link Boolean} into its number value.
+     * @param bool The {@link Boolean} to parse.
+     * @return "1", if true. If there was an error, it will be "0" by default.
+     */
+    @NotNull
+    public static String parseBoolean(@NotNull Boolean bool) {
+        if (bool.equals(true)) {
+            return "1";
+        }
+        return "0";
     }
 
 }
