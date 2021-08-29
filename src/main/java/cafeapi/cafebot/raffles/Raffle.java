@@ -1,6 +1,5 @@
 package cafeapi.cafebot.raffles;
 
-import cafeapi.generic.Generic;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Timestamp;

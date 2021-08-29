@@ -14,7 +14,7 @@ import java.util.TimeZone;
  *
  * @author beanbeanjuice
  */
-public class Generic {
+public class CafeGeneric {
 
     /**
      * Parses a {@link Timestamp} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.

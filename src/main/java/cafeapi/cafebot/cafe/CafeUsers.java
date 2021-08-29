@@ -2,7 +2,7 @@ package cafeapi.cafebot.cafe;
 
 import cafeapi.api.CafeAPI;
 import cafeapi.exception.*;
-import cafeapi.generic.Generic;
+import cafeapi.generic.CafeGeneric;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
 import cafeapi.requests.RequestRoute;
@@ -173,7 +173,7 @@ public class CafeUsers implements CafeAPI {
     private CafeUser parseCafeUser(@NotNull JsonNode node) {
         String userID = node.get("user_id").asText();
         Double beanCoins = node.get("bean_coins").asDouble();
-        Timestamp timestamp = Generic.parseTimestamp(node.get("last_serving_time").asText());
+        Timestamp timestamp = CafeGeneric.parseTimestamp(node.get("last_serving_time").asText());
         Integer ordersBought = node.get("orders_bought").asInt();
         Integer ordersReceived = node.get("orders_received").asInt();
 
