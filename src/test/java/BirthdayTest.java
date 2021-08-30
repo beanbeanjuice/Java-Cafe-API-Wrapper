@@ -33,7 +33,7 @@ public class BirthdayTest {
 //        Assertions.assertEquals(31, cafeAPI.birthdays().getUserBirthday("178272524533104642").getDay());
         int day = cafeAPI.birthdays().getUserBirthday("178272524533104642").getDay();
         System.out.println("DAY IS " + day);
-        Assertions.assertEquals(31, day);
+        Assertions.assertEquals(31, day, "Comparison Failed, expected 31, but got " + day);
 
         // Makes sure a TeaPotException is thrown when there are more days than in the month.
         Assertions.assertThrows(TeaPotException.class, () -> cafeAPI.birthdays().updateUserBirthday("178272524533104642", BirthdayMonth.FEBRUARY, 30));
