@@ -9,7 +9,7 @@ public class BotVersionTest {
     @Test
     @DisplayName("Bot Version API Test")
     public void testBotVersionAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Gets the current version of cafeBot.
         String currentVersion = cafeAPI.versions().getCurrentCafeBotVersion();

@@ -49,7 +49,7 @@ public class DonationUsers implements CafeAPI {
 
         for (JsonNode user : request.getData().get("users")) {
             String userID = user.get("user_id").asText();
-            Timestamp timeUntilNextDonation = CafeGeneric.parseTimestamp(user.get("time_until_next_donation").asText());
+            Timestamp timeUntilNextDonation = CafeGeneric.parseTimestampFromAPI(user.get("time_until_next_donation").asText());
 
             donationUsers.put(userID, timeUntilNextDonation);
         }
@@ -73,7 +73,7 @@ public class DonationUsers implements CafeAPI {
                 .setAuthorization(apiKey)
                 .build();
 
-        return CafeGeneric.parseTimestamp(request.getData().get("user").get("time_until_next_donation").asText());
+        return CafeGeneric.parseTimestampFromAPI(request.getData().get("user").get("time_until_next_donation").asText());
     }
 
     /**

@@ -14,7 +14,7 @@ public class UserTest {
     @Test
     @DisplayName("Test Users API")
     public void userAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Making sure the first user's ID is 1.
         Assertions.assertEquals(1, cafeAPI.users().getUsers().get(0).getID());

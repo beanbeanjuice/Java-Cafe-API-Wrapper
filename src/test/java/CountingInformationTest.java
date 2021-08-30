@@ -11,7 +11,7 @@ public class CountingInformationTest {
     @Test
     @DisplayName("Counting Information API Test")
     public void testCountingInformationAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure the counting information for the guild is deleted beforehand.
         Assertions.assertTrue(cafeAPI.countingInformations().deleteGuildCountingInformation("605489113323536433"));

@@ -11,7 +11,7 @@ public class WinStreakTest {
     @Test
     @DisplayName("Test WinStreaks API")
     public void winStreaksAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         Assertions.assertTrue(cafeAPI.winStreaks().deleteUserWinStreak("879310496002637824"));
 

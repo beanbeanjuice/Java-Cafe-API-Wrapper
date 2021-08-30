@@ -16,7 +16,7 @@ public class GuildWelcomeTest {
     @Test
     @DisplayName("Test Guild Welcomes API")
     public void guildWelcomesAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure that the amount of guilds in the guild's welcome is more than 0.
         Assertions.assertTrue(cafeAPI.welcomes().getAllGuildWelcomes().size() > 0);

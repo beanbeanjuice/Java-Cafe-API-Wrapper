@@ -10,7 +10,7 @@ public class GeneratedCodeTest {
     @Test
     @DisplayName("Test Generated Codes API")
     public void testGeneratedCodesAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure the code doesn't exist beforehand.
         Assertions.assertTrue(cafeAPI.generatedCodes().deleteUserGeneratedCode("738590591767543921"));

@@ -13,7 +13,7 @@ public class DonationUsersTest {
     @Test
     @DisplayName("Donation Users API Test")
     public void testDonationUsersAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         Assertions.assertTrue(cafeAPI.donationUsers().deleteDonationUser("738590591767543921"));
         Assertions.assertThrows(NotFoundException.class, () -> cafeAPI.donationUsers().getUserDonationTime("738590591767543921"));

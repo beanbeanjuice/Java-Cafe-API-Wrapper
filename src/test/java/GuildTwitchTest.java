@@ -9,7 +9,7 @@ public class GuildTwitchTest {
     @Test
     @DisplayName("Guild Twitch API Test")
     public void testGuildTwitchAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure when getting twitch names for a guild that doesn't exist it returns empty.
         Assertions.assertTrue(cafeAPI.guildTwitches().getGuildTwitches("491616686928166912").isEmpty());

@@ -53,7 +53,7 @@ public class Raffles implements CafeAPI {
         for (JsonNode raffle : request.getData().get("raffles")) {
             String guildID = raffle.get("guild_id").asText();
             String messageID = raffle.get("message_id").asText();
-            Timestamp endingTime = CafeGeneric.parseTimestamp(raffle.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(raffle.get("ending_time").asText());
             Integer winnerAmount = raffle.get("winner_amount").asInt();
 
             if (!raffles.containsKey(guildID)) {
@@ -85,7 +85,7 @@ public class Raffles implements CafeAPI {
 
         for (JsonNode raffle : request.getData().get("raffles")) {
             String messageID = raffle.get("message_id").asText();
-            Timestamp endingTime = CafeGeneric.parseTimestamp(raffle.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(raffle.get("ending_time").asText());
             Integer winnerAmount = raffle.get("winner_amount").asInt();
 
             raffles.add(new Raffle(messageID, endingTime, winnerAmount));

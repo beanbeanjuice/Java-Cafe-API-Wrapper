@@ -14,7 +14,7 @@ public class WordTest {
     @Test
     @DisplayName("Test Word API")
     public void wordAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure the ENTIRE word list is retrieved.
         Assertions.assertTrue(cafeAPI.words().getAllWords().size() > 370100);

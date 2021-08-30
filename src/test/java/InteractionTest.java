@@ -11,7 +11,7 @@ public class InteractionTest {
     @Test
     @DisplayName("Test Interactions API (SENDERS)")
     public void interactionSendersAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure to delete the user before-hand.
         Assertions.assertTrue(cafeAPI.interactions().deleteUserInteractionsSent("879761226761109544"));
@@ -116,7 +116,7 @@ public class InteractionTest {
     @Test
     @DisplayName("Test Interactions API (RECEIVERS)")
     public void interactionReceiversAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure to delete the user before-hand.
         Assertions.assertTrue(cafeAPI.interactions().deleteUserInteractionsReceived("879761226761109544"));

@@ -12,7 +12,7 @@ public class BirthdayTest {
     @Test
     @DisplayName("Birthdays Test API")
     public void testBirthdayAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure the user's birthday doesn't exist before starting.
         Assertions.assertTrue(cafeAPI.birthdays().removeUserBirthday("178272524533104642"));

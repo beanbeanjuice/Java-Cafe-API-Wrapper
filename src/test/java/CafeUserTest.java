@@ -16,7 +16,7 @@ public class CafeUserTest {
     @Test
     @DisplayName("Cafe User API Test")
     public void testCafeUserAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure the user does not exist beforehand.
         Assertions.assertTrue(cafeAPI.cafeUsers().deleteCafeUser("236654580300120064"));
