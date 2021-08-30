@@ -7,6 +7,7 @@ import cafeapi.cafebot.codes.GeneratedCodes;
 import cafeapi.cafebot.counting.CountingInformations;
 import cafeapi.cafebot.guilds.GuildInformations;
 import cafeapi.cafebot.interactions.Interactions;
+import cafeapi.cafebot.interactions.pictures.InteractionPictures;
 import cafeapi.cafebot.minigames.winstreaks.WinStreaks;
 import cafeapi.cafebot.polls.Polls;
 import cafeapi.cafebot.raffles.Raffles;
@@ -45,6 +46,7 @@ public class CafeAPI {
     private CafeUsers cafeUsers;
     private Birthdays birthdays;
     private DonationUsers donationUsers;
+    private InteractionPictures interactionPictures;
 
     public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
@@ -73,6 +75,7 @@ public class CafeAPI {
         cafeUsers = new CafeUsers(apiKey);
         birthdays = new Birthdays(apiKey);
         donationUsers = new DonationUsers(apiKey);
+        interactionPictures = new InteractionPictures(apiKey);
     }
 
     // TODO: Reset API Key
@@ -149,5 +152,9 @@ public class CafeAPI {
 
     public DonationUsers donationUsers() {
         return donationUsers;
+    }
+    
+    public InteractionPictures interactionPictures() {
+        return interactionPictures;
     }
 }
