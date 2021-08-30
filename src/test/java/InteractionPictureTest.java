@@ -11,8 +11,7 @@ public class InteractionPictureTest {
     public void testInteractionPicturesAPI() {
         CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
 
-        Assertions.assertNotNull(cafeAPI.interactionPictures().getInteractionPicture(InteractionType.SHUSH));
-        System.out.println(cafeAPI.interactionPictures().getInteractionPicture(InteractionType.SLAP));
+        Assertions.assertNotNull(cafeAPI.interactionPictures().getRandomInteractionPicture(InteractionType.SHUSH));
     }
 
 }
