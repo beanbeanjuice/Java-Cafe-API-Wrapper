@@ -1,11 +1,15 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
+
+group = 'com.github.beanbeanjuice'
 
 group 'com.beanbeanjuice'
 version 'v1.0.0'
 
 repositories {
+    maven { url "https://jitpack.io" }
     mavenCentral()
 }
 
