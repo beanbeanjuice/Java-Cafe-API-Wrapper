@@ -61,11 +61,11 @@ public class CafeGeneric {
      * @throws IllegalArgumentException - Thrown when the pattern given is invalid.
      */
     @Nullable
-    public static Date parseDate(@NotNull String dateString) throws IllegalArgumentException {
+    public static Date parseDateFromAPI(@NotNull String dateString) throws IllegalArgumentException {
         dateString = dateString.replace("T", " ").replace("Z", "");
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+//            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             return new Date(simpleDateFormat.parse(dateString).getTime());
         } catch (ParseException e) {
             return null;
