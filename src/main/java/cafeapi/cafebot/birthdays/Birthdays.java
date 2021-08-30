@@ -191,14 +191,16 @@ public class Birthdays implements CafeAPI {
      */
     @NotNull
     private Birthday parseBirthday(@NotNull JsonNode birthday) {
-        Date date = CafeGeneric.parseDate(birthday.get("birth_date").asText());
+        Date date = CafeGeneric.parseDateFromAPI(birthday.get("birth_date").asText());
         Boolean alreadyMentioned = birthday.get("already_mentioned").asBoolean();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+//        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTime(date);
+//        System.out.println(date);
         int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+//        System.out.println(day);
         return new Birthday(getBirthdayMonth(month), day, alreadyMentioned);
     }
 

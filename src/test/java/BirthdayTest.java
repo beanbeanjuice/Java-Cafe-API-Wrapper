@@ -66,4 +66,14 @@ public class BirthdayTest {
         Assertions.assertThrows(NotFoundException.class, () -> cafeAPI.birthdays().getUserBirthday("178272524533104642"));
     }
 
+    @Test
+    public void test() {
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
+
+        Assertions.assertTrue(cafeAPI.birthdays().removeUserBirthday("178272524533104642"));
+        Assertions.assertTrue(cafeAPI.birthdays().createUserBirthday("178272524533104642", BirthdayMonth.DECEMBER, 31));
+        System.out.println(cafeAPI.birthdays().getUserBirthday("178272524533104642").getDay());
+        System.out.println(cafeAPI.birthdays().getUserBirthday("178272524533104642").getMonth());
+    }
+
 }
