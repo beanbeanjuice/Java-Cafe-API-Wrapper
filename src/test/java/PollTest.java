@@ -14,7 +14,7 @@ public class PollTest {
     @Test
     @DisplayName("Test Polls API")
     public void pollsAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         long currentTime = System.currentTimeMillis();
         Timestamp currentTimestamp = CafeGeneric.parseTimestamp(new Timestamp(currentTime).toString());

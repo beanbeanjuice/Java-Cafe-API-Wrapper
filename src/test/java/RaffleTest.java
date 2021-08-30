@@ -14,10 +14,13 @@ public class RaffleTest {
     @Test
     @DisplayName("Test Raffles API")
     public void rafflesAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         long currentTime = System.currentTimeMillis();
         Timestamp currentTimestamp = CafeGeneric.parseTimestamp(new Timestamp(currentTime).toString());
+
+        // Makes sure the raffle is deleted beforehand.
+        Assertions.assertTrue(cafeAPI.raffles().deleteRaffle("798830792938881024", "878895791081676831"));
 
         // Makes sure a raffle can be created.
         Assertions.assertTrue(() -> cafeAPI.raffles().createRaffle("798830792938881024", new Raffle(

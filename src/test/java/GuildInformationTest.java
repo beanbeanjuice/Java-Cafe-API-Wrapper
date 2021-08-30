@@ -11,7 +11,7 @@ public class GuildInformationTest {
     @Test
     @DisplayName("Guild Information API Test")
     public void testGuildInformationAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure the guild is deleted beforehand.
         Assertions.assertTrue(cafeAPI.guildInformations().deleteGuildInformation("816880157490675732"));

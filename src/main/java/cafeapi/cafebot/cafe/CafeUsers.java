@@ -173,7 +173,7 @@ public class CafeUsers implements CafeAPI {
     private CafeUser parseCafeUser(@NotNull JsonNode node) {
         String userID = node.get("user_id").asText();
         Double beanCoins = node.get("bean_coins").asDouble();
-        Timestamp timestamp = CafeGeneric.parseTimestamp(node.get("last_serving_time").asText());
+        Timestamp timestamp = CafeGeneric.parseTimestampFromAPI(node.get("last_serving_time").asText());
         Integer ordersBought = node.get("orders_bought").asInt();
         Integer ordersReceived = node.get("orders_received").asInt();
 

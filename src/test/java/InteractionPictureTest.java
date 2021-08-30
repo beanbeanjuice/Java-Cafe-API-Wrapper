@@ -9,7 +9,7 @@ public class InteractionPictureTest {
     @Test
     @DisplayName("Interaction Pictures API Test")
     public void testInteractionPicturesAPI() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Goes through every interaction type.
         Assertions.assertDoesNotThrow(() -> {

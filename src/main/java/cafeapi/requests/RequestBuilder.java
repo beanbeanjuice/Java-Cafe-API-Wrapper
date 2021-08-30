@@ -28,9 +28,10 @@ import java.util.HashMap;
  */
 public class RequestBuilder {
 
-    private String apiURL = "http://localhost:4101";
+    private String apiURL = "http://beanbeanjuice.com:5101";
+//    private String apiURL = "http://localhost:5101";
 
-    private RequestType requestType;
+    private final RequestType requestType;
     private String route;
     private final HashMap<String, String> parameters;
 

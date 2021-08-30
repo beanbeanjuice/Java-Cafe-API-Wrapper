@@ -15,7 +15,7 @@ public class VoiceChannelBindTest {
     @Test
     @DisplayName("Test Voice Channel Binds API")
     public void voiceChannelBindsAPITest() {
-        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", "password123");
+        CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"));
 
         // Makes sure that the list of voice channel binds contains the guild home guild.
         Assertions.assertTrue(cafeAPI.voiceChannelBinds().getAllVoiceChannelBinds().containsKey("798830792938881024"));

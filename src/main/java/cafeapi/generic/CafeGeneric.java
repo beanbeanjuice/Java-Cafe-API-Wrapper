@@ -36,6 +36,24 @@ public class CafeGeneric {
     }
 
     /**
+     * Parses a {@link Timestamp} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.
+     * @param timestampString The {@link String timestampString} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.
+     * @return The parsed {@link Timestamp timestamp} retrieved from the {@link cafeapi.CafeAPI CafeAPI}. UTC Timezone.
+     * Null if timestamp was incorrectly entered.
+     * @throws IllegalArgumentException - Thrown when the pattern given is invalid.
+     */
+    @Nullable
+    public static Timestamp parseTimestampFromAPI(@NotNull String timestampString) throws IllegalArgumentException {
+        timestampString = timestampString.replace("T", " ").replace("Z", "");
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return new Timestamp(simpleDateFormat.parse(timestampString).getTime());
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    /**
      * Parses a {@link Date} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.
      * @param dateString The {@link String dateString} retrieved from the {@link cafeapi.CafeAPI CafeAPI}.
      * @return The parsed {@link Date} retrieved from the {@link cafeapi.CafeAPI CafeAPI}. UTC Timezone.
