@@ -36,5 +36,6 @@ dependencies {
 }
 
 test {
+    gradle.startParameter.showStacktrace = org.gradle.api.logging.configuration.ShowStacktrace.ALWAYS
     useJUnitPlatform()
 }
