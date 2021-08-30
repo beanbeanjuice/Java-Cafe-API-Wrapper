@@ -65,7 +65,6 @@ public class CafeGeneric {
         dateString = dateString.replace("T", " ").replace("Z", "");
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//            simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             return new Date(simpleDateFormat.parse(dateString).getTime());
         } catch (ParseException e) {
             return null;

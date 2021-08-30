@@ -195,12 +195,9 @@ public class Birthdays implements CafeAPI {
         Boolean alreadyMentioned = birthday.get("already_mentioned").asBoolean();
 
         Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTime(date);
-//        System.out.println(date);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-//        System.out.println(day);
         return new Birthday(getBirthdayMonth(month), day, alreadyMentioned);
     }
 

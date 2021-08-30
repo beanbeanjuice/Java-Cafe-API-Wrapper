@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Users implements CafeAPI {
 
-    private String apiKey; // TODO: Make something for updating the API key
+    private String apiKey;
 
     /**
      * Creates a new {@link Users}.
