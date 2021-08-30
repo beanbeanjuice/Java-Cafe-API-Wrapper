@@ -1,30 +1,55 @@
 package cafeapi;
 
+import cafeapi.cafebot.beancoins.users.DonationUsers;
+import cafeapi.cafebot.birthdays.Birthdays;
+import cafeapi.cafebot.cafe.CafeUsers;
+import cafeapi.cafebot.codes.GeneratedCodes;
+import cafeapi.cafebot.counting.CountingInformations;
+import cafeapi.cafebot.guilds.GuildInformations;
+import cafeapi.cafebot.interactions.Interactions;
+import cafeapi.cafebot.interactions.pictures.InteractionPictures;
+import cafeapi.cafebot.minigames.winstreaks.WinStreaks;
+import cafeapi.cafebot.polls.Polls;
+import cafeapi.cafebot.raffles.Raffles;
+import cafeapi.cafebot.twitches.GuildTwitches;
+import cafeapi.cafebot.version.Versions;
+import cafeapi.cafebot.voicebinds.VoiceChannelBinds;
+import cafeapi.cafebot.welcomes.Welcomes;
+import cafeapi.cafebot.words.Words;
 import cafeapi.requests.Request;
 import cafeapi.requests.RequestBuilder;
+import cafeapi.requests.RequestRoute;
 import cafeapi.requests.RequestType;
-import cafeapi.user.User;
-import cafeapi.user.UserType;
 import cafeapi.user.Users;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 public class CafeAPI {
 
     private String apiKey;
     private String userAgent;
-    private final Boolean useCafeBot;
     public static final String url = "http://localhost:4101/cafe/api/v1";
 
-    public Users users;
+    private Users users;
 
-    public CafeAPI(@NotNull String username, @NotNull String password, @NotNull Boolean useCafeBot) {
+    private Words words;
+    private Welcomes welcomes;
+    private VoiceChannelBinds voiceChannelBinds;
+    private Raffles raffles;
+    private Polls polls;
+    private WinStreaks winstreaks;
+    private Interactions interactions;
+    private GuildTwitches guildTwitches;
+    private GuildInformations guildInformations;
+    private GeneratedCodes generatedCodes;
+    private Versions versions;
+    private CountingInformations countingInformations;
+    private CafeUsers cafeUsers;
+    private Birthdays birthdays;
+    private DonationUsers donationUsers;
+    private InteractionPictures interactionPictures;
+
+    public CafeAPI(@NotNull String username, @NotNull String password) {
         this.userAgent = username;
-        this.useCafeBot = useCafeBot;
 
         try {
             apiKey = getToken(username, password);
@@ -33,10 +58,30 @@ public class CafeAPI {
         }
 
         users = new Users(apiKey);
+
+        // cafeBot
+        words = new Words(apiKey);
+        welcomes = new Welcomes(apiKey);
+        voiceChannelBinds = new VoiceChannelBinds(apiKey);
+        raffles = new Raffles(apiKey);
+        polls = new Polls(apiKey);
+        winstreaks = new WinStreaks(apiKey);
+        interactions = new Interactions(apiKey);
+        guildTwitches = new GuildTwitches(apiKey);
+        guildInformations = new GuildInformations(apiKey);
+        generatedCodes = new GeneratedCodes(apiKey);
+        versions = new Versions(apiKey);
+        countingInformations = new CountingInformations(apiKey);
+        cafeUsers = new CafeUsers(apiKey);
+        birthdays = new Birthdays(apiKey);
+        donationUsers = new DonationUsers(apiKey);
+        interactionPictures = new InteractionPictures(apiKey);
     }
 
-    private String getToken(@NotNull String username, @NotNull String password) throws IOException, URISyntaxException {
-        Request request = new RequestBuilder(RequestType.POST)
+    // TODO: Reset API Key
+
+    private String getToken(@NotNull String username, @NotNull String password) {
+        Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.POST)
                 .setRoute("/user/login")
                 .addParameter("username", username)
                 .addParameter("password", password)
@@ -45,4 +90,71 @@ public class CafeAPI {
         return request.getData().get("api_key").textValue();
     }
 
+    public Users users() {
+        return users;
+    }
+
+    public Words words() {
+        return words;
+    }
+
+    public Welcomes welcomes() {
+        return welcomes;
+    }
+
+    public VoiceChannelBinds voiceChannelBinds() {
+        return voiceChannelBinds;
+    }
+
+    public Raffles raffles() {
+        return raffles;
+    }
+
+    public Polls polls() {
+        return polls;
+    }
+
+    public WinStreaks winStreaks() {
+        return winstreaks;
+    }
+
+    public Interactions interactions() {
+        return interactions;
+    }
+
+    public GuildTwitches guildTwitches() {
+        return guildTwitches;
+    }
+
+    public GuildInformations guildInformations() {
+        return guildInformations;
+    }
+
+    public GeneratedCodes generatedCodes() {
+        return generatedCodes;
+    }
+
+    public Versions versions() {
+        return versions;
+    }
+
+    public CountingInformations countingInformations() {
+        return countingInformations;
+    }
+
+    public CafeUsers cafeUsers() {
+        return cafeUsers;
+    }
+
+    public Birthdays birthdays() {
+        return birthdays;
+    }
+
+    public DonationUsers donationUsers() {
+        return donationUsers;
+    }
+    
+    public InteractionPictures interactionPictures() {
+        return interactionPictures;
+    }
 }

@@ -29,9 +29,13 @@ dependencies {
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 
     // HTTP
-    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
+    // DOTENV
+    implementation group: 'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
 }
 
 test {
+    gradle.startParameter.showStacktrace = org.gradle.api.logging.configuration.ShowStacktrace.ALWAYS
     useJUnitPlatform()
 }
