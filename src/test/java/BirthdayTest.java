@@ -32,7 +32,7 @@ public class BirthdayTest {
         // Makes sure the date is the same.
 //        Assertions.assertEquals(31, cafeAPI.birthdays().getUserBirthday("178272524533104642").getDay());
         int day = cafeAPI.birthdays().getUserBirthday("178272524533104642").getDay();
-        System.out.println(day);
+        System.out.println("DAY IS " + day);
         Assertions.assertEquals(31, day);
 
         // Makes sure a TeaPotException is thrown when there are more days than in the month.
