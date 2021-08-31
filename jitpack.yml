@@ -1,8 +1,11 @@
 jdk:
-   - openjdk16
+  - openjdk16
 before_install:
-   - sdk install java 16.0.2
-   - sdk use java 16.0.2
+  - echo "Before Install"
+  - ./ensure-java-16 install
 install:
-   - echo "Running a custom install command"
-   - ./gradlew clean install -xtest
+  - echo "Install"
+  - if ! ./ensure-java-16 use; then source ~/.sdkman/bin/sdkman-init.sh; fi
+  - java -version
+
+# Thanks to https://github.com/jitpack/jitpack.io/issues/4355#issuecomment-744678253
