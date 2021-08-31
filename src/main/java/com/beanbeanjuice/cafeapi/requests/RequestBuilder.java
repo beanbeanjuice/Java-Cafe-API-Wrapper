@@ -70,7 +70,7 @@ public class RequestBuilder {
      * @return The new {@link RequestBuilder}.
      */
     @NotNull
-    public RequestBuilder addParameter(@NotNull String key, @NotNull String value) {
+    public RequestBuilder addParameter(@NotNull String key, @Nullable String value) {
         parameters.put(key, value);
         return this;
     }
