@@ -1,11 +1,11 @@
-import cafeapi.CafeAPI;
-import cafeapi.exception.NotFoundException;
+import com.beanbeanjuice.cafeapi.CafeAPI;
+import com.beanbeanjuice.cafeapi.exception.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * A test class used to test all aspects of the {@link cafeapi.cafebot.words.Words Words} module.
+ * A test class used to test all aspects of the {@link com.beanbeanjuice.cafeapi.cafebot.words.Words Words} module.
  *
  * @author beanbeanjuice
  */
