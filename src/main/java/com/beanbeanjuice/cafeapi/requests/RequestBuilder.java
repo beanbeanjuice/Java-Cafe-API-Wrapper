@@ -44,6 +44,7 @@ public class RequestBuilder {
     /**
      * Creates a new {@link RequestBuilder}.
      * @param requestType The {@link RequestType type} of {@link Request}.
+     * @param requestRoute The {@link RequestRoute} of the {@link Request}.
      */
     public RequestBuilder(@NotNull RequestRoute requestRoute, @NotNull RequestType requestType) {
         this.requestType = requestType;

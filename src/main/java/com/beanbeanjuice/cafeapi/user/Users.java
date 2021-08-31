@@ -66,6 +66,13 @@ public class Users implements CafeAPI {
         return request.getStatusCode() == 201;
     }
 
+    /**
+     * Retrieves a {@link User} from the {@link com.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
+     * @param username The {@link String username} of the {@link User}.
+     * @return The specified {@link User}.
+     * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
+     * @throws ResponseException Thrown when there is a generic server-side {@link com.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     */
     public User getUser(@NotNull String username) throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.GET)
                 .setRoute("/user/" + username)
@@ -77,6 +84,11 @@ public class Users implements CafeAPI {
         return new User(ID, username, userType);
     }
 
+    /**
+     * Deletes a {@link User} from the {@link com.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
+     * @param username The {@link String username} of the {@link User}.
+     * @return True, if the {@link User} was successfully deleted.
+     */
     public Boolean deleteUser(@NotNull String username) {
         RequestBuilder requestBuilder = new RequestBuilder(RequestRoute.CAFE, RequestType.DELETE)
                 .setRoute("/user/" + username)
@@ -84,6 +96,10 @@ public class Users implements CafeAPI {
         return requestBuilder.build().getStatusCode() == 200;
     }
 
+    /**
+     * Updates the {@link String apiKey}.
+     * @param apiKey The new {@link String apiKey}.
+     */
     @Override
     public void updateAPIKey(@NotNull String apiKey) {
         this.apiKey = apiKey;

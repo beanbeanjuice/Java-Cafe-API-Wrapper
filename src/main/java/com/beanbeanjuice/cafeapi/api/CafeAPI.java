@@ -2,6 +2,11 @@ package com.beanbeanjuice.cafeapi.api;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * An interface used for {@link com.beanbeanjuice.cafeapi.CafeAPI CafeAPI} Requests.
+ *
+ * @author beanbeanjuice
+ */
 public interface CafeAPI {
 
     /**
