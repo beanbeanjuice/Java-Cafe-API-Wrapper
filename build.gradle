@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
+sourceCompatibility = '16'
 group = 'com.github.beanbeanjuice'
 
 group 'com.beanbeanjuice'

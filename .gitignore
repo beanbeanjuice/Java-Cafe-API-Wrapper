@@ -23,7 +23,6 @@
 /build/
 /.gradle/
 /out/
-gradle.properties
 
 # IntelliJ IDEA
 /.idea/
