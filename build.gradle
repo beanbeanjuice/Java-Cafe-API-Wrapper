@@ -63,6 +63,18 @@ wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.beanbeanjuice'
+            artifactId = 'cafe-api-wrapper'
+            version = '1.0.2'
+
+            from components.java
+        }
+    }
+}
+
 test {
     gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS
     useJUnitPlatform()
