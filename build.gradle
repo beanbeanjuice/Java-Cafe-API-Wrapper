@@ -13,15 +13,6 @@ repositories {
     mavenCentral()
 }
 
-jar {
-    enabled = true
-    manifest {
-        attributes 'Main-Class': 'com.beanbeanjuice.cafeapi.CafeAPI'
-    }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
-
 dependencies {
     // JUnit - Unit Testing
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.0-M1'
@@ -49,6 +40,6 @@ dependencies {
 }
 
 test {
-    gradle.startParameter.showStacktrace = org.gradle.api.logging.configuration.ShowStacktrace.ALWAYS
+    gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS
     useJUnitPlatform()
 }
