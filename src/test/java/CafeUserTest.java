@@ -1,10 +1,10 @@
-import cafeapi.CafeAPI;
-import cafeapi.cafebot.cafe.CafeType;
-import cafeapi.cafebot.cafe.CafeUser;
-import cafeapi.exception.ConflictException;
-import cafeapi.exception.NotFoundException;
-import cafeapi.exception.TeaPotException;
-import cafeapi.generic.CafeGeneric;
+import com.beanbeanjuice.cafeapi.CafeAPI;
+import com.beanbeanjuice.cafeapi.cafebot.cafe.CafeType;
+import com.beanbeanjuice.cafeapi.cafebot.cafe.CafeUser;
+import com.beanbeanjuice.cafeapi.exception.ConflictException;
+import com.beanbeanjuice.cafeapi.exception.NotFoundException;
+import com.beanbeanjuice.cafeapi.exception.TeaPotException;
+import com.beanbeanjuice.cafeapi.generic.CafeGeneric;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

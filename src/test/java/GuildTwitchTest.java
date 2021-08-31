@@ -1,5 +1,5 @@
-import cafeapi.CafeAPI;
-import cafeapi.exception.ConflictException;
+import com.beanbeanjuice.cafeapi.CafeAPI;
+import com.beanbeanjuice.cafeapi.exception.ConflictException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

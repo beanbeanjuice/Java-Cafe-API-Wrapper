@@ -1,5 +1,5 @@
-import cafeapi.CafeAPI;
-import cafeapi.cafebot.interactions.InteractionType;
+import com.beanbeanjuice.cafeapi.CafeAPI;
+import com.beanbeanjuice.cafeapi.cafebot.interactions.InteractionType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

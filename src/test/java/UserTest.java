@@ -1,11 +1,11 @@
-import cafeapi.CafeAPI;
-import cafeapi.exception.AuthorizationException;
+import com.beanbeanjuice.cafeapi.CafeAPI;
+import com.beanbeanjuice.cafeapi.exception.AuthorizationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * A test class used to test all aspects of the {@link cafeapi.user.Users Users} module.
+ * A test class used to test all aspects of the {@link com.beanbeanjuice.cafeapi.user.Users Users} module.
  *
  * @author beanbeanjuice
  */
