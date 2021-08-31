@@ -10,7 +10,9 @@ if [ "$JV" != 16 ]; then
 		curl -s "https://get.sdkman.io" | bash
 		source ~/.sdkman/bin/sdkman-init.sh
 		sdk version
+		echo "Updating SDKMAN..."
 		sdk update
+		echo "Installing JDK 16"
 		sdk install java 16.0.2-open
 		;;
 	use)
