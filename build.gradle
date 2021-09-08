@@ -10,14 +10,14 @@ group 'com.beanbeanjuice'
 version 'v1.0.0'
 
 repositories {
-    maven {
-        url "https://jitpack.io"
-        allowInsecureProtocol = true
-    }
-    maven {
-        url "http://cache"
-        allowInsecureProtocol = true
-    }
+//    maven {
+//        url "https://jitpack.io"
+//        allowInsecureProtocol = true
+//    }
+//    maven {
+//        url "http://cache"
+//        allowInsecureProtocol = true
+//    }
     mavenCentral()
 }
 
@@ -67,17 +67,17 @@ wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-//publishing {
-//    publications {
-//        maven(MavenPublication) {
-//            groupId = 'com.beanbeanjuice'
-//            artifactId = 'cafe-api-wrapper'
-//            version = '1.0.2'
-//
-//            from components.java
-//        }
-//    }
-//}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.beanbeanjuice'
+            artifactId = 'cafe-api-wrapper'
+            version = '1.0.2'
+
+            from components.java
+        }
+    }
+}
 
 test {
     gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS
