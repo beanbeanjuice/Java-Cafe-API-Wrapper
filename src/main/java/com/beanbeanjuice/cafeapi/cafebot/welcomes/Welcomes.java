@@ -41,7 +41,7 @@ public class Welcomes {
                 .build();
 
         for (JsonNode guildWelcome : request.getData().get("welcomes")) {
-            parseGuildWelcome(guildWelcome);
+            guildWelcomes.add(parseGuildWelcome(guildWelcome));
         }
 
         return guildWelcomes;
