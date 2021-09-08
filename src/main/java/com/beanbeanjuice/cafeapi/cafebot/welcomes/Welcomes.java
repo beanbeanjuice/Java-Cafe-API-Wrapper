@@ -41,13 +41,7 @@ public class Welcomes {
                 .build();
 
         for (JsonNode guildWelcome : request.getData().get("welcomes")) {
-            guildWelcomes.add(new GuildWelcome(
-                    guildWelcome.get("guild_id").asText(),
-                    guildWelcome.get("description").asText(),
-                    guildWelcome.get("thumbnail_url").asText(),
-                    guildWelcome.get("image_url").asText(),
-                    guildWelcome.get("message").asText()
-            ));
+            parseGuildWelcome(guildWelcome);
         }
 
         return guildWelcomes;
@@ -70,13 +64,7 @@ public class Welcomes {
 
         JsonNode guildWelcome = request.getData().get("welcome");
 
-        return new GuildWelcome(
-                guildWelcome.get("guild_id").asText(),
-                guildWelcome.get("description").asText(),
-                guildWelcome.get("thumbnail_url").asText(),
-                guildWelcome.get("image_url").asText(),
-                guildWelcome.get("message").asText()
-        );
+        return parseGuildWelcome(guildWelcome);
     }
 
     /**
@@ -142,6 +130,45 @@ public class Welcomes {
                 .build();
 
         return request.getStatusCode() == 200;
+    }
+
+    /**
+     * Parses a {@link GuildWelcome} from the {@link JsonNode}.
+     * @param node The {@link JsonNode} to parse.
+     * @return The parsed {@link GuildWelcome}.
+     */
+    @NotNull
+    private GuildWelcome parseGuildWelcome(@NotNull JsonNode node) {
+        String guildID = node.get("guild_id").asText();
+
+        String description = node.get("description").asText();
+        String thumbnailURL = node.get("thumbnail_url").asText();
+        String imageURL = node.get("image_url").asText();
+        String message = node.get("message").asText();
+
+        if (description.equals("null")) {
+            description = null;
+        }
+
+        if (thumbnailURL.equals("null")) {
+            thumbnailURL = null;
+        }
+
+        if (imageURL.equals("null")) {
+            imageURL = null;
+        }
+
+        if (message.equals("null")) {
+            message = null;
+        }
+
+        return new GuildWelcome(
+                guildID,
+                description,
+                thumbnailURL,
+                imageURL,
+                message
+        );
     }
 
 }
