@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.Timestamp;
 
 /**
- * A class used to hold {@link Raffles} retrieved from the {@link com.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
+ * A class used to hold {@link Raffles} retrieved from the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
  *
  * @author beanbeanjuice
  */
