@@ -3,7 +3,7 @@ package io.github.beanbeanjuice.cafeapi.api;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An interface used for {@link com.beanbeanjuice.cafeapi.CafeAPI CafeAPI} Requests.
+ * An interface used for {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI} Requests.
  *
  * @author beanbeanjuice
  */

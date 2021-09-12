@@ -29,7 +29,7 @@
 *.iml
 *.ipr
 *.iws
-target/
+/target/
 
 # Eclipse
 .classpath
