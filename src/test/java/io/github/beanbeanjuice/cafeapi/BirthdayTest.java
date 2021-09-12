@@ -4,9 +4,9 @@ import io.github.beanbeanjuice.cafeapi.cafebot.birthdays.BirthdayMonth;
 import io.github.beanbeanjuice.cafeapi.exception.ConflictException;
 import io.github.beanbeanjuice.cafeapi.exception.NotFoundException;
 import io.github.beanbeanjuice.cafeapi.exception.TeaPotException;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class BirthdayTest {
 
