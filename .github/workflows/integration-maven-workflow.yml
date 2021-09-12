@@ -17,3 +17,4 @@ jobs:
         env:
           API_PASSWORD: ${{ secrets.API_PASSWORD }}
         run: mvn --batch-mode --update-snapshots verify
+        run: mvn test
