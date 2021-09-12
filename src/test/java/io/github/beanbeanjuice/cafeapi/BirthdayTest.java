@@ -19,7 +19,8 @@ public class BirthdayTest {
         Assertions.assertTrue(cafeAPI.birthdays().removeUserBirthday("178272524533104642"));
 
         // Makes sure the user's birthday cannot be found.
-        Assertions.assertThrows(NotFoundException.class, () -> cafeAPI.birthdays().getUserBirthday("178272524533104642"));
+//        Assertions.assertThrows(NotFoundException.class, () -> cafeAPI.birthdays().getUserBirthday("178272524533104642"));
+        Assertions.assertThrows(ConflictException.class, () -> cafeAPI.birthdays().getUserBirthday("178272524533104642"));
 
         // Makes sure the user's birthday can be created.
         Assertions.assertTrue(cafeAPI.birthdays().createUserBirthday("178272524533104642", BirthdayMonth.DECEMBER, 31));
