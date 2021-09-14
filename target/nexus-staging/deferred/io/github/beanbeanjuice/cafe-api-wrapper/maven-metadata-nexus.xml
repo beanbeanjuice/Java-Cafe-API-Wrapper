@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>io.github.beanbeanjuice</groupId>
+  <artifactId>cafe-api-wrapper</artifactId>
+  <versioning>
+    <versions>
+      <version>v1.0.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20210912164214</lastUpdated>
+  </versioning>
+</metadata>

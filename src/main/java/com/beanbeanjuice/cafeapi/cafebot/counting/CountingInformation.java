@@ -12,6 +12,7 @@ public class CountingInformation {
     private final Integer highestNumber;
     private final Integer lastNumber;
     private final String lastUserID;
+    private final String failureRoleID;
 
     /**
      * Creates a new {@link CountingInformation} object.
@@ -19,10 +20,12 @@ public class CountingInformation {
      * @param lastNumber The {@link Integer lastNumber}.
      * @param lastUserID The {@link String lastUserID}.
      */
-    public CountingInformation(@NotNull Integer highestNumber, @NotNull Integer lastNumber, @NotNull String lastUserID) {
+    public CountingInformation(@NotNull Integer highestNumber, @NotNull Integer lastNumber, @NotNull String lastUserID,
+                               @NotNull String failureRoleID) {
         this.highestNumber = highestNumber;
         this.lastNumber = lastNumber;
         this.lastUserID = lastUserID;
+        this.failureRoleID = failureRoleID;
     }
 
     /**
@@ -48,4 +51,13 @@ public class CountingInformation {
     public String getLastUserID() {
         return lastUserID;
     }
+
+    /**
+     * @return The {@link String failureRoleID}.
+     */
+    @NotNull
+    public String getFailureRoleID() {
+        return failureRoleID;
+    }
+
 }

@@ -78,6 +78,7 @@ public class CountingInformations implements CafeAPI {
      * @param highestNumber The new {@link Integer highestNumber}.
      * @param lastNumber The new {@link Integer lastNumber}.
      * @param lastUserID The new {@link String lastuserID}.
+     * @param failureRoleID The new {@link String failureRoleID}.
      * @return True, if the {@link CountingInformation} was successfully updated for the specified {@link String guildID}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
@@ -85,13 +86,15 @@ public class CountingInformations implements CafeAPI {
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
     @NotNull
-    public Boolean updateGuildCountingInformation(@NotNull String guildID, @NotNull Integer highestNumber, @NotNull Integer lastNumber, @NotNull String lastUserID)
+    public Boolean updateGuildCountingInformation(@NotNull String guildID, @NotNull Integer highestNumber, @NotNull Integer lastNumber,
+                                                  @NotNull String lastUserID, @NotNull String failureRoleID)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/counting/guilds/" + guildID)
                 .addParameter("highest_number", highestNumber.toString())
                 .addParameter("last_number", lastNumber.toString())
                 .addParameter("last_user_id", lastUserID)
+                .addParameter("failure_role_id", failureRoleID)
                 .setAuthorization(apiKey)
                 .build();
 
@@ -111,7 +114,8 @@ public class CountingInformations implements CafeAPI {
     @NotNull
     public Boolean updateGuildCountingInformation(@NotNull String guildID, @NotNull CountingInformation countingInformation)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
-        return updateGuildCountingInformation(guildID, countingInformation.getHighestNumber(), countingInformation.getLastNumber(), countingInformation.getLastUserID());
+        return updateGuildCountingInformation(guildID, countingInformation.getHighestNumber(), countingInformation.getLastNumber(),
+                countingInformation.getLastUserID(), countingInformation.getFailureRoleID());
     }
 
     /**
@@ -161,8 +165,14 @@ public class CountingInformations implements CafeAPI {
         Integer highestNumber = node.get("highest_number").asInt();
         Integer lastNumber = node.get("last_number").asInt();
         String lastUserID = node.get("last_user_id").asText();
+        String failureRoleID = node.get("failure_role_id").asText();
 
-        return new CountingInformation(highestNumber, lastNumber, lastUserID);
+        return new CountingInformation(
+                highestNumber,
+                lastNumber,
+                lastUserID,
+                failureRoleID
+        );
     }
 
     /**

@@ -36,7 +36,7 @@ public class CountingInformationTest {
 
         // Makes sure the counting information can be updated.
         Assertions.assertTrue(cafeAPI.countingInformations().updateGuildCountingInformation("605489113323536433", new CountingInformation(
-                133, 100, "178272524533104642")));
+                133, 100, "178272524533104642", "221062533119868928")));
 
         // Confirms the new highest number is 133.
         Assertions.assertEquals(133, cafeAPI.countingInformations().getGuildCountingInformation("605489113323536433").getHighestNumber());
@@ -46,6 +46,9 @@ public class CountingInformationTest {
 
         // Confirms the new last user ID is "178272524533104642".
         Assertions.assertEquals("178272524533104642", cafeAPI.countingInformations().getGuildCountingInformation("605489113323536433").getLastUserID());
+
+        // Confirms that the failure role ID is "221062533119868928"
+        Assertions.assertEquals("221062533119868928", cafeAPI.countingInformations().getGuildCountingInformation("605489113323536433").getFailureRoleID());
 
         // Makes sure the counting information can be deleted.
         Assertions.assertTrue(cafeAPI.countingInformations().deleteGuildCountingInformation("605489113323536433"));
