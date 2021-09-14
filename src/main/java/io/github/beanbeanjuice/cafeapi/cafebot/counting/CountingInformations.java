@@ -85,13 +85,15 @@ public class CountingInformations implements CafeAPI {
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
     @NotNull
-    public Boolean updateGuildCountingInformation(@NotNull String guildID, @NotNull Integer highestNumber, @NotNull Integer lastNumber, @NotNull String lastUserID)
+    public Boolean updateGuildCountingInformation(@NotNull String guildID, @NotNull Integer highestNumber, @NotNull Integer lastNumber,
+                                                  @NotNull String lastUserID, @NotNull String failureRoleID)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/counting/guilds/" + guildID)
                 .addParameter("highest_number", highestNumber.toString())
                 .addParameter("last_number", lastNumber.toString())
                 .addParameter("last_user_id", lastUserID)
+                .addParameter("failure_role_id", failureRoleID)
                 .setAuthorization(apiKey)
                 .build();
 
@@ -111,7 +113,13 @@ public class CountingInformations implements CafeAPI {
     @NotNull
     public Boolean updateGuildCountingInformation(@NotNull String guildID, @NotNull CountingInformation countingInformation)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
-        return updateGuildCountingInformation(guildID, countingInformation.getHighestNumber(), countingInformation.getLastNumber(), countingInformation.getLastUserID());
+        return updateGuildCountingInformation(
+                guildID,
+                countingInformation.getHighestNumber(),
+                countingInformation.getLastNumber(),
+                countingInformation.getLastUserID(),
+                countingInformation.getFailureRoleID()
+        );
     }
 
     /**
@@ -161,8 +169,14 @@ public class CountingInformations implements CafeAPI {
         Integer highestNumber = node.get("highest_number").asInt();
         Integer lastNumber = node.get("last_number").asInt();
         String lastUserID = node.get("last_user_id").asText();
+        String failureRoleID = node.get("failure_role_id").asText();
 
-        return new CountingInformation(highestNumber, lastNumber, lastUserID);
+        return new CountingInformation(
+                highestNumber,
+                lastNumber,
+                lastUserID,
+                failureRoleID
+        );
     }
 
     /**
@@ -173,4 +187,5 @@ public class CountingInformations implements CafeAPI {
     public void updateAPIKey(@NotNull String apiKey) {
         this.apiKey = apiKey;
     }
+
 }
