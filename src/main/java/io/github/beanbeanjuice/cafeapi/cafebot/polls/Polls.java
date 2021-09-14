@@ -112,7 +112,7 @@ public class Polls implements CafeAPI {
                 .setAuthorization(apiKey)
                 .build();
 
-        return request.statusCode() == 201;
+        return request.getStatusCode() == 201;
     }
 
     /**
@@ -144,7 +144,7 @@ public class Polls implements CafeAPI {
                 .setAuthorization(apiKey)
                 .build();
 
-        return request.statusCode() == 200;
+        return request.getStatusCode() == 200;
     }
 
     /**
