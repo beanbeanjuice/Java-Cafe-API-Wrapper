@@ -16,10 +16,7 @@ import io.github.beanbeanjuice.cafeapi.cafebot.version.Versions;
 import io.github.beanbeanjuice.cafeapi.cafebot.voicebinds.VoiceChannelBinds;
 import io.github.beanbeanjuice.cafeapi.cafebot.welcomes.Welcomes;
 import io.github.beanbeanjuice.cafeapi.cafebot.words.Words;
-import io.github.beanbeanjuice.cafeapi.requests.Request;
-import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
-import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;
-import io.github.beanbeanjuice.cafeapi.requests.RequestType;
+import io.github.beanbeanjuice.cafeapi.requests.*;
 import io.github.beanbeanjuice.cafeapi.user.Users;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +24,7 @@ public class CafeAPI {
 
     private String apiKey;
     private String userAgent;
+    private static RequestLocation requestLocation;
 
     private Users users;
 
@@ -47,8 +45,15 @@ public class CafeAPI {
     private DonationUsers donationUsers;
     private InteractionPictures interactionPictures;
 
-    public CafeAPI(@NotNull String username, @NotNull String password) {
+    /**
+     * Creates a new {@link CafeAPI} object.
+     * @param username The {@link String username}.
+     * @param password The {@link String password}.
+     * @param requestLocation The {@link RequestLocation requestLocation}.
+     */
+    public CafeAPI(@NotNull String username, @NotNull String password, @NotNull RequestLocation requestLocation) {
         this.userAgent = username;
+        CafeAPI.requestLocation = requestLocation;
 
         try {
             apiKey = getToken(username, password);
@@ -77,7 +82,10 @@ public class CafeAPI {
         interactionPictures = new InteractionPictures(apiKey);
     }
 
-    // TODO: Reset API Key
+    @NotNull
+    public static RequestLocation getRequestLocation() {
+        return requestLocation;
+    }
 
     private String getToken(@NotNull String username, @NotNull String password) {
         Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.POST)
