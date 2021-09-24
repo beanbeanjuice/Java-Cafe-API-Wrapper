@@ -15,25 +15,25 @@ public class BotVersionTest {
         CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"), RequestLocation.BETA);
 
         // Gets the current version of cafeBot.
-        String currentVersion = cafeAPI.versions().getCurrentCafeBotVersion();
+        String currentVersion = cafeAPI.VERSION.getCurrentCafeBotVersion();
 
         // Makes sure the current version is not null.
         Assertions.assertNotNull(currentVersion);
 
         // Makes sure a TeaPotException is thrown when the user forgets to add a "v" to the beginning of the version number.
-        Assertions.assertThrows(TeaPotException.class, () -> cafeAPI.versions().updateCurrentCafeBotVersion("2.0.0-UNIT-TEST"));
+        Assertions.assertThrows(TeaPotException.class, () -> cafeAPI.VERSION.updateCurrentCafeBotVersion("2.0.0-UNIT-TEST"));
 
         // Makes sure the version number for cafeBot can be updated.
-        Assertions.assertTrue(cafeAPI.versions().updateCurrentCafeBotVersion("v2.0.0-UNIT-TEST"));
+        Assertions.assertTrue(cafeAPI.VERSION.updateCurrentCafeBotVersion("v2.0.0-UNIT-TEST"));
 
         // Makes sure the version number has been changed.
-        Assertions.assertEquals("v2.0.0-UNIT-TEST", cafeAPI.versions().getCurrentCafeBotVersion());
+        Assertions.assertEquals("v2.0.0-UNIT-TEST", cafeAPI.VERSION.getCurrentCafeBotVersion());
 
         // Changes the version number back to the original.
-        Assertions.assertTrue(cafeAPI.versions().updateCurrentCafeBotVersion(currentVersion));
+        Assertions.assertTrue(cafeAPI.VERSION.updateCurrentCafeBotVersion(currentVersion));
 
         // Makes sure the version number has been changed back to the original.
-        Assertions.assertEquals(currentVersion, cafeAPI.versions().getCurrentCafeBotVersion());
+        Assertions.assertEquals(currentVersion, cafeAPI.VERSION.getCurrentCafeBotVersion());
     }
 
 }

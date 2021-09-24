@@ -20,31 +20,31 @@ public class UserTest {
         CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("RELEASE_API_PASSWORD"), RequestLocation.RELEASE);
 
         // Making sure the first user's ID is 1.
-        Assertions.assertEquals(2, cafeAPI.users().getUsers().get(0).getID());
+        Assertions.assertEquals(2, cafeAPI.USER.getUsers().get(0).getID());
 
         // Checking if USER ID is correct.
-        Assertions.assertEquals(2, cafeAPI.users().getUser("beanbeanjuice").getID());
+        Assertions.assertEquals(2, cafeAPI.USER.getUser("beanbeanjuice").getID());
 
         // Making sure that exception is thrown when a user does not exist.
         Assertions.assertThrows(AuthorizationException.class, () -> {
-            cafeAPI.users().getUser("beanbeanjuiceTest");
+            cafeAPI.USER.getUser("beanbeanjuiceTest");
         });
 
         // Making sure that an exception is thrown when trying to sign up with an existing user.
         Assertions.assertThrows(AuthorizationException.class, () -> {
-            cafeAPI.users().signUp("beanbeanjuice", "passwordtesttest");
+            cafeAPI.USER.signUp("beanbeanjuice", "passwordtesttest");
         });
 
         // Making sure sign up is true when user does not exist.
-        Assertions.assertTrue(cafeAPI.users().signUp("beanbeanjuiceTest", "passwordTest"));
+        Assertions.assertTrue(cafeAPI.USER.signUp("beanbeanjuiceTest", "passwordTest"));
 
         // Making sure nothing is thrown when the user does exist.
         Assertions.assertDoesNotThrow(() -> {
-            cafeAPI.users().getUser("beanbeanjuiceTest");
+            cafeAPI.USER.getUser("beanbeanjuiceTest");
         });
 
         // Making sure it is true when deleting a user.
-        Assertions.assertTrue(cafeAPI.users().deleteUser("beanbeanjuiceTest"));
+        Assertions.assertTrue(cafeAPI.USER.deleteUser("beanbeanjuiceTest"));
     }
 
 }

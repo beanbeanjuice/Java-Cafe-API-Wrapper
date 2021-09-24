@@ -17,7 +17,7 @@ public class InteractionPictureTest {
         // Goes through every interaction type.
         Assertions.assertDoesNotThrow(() -> {
             for (InteractionType type : InteractionType.values()) {
-                Assertions.assertNotNull(cafeAPI.interactionPictures().getRandomInteractionPicture(type));
+                Assertions.assertNotNull(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type));
             }
         });
     }
