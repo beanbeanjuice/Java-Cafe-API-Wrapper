@@ -6,7 +6,7 @@
 
     <groupId>io.github.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
-    <version>v1.0.2-SNAPSHOT</version>
+    <version>v1.1.2-SNAPSHOT</version>
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
@@ -15,7 +15,7 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -32,7 +32,7 @@
     <scm>
         <connection>scm:git:git://github.com/beanbeanjuice/cafe-api-wrapper.git</connection>
         <developerConnection>scm:git:ssh://github.com:beanbeanjuice/cafe-api-wrapper.git</developerConnection>
-        <url>http://github.com/beanbeanjuice/cafe-api-wrapper/tree/master</url>
+        <url>https://github.com/beanbeanjuice/cafe-api-wrapper/tree/master</url>
     </scm>
 
     <build>
@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
+                <version>1.6.13</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -86,6 +86,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
                 <version>1.5</version>
                 <executions>
                     <execution>
@@ -114,12 +117,18 @@
     </distributionManagement>
 
     <dependencies>
+        <!-- Nexus Staging Maven Plugin -->
+        <dependency>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.13</version>
+        </dependency>
 
         <!-- Jetbrains Annotations -->
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>22.0.0</version>
+            <version>23.0.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -127,17 +136,25 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.12.5</version>
+            <version>2.13.3</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.12.5</version>
+            <version>2.13.3</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.12.5</version>
+            <version>2.13.3</version>
+        </dependency>
+
+        <!-- Logback for Logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- HTTPComponents for REQUESTS to the API -->
@@ -162,15 +179,17 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.8.0</version>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
 
     <properties>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
 </project>
