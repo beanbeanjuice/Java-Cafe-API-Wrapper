@@ -6,8 +6,6 @@ package io.github.beanbeanjuice.cafeapi.user;
  * @author beanbeanjuice
  */
 public enum UserType {
-
     ADMIN,
     USER
-
 }

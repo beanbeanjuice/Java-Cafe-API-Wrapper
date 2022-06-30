@@ -1,6 +1,7 @@
 package io.github.beanbeanjuice.cafeapi.requests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.beanbeanjuice.cafeapi.CafeAPI;
 import io.github.beanbeanjuice.cafeapi.exception.*;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -28,12 +29,11 @@ import java.util.HashMap;
  */
 public class RequestBuilder {
 
-    private String apiURL = "http://beanbeanjuice.com:5101";
-//    private String apiURL = "http://localhost:5101";
-
     private final RequestType requestType;
     private String route;
     private final HashMap<String, String> parameters;
+
+    private String apiURL;
 
     private HttpClient httpClient;
     private URIBuilder uriBuilder;
@@ -50,7 +50,7 @@ public class RequestBuilder {
         this.requestType = requestType;
         parameters = new HashMap<>();
 
-        apiURL += requestRoute.getRoute();
+        apiURL = CafeAPI.getRequestLocation().getURL() + requestRoute.getRoute();
     }
 
     /**

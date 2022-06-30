@@ -16,10 +16,7 @@ import io.github.beanbeanjuice.cafeapi.cafebot.version.Versions;
 import io.github.beanbeanjuice.cafeapi.cafebot.voicebinds.VoiceChannelBinds;
 import io.github.beanbeanjuice.cafeapi.cafebot.welcomes.Welcomes;
 import io.github.beanbeanjuice.cafeapi.cafebot.words.Words;
-import io.github.beanbeanjuice.cafeapi.requests.Request;
-import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
-import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;
-import io.github.beanbeanjuice.cafeapi.requests.RequestType;
+import io.github.beanbeanjuice.cafeapi.requests.*;
 import io.github.beanbeanjuice.cafeapi.user.Users;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,28 +24,36 @@ public class CafeAPI {
 
     private String apiKey;
     private String userAgent;
+    private static RequestLocation requestLocation;
 
-    private Users users;
+    public Users USER;
 
-    private Words words;
-    private Welcomes welcomes;
-    private VoiceChannelBinds voiceChannelBinds;
-    private Raffles raffles;
-    private Polls polls;
-    private WinStreaks winstreaks;
-    private Interactions interactions;
-    private GuildTwitches guildTwitches;
-    private GuildInformations guildInformations;
-    private GeneratedCodes generatedCodes;
-    private Versions versions;
-    private CountingInformations countingInformations;
-    private CafeUsers cafeUsers;
-    private Birthdays birthdays;
-    private DonationUsers donationUsers;
-    private InteractionPictures interactionPictures;
+    public Words WORD;
+    public Welcomes WELCOME;
+    public VoiceChannelBinds VOICE_CHANNEL_BIND;
+    public Raffles RAFFLE;
+    public Polls POLL;
+    public WinStreaks WIN_STREAK;
+    public Interactions INTERACTION;
+    public GuildTwitches TWITCH;
+    public GuildInformations GUILD;
+    public GeneratedCodes GENERATED_CODE;
+    public Versions VERSION;
+    public CountingInformations COUNTING_INFORMATION;
+    public CafeUsers CAFE_USER;
+    public Birthdays BIRTHDAY;
+    public DonationUsers DONATION_USER;
+    public InteractionPictures INTERACTION_PICTURE;
 
-    public CafeAPI(@NotNull String username, @NotNull String password) {
+    /**
+     * Creates a new {@link CafeAPI} object.
+     * @param username The {@link String username}.
+     * @param password The {@link String password}.
+     * @param requestLocation The {@link RequestLocation requestLocation}.
+     */
+    public CafeAPI(@NotNull String username, @NotNull String password, @NotNull RequestLocation requestLocation) {
         this.userAgent = username;
+        CafeAPI.requestLocation = requestLocation;
 
         try {
             apiKey = getToken(username, password);
@@ -56,28 +61,31 @@ public class CafeAPI {
             e.printStackTrace();
         }
 
-        users = new Users(apiKey);
+        USER = new Users(apiKey);
 
         // cafeBot
-        words = new Words(apiKey);
-        welcomes = new Welcomes(apiKey);
-        voiceChannelBinds = new VoiceChannelBinds(apiKey);
-        raffles = new Raffles(apiKey);
-        polls = new Polls(apiKey);
-        winstreaks = new WinStreaks(apiKey);
-        interactions = new Interactions(apiKey);
-        guildTwitches = new GuildTwitches(apiKey);
-        guildInformations = new GuildInformations(apiKey);
-        generatedCodes = new GeneratedCodes(apiKey);
-        versions = new Versions(apiKey);
-        countingInformations = new CountingInformations(apiKey);
-        cafeUsers = new CafeUsers(apiKey);
-        birthdays = new Birthdays(apiKey);
-        donationUsers = new DonationUsers(apiKey);
-        interactionPictures = new InteractionPictures(apiKey);
+        WORD = new Words(apiKey);
+        WELCOME = new Welcomes(apiKey);
+        VOICE_CHANNEL_BIND = new VoiceChannelBinds(apiKey);
+        RAFFLE = new Raffles(apiKey);
+        POLL = new Polls(apiKey);
+        WIN_STREAK = new WinStreaks(apiKey);
+        INTERACTION = new Interactions(apiKey);
+        TWITCH = new GuildTwitches(apiKey);
+        GUILD = new GuildInformations(apiKey);
+        GENERATED_CODE = new GeneratedCodes(apiKey);
+        VERSION = new Versions(apiKey);
+        COUNTING_INFORMATION = new CountingInformations(apiKey);
+        CAFE_USER = new CafeUsers(apiKey);
+        BIRTHDAY = new Birthdays(apiKey);
+        DONATION_USER = new DonationUsers(apiKey);
+        INTERACTION_PICTURE = new InteractionPictures(apiKey);
     }
 
-    // TODO: Reset API Key
+    @NotNull
+    public static RequestLocation getRequestLocation() {
+        return requestLocation;
+    }
 
     private String getToken(@NotNull String username, @NotNull String password) {
         Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.POST)
@@ -89,71 +97,4 @@ public class CafeAPI {
         return request.getData().get("api_key").textValue();
     }
 
-    public Users users() {
-        return users;
-    }
-
-    public Words words() {
-        return words;
-    }
-
-    public Welcomes welcomes() {
-        return welcomes;
-    }
-
-    public VoiceChannelBinds voiceChannelBinds() {
-        return voiceChannelBinds;
-    }
-
-    public Raffles raffles() {
-        return raffles;
-    }
-
-    public Polls polls() {
-        return polls;
-    }
-
-    public WinStreaks winStreaks() {
-        return winstreaks;
-    }
-
-    public Interactions interactions() {
-        return interactions;
-    }
-
-    public GuildTwitches guildTwitches() {
-        return guildTwitches;
-    }
-
-    public GuildInformations guildInformations() {
-        return guildInformations;
-    }
-
-    public GeneratedCodes generatedCodes() {
-        return generatedCodes;
-    }
-
-    public Versions versions() {
-        return versions;
-    }
-
-    public CountingInformations countingInformations() {
-        return countingInformations;
-    }
-
-    public CafeUsers cafeUsers() {
-        return cafeUsers;
-    }
-
-    public Birthdays birthdays() {
-        return birthdays;
-    }
-
-    public DonationUsers donationUsers() {
-        return donationUsers;
-    }
-    
-    public InteractionPictures interactionPictures() {
-        return interactionPictures;
-    }
 }
