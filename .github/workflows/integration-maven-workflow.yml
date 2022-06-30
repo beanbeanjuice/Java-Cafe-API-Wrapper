@@ -36,5 +36,7 @@ jobs:
       - name: Publish Package
         run: mvn clean deploy
         env:
+          API_PASSWORD: ${{ secrets.API_PASSWORD }}
+          RELEASE_API_PASSWORD: ${{ secrets.RELEASE_API_PASSWORD }}
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
