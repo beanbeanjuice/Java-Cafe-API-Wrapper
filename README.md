@@ -109,14 +109,14 @@ For `Maven`, paste this into your `dependencies` section of your `pom.xml` file.
 <dependency>
   <groupId>io.github.beanbeanjuice</groupId>
   <artifactId>cafe-api-wrapper</artifactId>
-  <version>v1.1.1-SNAPSHOT</version>
+  <version>v1.1.1</version>
 </dependency>
 ```
 
 For `Gradle`, paste this into your `dependencies` section of your `build.gradle` file.
 ```Groovy
 // Cafe API
-implementation group: 'io.github.beanbeanjuice', name: 'cafe-api-wrapper', version: 'v1.1.1-SNAPSHOT'
+implementation group: 'io.github.beanbeanjuice', name: 'cafe-api-wrapper', version: 'v1.1.1'
 ```
 
 <!-- ROADMAP -->
