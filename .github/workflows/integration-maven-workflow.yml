@@ -23,6 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Install GPG
+        run: sudo apt-get install gnupg
+      - name: Create GPG Key
+        run: gpg --gen-key
       - name: Set up Maven Central Repository
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
