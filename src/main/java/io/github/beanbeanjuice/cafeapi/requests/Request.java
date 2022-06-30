@@ -4,11 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A {@link Record} containing the request's {@link Integer status code} and resulting {@link JsonNode data}.
+ * A class containing the request's {@link Integer status code} and resulting {@link JsonNode data}.
  *
  * @author beanbeanjuice
  */
-public record Request(Integer statusCode, JsonNode data) {
+public class Request {
+
+    private final Integer statusCode;
+    private final JsonNode data;
 
     /**
      * Creates a new {@link Request} object.
