@@ -1,7 +1,7 @@
 package io.github.beanbeanjuice.cafeapi.beta;
 
 import io.github.beanbeanjuice.cafeapi.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.AuthorizationException;
+import io.github.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
 import io.github.beanbeanjuice.cafeapi.requests.RequestLocation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -2,7 +2,7 @@ package io.github.beanbeanjuice.cafeapi.cafebot.codes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.github.beanbeanjuice.cafeapi.api.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.*;
+import io.github.beanbeanjuice.cafeapi.exception.api.*;
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;

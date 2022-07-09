@@ -2,8 +2,9 @@ package io.github.beanbeanjuice.cafeapi.user;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.github.beanbeanjuice.cafeapi.api.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.AuthorizationException;
-import io.github.beanbeanjuice.cafeapi.exception.ResponseException;
+import io.github.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ResponseException;
+import io.github.beanbeanjuice.cafeapi.exception.api.CafeException;
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;
@@ -71,7 +72,7 @@ public class Users implements CafeAPI {
      * @param username The {@link String username} of the {@link User}.
      * @return The specified {@link User}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
     public User getUser(@NotNull String username) throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.GET)
