@@ -20,7 +20,7 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
         uses: actions/setup-java@v3
         with:
-          java-version: '18'
+          java-version: '16'
           distribution: 'adopt'
           cache: maven
           server-id: ossrh
