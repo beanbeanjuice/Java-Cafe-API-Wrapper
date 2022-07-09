@@ -2,10 +2,10 @@ package io.github.beanbeanjuice.cafeapi.cafebot.words;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.github.beanbeanjuice.cafeapi.api.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.AuthorizationException;
-import io.github.beanbeanjuice.cafeapi.exception.NotFoundException;
-import io.github.beanbeanjuice.cafeapi.exception.ResponseException;
-import io.github.beanbeanjuice.cafeapi.exception.UndefinedVariableException;
+import io.github.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
+import io.github.beanbeanjuice.cafeapi.exception.api.NotFoundException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ResponseException;
+import io.github.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;

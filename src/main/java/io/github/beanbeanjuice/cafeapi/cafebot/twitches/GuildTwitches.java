@@ -4,10 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.beanbeanjuice.cafeapi.api.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.AuthorizationException;
-import io.github.beanbeanjuice.cafeapi.exception.ConflictException;
-import io.github.beanbeanjuice.cafeapi.exception.ResponseException;
-import io.github.beanbeanjuice.cafeapi.exception.UndefinedVariableException;
+import io.github.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ConflictException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ResponseException;
+import io.github.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
+import io.github.beanbeanjuice.cafeapi.exception.api.CafeException;
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;
@@ -38,7 +39,7 @@ public class GuildTwitches implements CafeAPI {
      * Retrieves all Twitch channels from the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @return A {@link HashMap} with keys of {@link String guildID} and a value of {@link ArrayList} of {@link String twitchChannelName}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
     @NotNull
     public HashMap<String, ArrayList<String>> getAllTwitches()
@@ -69,7 +70,7 @@ public class GuildTwitches implements CafeAPI {
      * @param guildID The specified {@link String guildID}.
      * @return The {@link ArrayList} of {@link String twitchChannelName}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
     @NotNull
     public ArrayList<String> getGuildTwitches(@NotNull String guildID)
@@ -93,7 +94,7 @@ public class GuildTwitches implements CafeAPI {
      * @param twitchChannelName The {@link String twitchChannelName} to add.
      * @return True, if the {@link String twitchChannelName} was successfully added.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws ConflictException Thrown when the {@link String twitchChannelName} already exists for the specified {@link String guildID}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
@@ -115,7 +116,7 @@ public class GuildTwitches implements CafeAPI {
      * @param twitchChannelName The {@link String twitchChannelName} to add.
      * @return True, if the {@link String twitchChannelName} was successfully removed.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
     @NotNull

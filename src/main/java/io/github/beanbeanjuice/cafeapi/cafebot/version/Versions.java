@@ -1,10 +1,11 @@
 package io.github.beanbeanjuice.cafeapi.cafebot.version;
 
 import io.github.beanbeanjuice.cafeapi.api.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.AuthorizationException;
-import io.github.beanbeanjuice.cafeapi.exception.ResponseException;
-import io.github.beanbeanjuice.cafeapi.exception.TeaPotException;
-import io.github.beanbeanjuice.cafeapi.exception.UndefinedVariableException;
+import io.github.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ResponseException;
+import io.github.beanbeanjuice.cafeapi.exception.api.TeaPotException;
+import io.github.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
+import io.github.beanbeanjuice.cafeapi.exception.api.CafeException;
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;
@@ -32,7 +33,7 @@ public class Versions implements CafeAPI {
      * Retrieves the current {@link String botVersion}.
      * @return The current {@link String botVersion} from the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
     @NotNull
     public String getCurrentCafeBotVersion()
@@ -50,7 +51,7 @@ public class Versions implements CafeAPI {
      * @param versionNumber The {@link String versionNumber} to update it to.
      * @return True, if the {@link String versionNumber} was successfully updated.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      * @throws TeaPotException Thrown when you forget to add "v" to the beginning of the version number.
      */

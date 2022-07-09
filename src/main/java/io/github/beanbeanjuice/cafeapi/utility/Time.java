@@ -1,22 +1,18 @@
 package io.github.beanbeanjuice.cafeapi.utility;
 
-import io.github.beanbeanjuice.cafeapi.cafebot.birthdays.BirthdayMonth;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * A class used for keeping track of time.
  *
  * @author beanbeanjuice
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html">SimpleDateTime Formatting</a>
+ * @see <a href="https://garygregory.wordpress.com/2013/06/18/what-are-the-java-timezone-ids/">Timezone IDs</a>
  */
 public class Time {
 
@@ -99,27 +95,13 @@ public class Time {
         long milliseconds2 = currentTime.getTime();
         long diff = milliseconds2 - milliseconds1;
 
-        switch (timestampDifference) {
-            case SECONDS -> {
-                return diff / 1000;
-            }
-
-            case MINUTES -> {
-                return diff / (60 * 1000);
-            }
-
-            case HOURS -> {
-                return diff / (60 * 60 * 1000);
-            }
-
-            case DAYS -> {
-                return diff / (24 * 60 * 60 * 1000);
-            }
-
-            default -> {
-                return diff;
-            }
-        }
+        return switch (timestampDifference) {
+            case SECONDS -> diff / 1000;
+            case MINUTES -> diff / (60 * 1000);
+            case HOURS -> diff / (60 * 60 * 1000);
+            case DAYS -> diff / (24 * 60 * 60 * 1000);
+            default -> diff;
+        };
     }
 
     /**
@@ -134,26 +116,63 @@ public class Time {
         return simpleDateFormat.format(timestamp);
     }
 
+    /**
+     *
+     * @param dateString The {@link String} of the {@link Date}.
+     * @param timeZone The {@link TimeZone} of the {@link Date}.
+     * @return The formatted {@link Date}.
+     * @throws ParseException Thrown if there was an error parsing the {@link Date}.
+     */
     @NotNull
-    public static Timestamp convertBirthdayToUTC(@NotNull BirthdayMonth month, @NotNull Integer day, @NotNull TimeZone timeZone) {
-        // Assume 00:00 (Midnight)
-        Calendar calendar = Calendar.getInstance(timeZone);
-        calendar.set(calendar.get(Calendar.YEAR), month.getMonthNumber()-1, day, 0, 0, 0);
+    public static Date getFullDate(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+        format.setTimeZone(timeZone);
+        return format.parse(dateString);
+    }
 
-//        Timestamp timestamp = new Timestamp(
-//                calendar.get(Calendar.YEAR),
-//                calendar.get(Calendar.MONTH),
-//                calendar.get(Calendar.DAY_OF_MONTH),
-//                0,
-//                0,
-//                0,
-//                0
-//        );
+    /**
+     * Check if a specified {@link String timeZoneString} is a valid {@link TimeZone}.
+     * @param timezoneString The {@link String timeZoneString} to check.
+     * @return True, if the specified {@link String timeZoneString} is a valid {@link TimeZone}.
+     */
+    @NotNull
+    public static Boolean isValidTimeZone(@NotNull String timezoneString) {
+        return Set.of(TimeZone.getAvailableIDs()).contains(timezoneString);
+    }
 
-        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Timestamp timestamp = new Timestamp(calendar.toInstant().toEpochMilli());
+    /**
+     * Check if a {@link Date} has passed the current {@link Date}.
+     * @param date The {@link Date} to check for.
+     * @return True, if the {@link Date} has passed the current {@link Date}.
+     * @throws ParseException Thrown if there was an error parsing the {@link Date}.
+     */
+    @NotNull
+    public static Boolean dateHasPassed(@NotNull Date date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd");
+        SimpleDateFormat yearFormat = new SimpleDateFormat("MM-dd-yyyy");
+        Date currentDate = new Date();
 
-        return timestamp;
+        // 2020 is a leap year
+        date = yearFormat.parse(format.format(date) + "-2020");
+        currentDate = yearFormat.parse(format.format(currentDate) + "-2020");
+
+        // Means they are the same.
+        if (!currentDate.after(date) && !currentDate.before(date))
+            return true;
+
+        return currentDate.after(date);
+    }
+
+    /**
+     * Check if the {@link String} of a {@link Date} has passed the current {@link Date}.
+     * @param dateString The {@link String} of a {@link Date}.
+     * @param timeZone The {@link TimeZone} of the {@link Date}.
+     * @return True, if the input {@link String} of a {@link Date} has passed.
+     * @throws ParseException Thrown if there was an error parsing hte {@link String} of the {@link Date}.
+     */
+    @NotNull
+    public static Boolean dateHasPassed(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
+        return dateHasPassed(getFullDate(dateString, timeZone));
     }
 
 }

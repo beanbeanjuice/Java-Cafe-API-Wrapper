@@ -2,8 +2,8 @@ package io.github.beanbeanjuice.cafeapi.beta;
 
 import io.github.beanbeanjuice.cafeapi.CafeAPI;
 import io.github.beanbeanjuice.cafeapi.cafebot.guilds.GuildInformationType;
-import io.github.beanbeanjuice.cafeapi.exception.ConflictException;
-import io.github.beanbeanjuice.cafeapi.exception.NotFoundException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ConflictException;
+import io.github.beanbeanjuice.cafeapi.exception.api.NotFoundException;
 import io.github.beanbeanjuice.cafeapi.requests.RequestLocation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
