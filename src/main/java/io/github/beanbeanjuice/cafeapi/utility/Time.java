@@ -168,11 +168,43 @@ public class Time {
      * @param dateString The {@link String} of a {@link Date}.
      * @param timeZone The {@link TimeZone} of the {@link Date}.
      * @return True, if the input {@link String} of a {@link Date} has passed.
-     * @throws ParseException Thrown if there was an error parsing hte {@link String} of the {@link Date}.
+     * @throws ParseException Thrown if there was an error parsing the {@link String} of the {@link Date}.
      */
     @NotNull
     public static Boolean dateHasPassed(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
         return dateHasPassed(getFullDate(dateString, timeZone));
+    }
+
+    /**
+     * Check if a {@link Date} is the current {@link Date}.
+     * @param date The {@link Date} to check for.
+     * @return True, if the {@link Date} is the current {@link Date}.
+     * @throws ParseException Thrown if there was an error parsing the {@link Date}.
+     */
+    @NotNull
+    public static Boolean isDate(@NotNull Date date) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd");
+        SimpleDateFormat yearFormat = new SimpleDateFormat("MM-dd-yyyy");
+        Date currentDate = new Date();
+
+        // 2020 is a leap year
+        date = yearFormat.parse(format.format(date) + "-2020");
+        currentDate = yearFormat.parse(format.format(currentDate) + "-2020");
+
+        // Means they are the same.
+        return !currentDate.after(date) && !currentDate.before(date);
+    }
+
+    /**
+     * Check if the {@link String} of a {@link Date} is the current {@link Date}.
+     * @param dateString The {@link String} of a {@link Date}.
+     * @param timeZone The {@link TimeZone} of the {@link Date}.
+     * @return True, if the input {@link String} of a {@link Date} is the date.
+     * @throws ParseException Thrown if there was an error parsing the {@link String} of the {@link Date}.
+     */
+    @NotNull
+    public static Boolean isDate(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
+        return isDate(getFullDate(dateString, timeZone));
     }
 
 }
