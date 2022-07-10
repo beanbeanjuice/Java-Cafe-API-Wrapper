@@ -6,7 +6,7 @@
 
     <groupId>io.github.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
-    <version>v1.2.1-SNAPSHOT</version>
+    <version>v1.2.2-SNAPSHOT</version>
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
