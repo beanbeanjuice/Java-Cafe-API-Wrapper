@@ -62,4 +62,12 @@ public class TimeTest {
         assertFalse(Time.dateHasPassed(new Date(System.currentTimeMillis() + 86400000)));  // 86400000 milliseconds in a day
     }
 
+    @Test
+    @DisplayName("Test Current Date")
+    public void testCurrentDate() throws ParseException {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        assertTrue(Time.isDate(new Date()));
+        assertFalse(Time.isDate("02-02-2020", TimeZone.getTimeZone("EST")));
+    }
+
 }
