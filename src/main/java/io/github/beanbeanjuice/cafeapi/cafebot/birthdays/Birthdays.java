@@ -209,8 +209,6 @@ public class Birthdays implements CafeAPI {
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        System.out.println(timeZoneString);
-
         return new Birthday(getBirthdayMonth(month), day, timeZoneString, alreadyMentioned);
     }
 
