@@ -1,12 +1,11 @@
 package io.github.beanbeanjuice.cafeapi.utility;
 
-import io.github.beanbeanjuice.cafeapi.cafebot.birthdays.BirthdayMonth;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -58,16 +57,36 @@ public class TimeTest {
     public void testDatePassing() throws ParseException {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         assertTrue(Time.dateHasPassed(Time.getFullDate("02-02-2020", TimeZone.getTimeZone("EST"))));
-        assertTrue(Time.dateHasPassed(new Date()));
-        assertFalse(Time.dateHasPassed(new Date(System.currentTimeMillis() + 86400000)));  // 86400000 milliseconds in a day
+        assertTrue(Time.isSameDay(new Date()));
+        assertFalse(Time.dateHasPassed(new Date(System.currentTimeMillis() + 120)));
+
+        Date birthday = Time.getFullDate("07-11-2020", TimeZone.getTimeZone("EST"));
+        assertTrue(Time.dateHasPassed(birthday));
+        assertFalse(Time.dateHasPassed(new Date()));
+
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat all = new SimpleDateFormat("MM-dd-yyyy");
+        TimeZone timeZone = TimeZone.getTimeZone("CET");
+        monthFormat.setTimeZone(timeZone);
+        dayFormat.setTimeZone(timeZone);
+        all.setTimeZone(timeZone);
+
+        Date currentDate = new Date();
+        String month = monthFormat.format(currentDate);
+        int day = Integer.parseInt(dayFormat.format(currentDate)) + 1;  // Current DAY + 1.
+        Date date = all.parse(month + "-" + day + "-2020");
+
+        assertTrue(Time.isSameDay(date));
+        assertFalse(Time.dateHasPassed(date));
     }
 
     @Test
     @DisplayName("Test Current Date")
     public void testCurrentDate() throws ParseException {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        assertTrue(Time.isDate(new Date()));
-        assertFalse(Time.isDate("02-02-2020", TimeZone.getTimeZone("EST")));
+        assertTrue(Time.isSameDay(new Date()));
+        assertFalse(Time.isSameDay("02-02-2020", TimeZone.getTimeZone("EST")));
     }
 
 }
