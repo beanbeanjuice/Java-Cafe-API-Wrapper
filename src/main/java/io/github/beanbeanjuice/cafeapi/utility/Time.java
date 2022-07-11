@@ -13,6 +13,7 @@ import java.util.*;
  * @author beanbeanjuice
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html">SimpleDateTime Formatting</a>
  * @see <a href="https://garygregory.wordpress.com/2013/06/18/what-are-the-java-timezone-ids/">Timezone IDs</a>
+ * @see <a href="https://stackoverflow.com/questions/2517709/comparing-two-java-util-dates-to-see-if-they-are-in-the-same-day">Calendar Help</a>
  */
 public class Time {
 
@@ -148,19 +149,17 @@ public class Time {
      */
     @NotNull
     public static Boolean dateHasPassed(@NotNull Date date) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd");
-        SimpleDateFormat yearFormat = new SimpleDateFormat("MM-dd-yyyy");
-        Date currentDate = new Date();
+        Calendar checkCalendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
 
-        // 2020 is a leap year
-        date = yearFormat.parse(format.format(date) + "-2020");
-        currentDate = yearFormat.parse(format.format(currentDate) + "-2020");
+        checkCalendar.setTime(date);
+        calendar.setTime(new Date());
 
-        // Means they are the same.
-        if (!currentDate.after(date) && !currentDate.before(date))
-            return true;
+        // Setting both years to 2020. (2020 has a leap-year)
+        checkCalendar.set(Calendar.YEAR, 2020);
+        calendar.set(Calendar.YEAR, 2020);
 
-        return currentDate.after(date);
+        return calendar.after(checkCalendar);
     }
 
     /**
@@ -182,7 +181,7 @@ public class Time {
      * @throws ParseException Thrown if there was an error parsing the {@link Date}.
      */
     @NotNull
-    public static Boolean isDate(@NotNull Date date) throws ParseException {
+    public static Boolean isSameDay(@NotNull Date date) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("MM-dd");
         SimpleDateFormat yearFormat = new SimpleDateFormat("MM-dd-yyyy");
         Date currentDate = new Date();
@@ -203,8 +202,8 @@ public class Time {
      * @throws ParseException Thrown if there was an error parsing the {@link String} of the {@link Date}.
      */
     @NotNull
-    public static Boolean isDate(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
-        return isDate(getFullDate(dateString, timeZone));
+    public static Boolean isSameDay(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
+        return isSameDay(getFullDate(dateString, timeZone));
     }
 
 }
