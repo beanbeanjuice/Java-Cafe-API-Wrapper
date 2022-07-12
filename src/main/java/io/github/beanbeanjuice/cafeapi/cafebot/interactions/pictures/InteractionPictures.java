@@ -2,9 +2,10 @@ package io.github.beanbeanjuice.cafeapi.cafebot.interactions.pictures;
 
 import io.github.beanbeanjuice.cafeapi.api.CafeAPI;
 import io.github.beanbeanjuice.cafeapi.cafebot.interactions.InteractionType;
-import io.github.beanbeanjuice.cafeapi.exception.AuthorizationException;
-import io.github.beanbeanjuice.cafeapi.exception.ResponseException;
-import io.github.beanbeanjuice.cafeapi.exception.TeaPotException;
+import io.github.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ResponseException;
+import io.github.beanbeanjuice.cafeapi.exception.api.TeaPotException;
+import io.github.beanbeanjuice.cafeapi.exception.api.CafeException;
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import io.github.beanbeanjuice.cafeapi.requests.RequestRoute;
@@ -33,7 +34,7 @@ public class InteractionPictures implements CafeAPI {
      * @param type The {@link InteractionType} specified.
      * @return The {@link String url} to the {@link io.github.beanbeanjuice.cafeapi.cafebot.interactions.users.Interaction Interaction} image.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws TeaPotException Thrown when an invalid {@link InteractionType} is entered.
      */
     @NotNull

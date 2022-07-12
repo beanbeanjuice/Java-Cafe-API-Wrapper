@@ -2,7 +2,7 @@ package io.github.beanbeanjuice.cafeapi.beta;
 
 import io.github.beanbeanjuice.cafeapi.CafeAPI;
 import io.github.beanbeanjuice.cafeapi.cafebot.raffles.Raffle;
-import io.github.beanbeanjuice.cafeapi.exception.ConflictException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ConflictException;
 import io.github.beanbeanjuice.cafeapi.generic.CafeGeneric;
 import io.github.beanbeanjuice.cafeapi.requests.RequestLocation;
 import org.junit.jupiter.api.Assertions;

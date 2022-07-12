@@ -20,6 +20,8 @@ import io.github.beanbeanjuice.cafeapi.requests.*;
 import io.github.beanbeanjuice.cafeapi.user.Users;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.TimeZone;
+
 public class CafeAPI {
 
     private String apiKey;
@@ -52,6 +54,7 @@ public class CafeAPI {
      * @param requestLocation The {@link RequestLocation requestLocation}.
      */
     public CafeAPI(@NotNull String username, @NotNull String password, @NotNull RequestLocation requestLocation) {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         this.userAgent = username;
         CafeAPI.requestLocation = requestLocation;
 
