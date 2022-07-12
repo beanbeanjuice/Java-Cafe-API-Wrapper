@@ -1,7 +1,7 @@
 package io.github.beanbeanjuice.cafeapi.beta;
 
 import io.github.beanbeanjuice.cafeapi.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.ConflictException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ConflictException;
 import io.github.beanbeanjuice.cafeapi.requests.RequestLocation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +18,7 @@ public class GuildTwitchTest {
         Assertions.assertTrue(cafeAPI.TWITCH.getGuildTwitches("491616686928166912").isEmpty());
 
         // Making sure that "beanbeanjuice" is contained in the specified guild.
-        Assertions.assertEquals("beanbeanjuice", cafeAPI.TWITCH.getGuildTwitches("798830792938881024").get(1));
+        Assertions.assertTrue(cafeAPI.TWITCH.getGuildTwitches("798830792938881024").contains("beanbeanjuice"));
 
         // Makes sure "beanbeanjuice2" can be removed from the specified guild.
         Assertions.assertTrue(cafeAPI.TWITCH.removeGuildTwitch("798830792938881024", "beanbeanjuice2"));

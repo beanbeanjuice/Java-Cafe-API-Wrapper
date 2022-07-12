@@ -1,4 +1,4 @@
-package io.github.beanbeanjuice.cafeapi.exception;
+package io.github.beanbeanjuice.cafeapi.exception.api;
 
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import org.jetbrains.annotations.NotNull;

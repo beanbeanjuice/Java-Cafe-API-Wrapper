@@ -6,7 +6,7 @@ public enum RequestLocation {
 
     RELEASE ("http://beanbeanjuice.com:5100"),
     BETA ("http://beanbeanjuice.com:5101"),
-    LOCAL ("http://localhost:5100");
+    LOCAL ("http://localhost:5101");
 
     private final String url;
 

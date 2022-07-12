@@ -2,10 +2,11 @@ package io.github.beanbeanjuice.cafeapi.cafebot.raffles;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.github.beanbeanjuice.cafeapi.api.CafeAPI;
-import io.github.beanbeanjuice.cafeapi.exception.AuthorizationException;
-import io.github.beanbeanjuice.cafeapi.exception.ConflictException;
-import io.github.beanbeanjuice.cafeapi.exception.ResponseException;
-import io.github.beanbeanjuice.cafeapi.exception.UndefinedVariableException;
+import io.github.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ConflictException;
+import io.github.beanbeanjuice.cafeapi.exception.api.ResponseException;
+import io.github.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
+import io.github.beanbeanjuice.cafeapi.exception.api.CafeException;
 import io.github.beanbeanjuice.cafeapi.generic.CafeGeneric;
 import io.github.beanbeanjuice.cafeapi.requests.Request;
 import io.github.beanbeanjuice.cafeapi.requests.RequestBuilder;
@@ -38,7 +39,7 @@ public class Raffles implements CafeAPI {
      * Retrieves all {@link Raffle Raffles} in the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @return The {@link HashMap} with keys of {@link String guildID} and a value of {@link ArrayList} containing {@link Raffle Raffles}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
     @NotNull
     public HashMap<String, ArrayList<Raffle>> getAllRaffles()
@@ -71,7 +72,7 @@ public class Raffles implements CafeAPI {
      * @param guildID The {@link String guildID} of the Discord server.
      * @return The {@link ArrayList} of {@link Raffle} in the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
     @NotNull
     public ArrayList<Raffle> getGuildRaffles(@NotNull String guildID)
@@ -100,7 +101,7 @@ public class Raffles implements CafeAPI {
      * @param raffle The {@link Raffle} to add to the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @return True, if the {@link Raffle} was successfully created.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      * @throws ConflictException Thrown when the {@link Raffle} already exists for the specified {@link String guildID}.
      */
@@ -124,7 +125,7 @@ public class Raffles implements CafeAPI {
      * @param raffle The {@link Raffle} to delete from the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @return True, if the {@link Raffle} was successfully removed from the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
     @NotNull
@@ -139,7 +140,7 @@ public class Raffles implements CafeAPI {
      * @param messageID The {@link String messageID} of the {@link Raffle}.
      * @return True, if the {@link Raffle} was successfully removed from the {@link io.github.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
-     * @throws ResponseException Thrown when there is a generic server-side {@link io.github.beanbeanjuice.cafeapi.exception.CafeException CafeException}.
+     * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
     @NotNull
