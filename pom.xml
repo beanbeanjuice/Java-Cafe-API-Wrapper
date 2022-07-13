@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
     <version>v1.2.3-SNAPSHOT</version>
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
-    <url>https://www.github.com/beanbeanjuice/cafe-api-wrapper</url>
+    <url>https://github.com/beanbeanjuice/Java-Cafe-API-Wrapper</url>
 
     <licenses>
         <license>
