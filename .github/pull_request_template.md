@@ -11,6 +11,7 @@ Fixes # (issue)
 - [ ] Feature (Something New Added to the Code)
 - [ ] Improvement (Improving An Existing Section of Code)
 - [ ] Documentation Update
+- [ ] Security Vulnerability
 
 ## Changes
 
@@ -18,16 +19,10 @@ Fixes # (issue)
 - [ ] Documentation
 - [ ] Other: _____
 
-**Test Configuration**:
-* Hardware:
-    - CPU: 
-    - GPU: 
-    - RAM:
-* SDK: Java Oracle 16
-
 # Checklist:
 
-- [ ] The code follows the style [guidlines]().
+- [ ] This pull request has been linked to the appropriate issue on GitHub. (Use the development section on the right.)
+- [ ] The code follows the style [guidlines](https://github.com/beanbeanjuice/cafeBot/blob/master/CONTRIBUTING.md).
 - [ ] A self-review of the code was performed in GitHub.
 - [ ] Appropriate comments were added in the code.
 - [ ] Appropriate changes have been made to the documentation.
@@ -37,4 +32,5 @@ Fixes # (issue)
 - [ ] New and existing Maven CI tests have passed.
 - [ ] The pull request is properly merging into the correct branch.
 - [ ] All existing local code has been pushed to the GitHub repository.
-- [ ] Changes have been documented in the current draft [cafeBot Releases](https://github.com/beanbeanjuice/cafeBot/releases) update.
+- [ ] Changes have been documented in the current draft [Java Cafe API Wrapper Release](https://github.com/beanbeanjuice/Java-Cafe-API-Wrapper/releases) update.
+- [ ] The version has been successfully incremented.
