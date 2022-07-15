@@ -7,7 +7,6 @@ import com.beanbeanjuice.cafeapi.requests.Request;
 import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
-import io.github.beanbeanjuice.cafeapi.exception.api.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
