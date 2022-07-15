@@ -6,8 +6,40 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
-    <version>1.2.5-SNAPSHOT</version>
+    <version>${version.number.final}</version>
     <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <version.number>1.2.6</version.number>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>snapshot-version</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <version.number.final>${version.number}-SNAPSHOT</version.number.final>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>release-version</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <properties>
+                <version.number.final>${version.number}</version.number.final>
+            </properties>
+        </profile>
+    </profiles>
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
@@ -188,12 +220,5 @@
         </dependency>
 
     </dependencies>
-
-    <properties>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
 
 </project>
