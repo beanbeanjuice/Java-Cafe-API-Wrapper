@@ -1,5 +1,6 @@
 [![wakatime](https://wakatime.com/badge/user/beeb4317-977b-4b19-878a-21e9aa8e43ed/project/da9ac356-721a-40dd-a76a-19c3ff0d57d5.svg?style=for-the-badge)](https://wakatime.com/badge/user/beeb4317-977b-4b19-878a-21e9aa8e43ed/project/da9ac356-721a-40dd-a76a-19c3ff0d57d5)
 [![CodeFactor](https://www.codefactor.io/repository/github/beanbeanjuice/java-cafe-api-wrapper/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/beanbeanjuice/java-cafe-api-wrapper)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/beanbeanjuice/Java-Cafe-API-Wrapper?style=for-the-badge)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -52,8 +53,6 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
-[![Product Name Screen Shot][product-title]](https://www.beanbeanjuice.com/cafeBot.html)
-
 ### Built With
 
 * [Maven](https://maven.apache.org/)
@@ -63,53 +62,22 @@
 
 To add this bot to your server, follow these steps.
 
-## Prerequisites
-
-In order to use this, you must have a Java project with either `Maven` or `Gradle`.
-
-For `Maven`, paste these two repositories in your `pom.xml` file.
-```XML
-<repositories>
-  ...
-
-  <!-- Sonatype Snapshot Repository -->
-  <repository>
-    <id>sonatype-snapshots</id>
-    <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-  </repository>
-
-  <!-- Sonatype Release Repository -->
-  <repository>
-    <id>sonatype-releases</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-  </repository>
-
-  ...
-</repositories>
-```
-
-For `Gradle`, paste these two repositories in your `build.gradle` file.
-```Groovy
-maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
-maven { url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/' }
-```
-
 ## Installation
 
 For `Maven`, paste this into your `dependencies` section of your `pom.xml` file.
 ```XML
 <!-- Cafe API -->
 <dependency>
-  <groupId>io.github.beanbeanjuice</groupId>
+  <groupId>com.beanbeanjuice</groupId>
   <artifactId>cafe-api-wrapper</artifactId>
-  <version>v1.1.1</version>
+  <version>VERSION</version>
 </dependency>
 ```
 
 For `Gradle`, paste this into your `dependencies` section of your `build.gradle` file.
 ```Groovy
 // Cafe API
-implementation group: 'io.github.beanbeanjuice', name: 'cafe-api-wrapper', version: 'v1.1.1'
+implementation group: 'com.beanbeanjuice', name: 'cafe-api-wrapper', version: 'VERSION'
 ```
 
 <!-- ROADMAP -->
