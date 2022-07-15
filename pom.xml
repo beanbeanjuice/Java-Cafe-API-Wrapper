@@ -2,20 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.beanbeanjuice</groupId>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
-    <version>v1.1.2</version>
+    <version>1.2.5-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
-    <url>https://www.github.com/beanbeanjuice/cafe-api-wrapper</url>
+    <url>https://github.com/beanbeanjuice/Java-Cafe-API-Wrapper</url>
 
     <licenses>
         <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>GNU General Public License, Version 3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -24,15 +25,15 @@
         <developer>
             <name>beanbeanjuice</name>
             <email>beanbeanjuice@outlook.com</email>
-            <organization>com.github.beanbeanjuice</organization>
-            <organizationUrl>https://www.github.com/beanbeanjuice/cafe-api-wrapper</organizationUrl>
+            <organization>com.beanbeanjuice</organization>
+            <organizationUrl>https://github.com/beanbeanjuice/Java-Cafe-API-Wrapper</organizationUrl>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/beanbeanjuice/cafe-api-wrapper.git</connection>
-        <developerConnection>scm:git:ssh://github.com:beanbeanjuice/cafe-api-wrapper.git</developerConnection>
-        <url>https://github.com/beanbeanjuice/cafe-api-wrapper/tree/master</url>
+        <connection>scm:git:git://github.com/beanbeanjuice/Java-Cafe-API-Wrapper.git</connection>
+        <developerConnection>scm:git:ssh://github.com:beanbeanjuice/Java-Cafe-API-Wrapper.git</developerConnection>
+        <url>https://github.com/beanbeanjuice/Java-Cafe-API-Wrapper/tree/master</url>
     </scm>
 
     <build>
@@ -86,10 +87,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-                <version>1.5</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -97,13 +95,17 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
-    <packaging>jar</packaging>
 
     <distributionManagement>
         <snapshotRepository>
@@ -117,6 +119,14 @@
     </distributionManagement>
 
     <dependencies>
+        <!-- GPG Plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.0.1</version>
+            <type>maven-plugin</type>
+        </dependency>
+
         <!-- Nexus Staging Maven Plugin -->
         <dependency>
             <groupId>org.sonatype.plugins</groupId>
@@ -149,14 +159,6 @@
             <version>2.13.3</version>
         </dependency>
 
-        <!-- Logback for Logging -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.11</version>
-            <scope>runtime</scope>
-        </dependency>
-
         <!-- HTTPComponents for REQUESTS to the API -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -170,6 +172,8 @@
             <artifactId>java-dotenv</artifactId>
             <version>5.2.2</version>
         </dependency>
+
+        <!-- JUNIT for Unit Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -186,8 +190,8 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
