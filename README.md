@@ -1,11 +1,5 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-[![WakaTime][wakatime-shield]][wakatime-url]
-[![CodeFactor][codefactor-shield]][codefactor-url]
+[![wakatime](https://wakatime.com/badge/user/beeb4317-977b-4b19-878a-21e9aa8e43ed/project/da9ac356-721a-40dd-a76a-19c3ff0d57d5.svg?style=for-the-badge)](https://wakatime.com/badge/user/beeb4317-977b-4b19-878a-21e9aa8e43ed/project/da9ac356-721a-40dd-a76a-19c3ff0d57d5)
+[![CodeFactor](https://www.codefactor.io/repository/github/beanbeanjuice/java-cafe-api-wrapper/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/beanbeanjuice/java-cafe-api-wrapper)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -63,7 +57,6 @@
 ### Built With
 
 * [Maven](https://maven.apache.org/)
-* [Twitch4J](https://github.com/twitch4j/twitch4j)
 
 <!-- GETTING STARTED -->
 # Getting Started
@@ -152,23 +145,3 @@ Distributed under the GPL-3.0 License. See `LICENSE` for more information.
 # Acknowledgements
 
 * *There's nothing here yet... maybe in the future?*
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/beanbeanjuice/cafe-api-wrapper.svg?style=for-the-badge
-[contributors-url]: https://github.com/beanbeanjuice/cafe-api-wrapper/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/beanbeanjuice/cafe-api-wrapper.svg?style=for-the-badge
-[forks-url]: https://github.com/beanbeanjuice/cafe-api-wrapper/network/members
-[stars-shield]: https://img.shields.io/github/stars/beanbeanjuice/cafe-api-wrapper.svg?style=for-the-badge
-[stars-url]: https://github.com/beanbeanjuice/cafe-api-wrapper/stargazers
-[issues-shield]: https://img.shields.io/github/issues/beanbeanjuice/cafe-api-wrapper.svg?style=for-the-badge
-[issues-url]: https://github.com/beanbeanjuice/cafe-api-wrapper/issues
-[license-shield]: https://img.shields.io/github/license/beanbeanjuice/cafe-api-wrapper.svg?style=for-the-badge
-[license-url]: https://github.com/beanbeanjuice/cafe-api-wrapper/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/beanbeanjuice
-[wakatime-shield]: https://wakatime.com/badge/github/beanbeanjuice/cafe-api-wrapper.svg?style=for-the-badge
-[wakatime-url]: https://wakatime.com/badge/github/beanbeanjuice/cafe-api-wrapper
-[product-title]: http://cdn.beanbeanjuice.com/images/cafeBot/readme/cafeBot.png
-[codefactor-shield]: https://www.codefactor.io/repository/github/beanbeanjuice/cafe-api-wrapper/badge?style=for-the-badge
-[codefactor-url]: https://www.codefactor.io/repository/github/beanbeanjuice/cafe-api-wrapper
