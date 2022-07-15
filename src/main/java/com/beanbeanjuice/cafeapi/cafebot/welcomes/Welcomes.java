@@ -7,7 +7,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
-import io.github.beanbeanjuice.cafeapi.exception.api.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

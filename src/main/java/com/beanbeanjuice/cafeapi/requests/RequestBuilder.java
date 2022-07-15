@@ -3,7 +3,6 @@ package com.beanbeanjuice.cafeapi.requests;
 import com.beanbeanjuice.cafeapi.CafeAPI;
 import com.beanbeanjuice.cafeapi.exception.api.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.beanbeanjuice.cafeapi.exception.api.*;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

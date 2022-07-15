@@ -18,7 +18,6 @@ import com.beanbeanjuice.cafeapi.cafebot.version.Versions;
 import com.beanbeanjuice.cafeapi.cafebot.voicebinds.VoiceChannelBinds;
 import com.beanbeanjuice.cafeapi.cafebot.welcomes.Welcomes;
 import com.beanbeanjuice.cafeapi.cafebot.words.Words;
-import io.github.beanbeanjuice.cafeapi.requests.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.TimeZone;
