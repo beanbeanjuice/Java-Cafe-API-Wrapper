@@ -4,9 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.beanbeanjuice</groupId>
+    <groupId>com.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
-    <version>v1.2.3-SNAPSHOT</version>
+    <version>1.2.4-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
@@ -14,8 +15,8 @@
 
     <licenses>
         <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <name>GNU General Public License, Version 3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -24,15 +25,15 @@
         <developer>
             <name>beanbeanjuice</name>
             <email>beanbeanjuice@outlook.com</email>
-            <organization>com.github.beanbeanjuice</organization>
-            <organizationUrl>https://www.github.com/beanbeanjuice/cafe-api-wrapper</organizationUrl>
+            <organization>com.beanbeanjuice</organization>
+            <organizationUrl>https://github.com/beanbeanjuice/Java-Cafe-API-Wrapper</organizationUrl>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/beanbeanjuice/cafe-api-wrapper.git</connection>
-        <developerConnection>scm:git:ssh://github.com:beanbeanjuice/cafe-api-wrapper.git</developerConnection>
-        <url>https://github.com/beanbeanjuice/cafe-api-wrapper/tree/master</url>
+        <connection>scm:git:git://github.com/beanbeanjuice/Java-Cafe-API-Wrapper.git</connection>
+        <developerConnection>scm:git:ssh://github.com:beanbeanjuice/Java-Cafe-API-Wrapper.git</developerConnection>
+        <url>https://github.com/beanbeanjuice/Java-Cafe-API-Wrapper/tree/master</url>
     </scm>
 
     <build>
@@ -102,8 +103,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <packaging>jar</packaging>
 
     <distributionManagement>
         <snapshotRepository>
