@@ -17,17 +17,20 @@ import org.jetbrains.annotations.NotNull;
  * A class used to retrieve random pictures from the {@link CafeAPI CafeAPI}.
  *
  * @author beanbeanjuice
+ * @since 1.3.1
  */
 public class InteractionPictures implements com.beanbeanjuice.cafeapi.api.CafeAPI {
 
     private String apiKey;
+    private final CafeAPI cafeAPI;
 
     /**
      * Creates a new {@link InteractionPictures} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public InteractionPictures(@NotNull String apiKey) {
+    public InteractionPictures(@NotNull String apiKey, @NotNull CafeAPI cafeAPI) {
         this.apiKey = apiKey;
+        this.cafeAPI = cafeAPI;
     }
 
     /**
@@ -41,12 +44,16 @@ public class InteractionPictures implements com.beanbeanjuice.cafeapi.api.CafeAP
     @NotNull
     public String getRandomInteractionPicture(@NotNull InteractionType type)
     throws AuthorizationException, ResponseException, TeaPotException {
-        Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
-                .setRoute("/interaction_pictures/" + type)
-                .setAuthorization(apiKey)
-                .build();
+        if (type.isKawaiiAPI()) {
+            return cafeAPI.KAWAII_API.GIF.getGIF(type.getKawaiiAPIString());
+        } else {
+            Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
+                    .setRoute("/interaction_pictures/" + type)
+                    .setAuthorization(apiKey)
+                    .build();
 
-        return request.getData().get("url").asText();
+            return request.getData().get("url").asText();
+        }
     }
 
     /**

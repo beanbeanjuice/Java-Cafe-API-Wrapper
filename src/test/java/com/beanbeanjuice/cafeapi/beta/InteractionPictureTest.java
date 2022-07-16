@@ -7,6 +7,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests the {@link com.beanbeanjuice.cafeapi.cafebot.interactions.pictures.InteractionPictures InteractionPictures}.
+ * This confirms that the {@link CafeAPI} and {@link com.beanbeanjuice.KawaiiAPI KawaiiAPI} are both working.
+ *
+ * @author beanbeanjuice
+ * @since 1.3.1
+ */
 public class InteractionPictureTest {
 
     @Test
@@ -17,7 +24,12 @@ public class InteractionPictureTest {
         // Goes through every interaction type.
         Assertions.assertDoesNotThrow(() -> {
             for (InteractionType type : InteractionType.values()) {
-                Assertions.assertNotNull(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type));
+
+                if (type.isKawaiiAPI())
+                    Assertions.assertTrue(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type).startsWith("https://api.kawaii.red/gif/"));
+
+                else
+                    Assertions.assertNotNull(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type));
             }
         });
     }
