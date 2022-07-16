@@ -1,5 +1,6 @@
 package com.beanbeanjuice.cafeapi;
 
+import com.beanbeanjuice.KawaiiAPI;
 import com.beanbeanjuice.cafeapi.requests.*;
 import com.beanbeanjuice.cafeapi.user.Users;
 import com.beanbeanjuice.cafeapi.cafebot.beancoins.users.DonationUsers;
@@ -27,6 +28,7 @@ public class CafeAPI {
     private String apiKey;
     private String userAgent;
     private static RequestLocation requestLocation;
+    public KawaiiAPI KAWAII_API;
 
     public Users USER;
 
@@ -82,12 +84,25 @@ public class CafeAPI {
         CAFE_USER = new CafeUsers(apiKey);
         BIRTHDAY = new Birthdays(apiKey);
         DONATION_USER = new DonationUsers(apiKey);
-        INTERACTION_PICTURE = new InteractionPictures(apiKey);
+        INTERACTION_PICTURE = new InteractionPictures(apiKey, this);
+
+        KAWAII_API = new KawaiiAPI("anonymous");
     }
 
+    /**
+     * @return The {@link RequestLocation} for the {@link CafeAPI}.
+     */
     @NotNull
     public static RequestLocation getRequestLocation() {
         return requestLocation;
+    }
+
+    /**
+     * Sets the {@link KawaiiAPI} token.
+     * @param token The {@link String} token for the {@link KawaiiAPI}.
+     */
+    public void setKawaiiAPI(@NotNull String token) {
+        KAWAII_API = new KawaiiAPI(token);
     }
 
     private String getToken(@NotNull String username, @NotNull String password) {
