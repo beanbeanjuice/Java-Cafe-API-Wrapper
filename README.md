@@ -60,9 +60,16 @@
 <!-- GETTING STARTED -->
 # Getting Started
 
-To add this bot to your server, follow these steps.
+## Usage
+
+```Java
+CafeAPI cafeAPI = new CafeAPI(USERNAME_HERE, PASSWORD_HERE, RequestLocation.RELEASE);
+cafeAPI.BIRTHDAY.getUserBirthday(USER_ID_HERE);
+```
 
 ## Installation
+
+![Maven Central](https://img.shields.io/maven-central/v/com.beanbeanjuice/cafe-api-wrapper?color=%23CBC3E3)
 
 For `Maven`, paste this into your `dependencies` section of your `pom.xml` file.
 ```XML
