@@ -28,7 +28,7 @@ public class VoiceChannelBindTest {
         Assertions.assertTrue(() -> cafeAPI.VOICE_CHANNEL_BIND.getAllVoiceChannelBinds().get("798830792938881024").size() >= 3);
 
         // Makes sure that the role ID specified is contained in the 2nd bind of voice channel binds in the home guild.
-        Assertions.assertEquals("854169730370109491", cafeAPI.VOICE_CHANNEL_BIND.getAllVoiceChannelBinds().get("798830792938881024").get(1).getRoleID());
+        Assertions.assertEquals("854163089590059048", cafeAPI.VOICE_CHANNEL_BIND.getAllVoiceChannelBinds().get("798830792938881024").get(1).getRoleID());
 
         // Makes sure that a ConflictException is thrown when trying to add a voice bind that already exists.
         Assertions.assertThrows(ConflictException.class, () -> {
