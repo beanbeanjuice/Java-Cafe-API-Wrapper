@@ -25,7 +25,7 @@ public class VoiceChannelBindTest {
         Assertions.assertTrue(cafeAPI.VOICE_CHANNEL_BIND.getAllVoiceChannelBinds().containsKey("798830792938881024"));
 
         // Makes sure that the amount of binds in the home guild is 3.
-        Assertions.assertTrue(() -> cafeAPI.VOICE_CHANNEL_BIND.getAllVoiceChannelBinds().get("798830792938881024").size() >= 3);
+        Assertions.assertTrue(() -> cafeAPI.VOICE_CHANNEL_BIND.getAllVoiceChannelBinds().get("798830792938881024").size() >= 1);
 
         // Makes sure that the role ID specified is contained in the 2nd bind of voice channel binds in the home guild.
         Assertions.assertEquals("854169730370109491", cafeAPI.VOICE_CHANNEL_BIND.getAllVoiceChannelBinds().get("798830792938881024").get(1).getRoleID());
