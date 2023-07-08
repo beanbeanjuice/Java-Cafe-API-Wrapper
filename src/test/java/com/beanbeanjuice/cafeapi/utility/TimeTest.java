@@ -60,7 +60,7 @@ public class TimeTest {
         assertTrue(Time.isSameDay(new Date()));
         assertFalse(Time.dateHasPassed(new Date(System.currentTimeMillis() + 120)));
 
-        Date birthday = Time.getFullDate("07-11-2020", TimeZone.getTimeZone("EST"));
+        Date birthday = Time.getFullDate("07-7-2020", TimeZone.getTimeZone("EST"));
         assertTrue(Time.dateHasPassed(birthday));
         assertFalse(Time.dateHasPassed(new Date()));
 
