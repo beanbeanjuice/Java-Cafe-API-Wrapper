@@ -21,6 +21,7 @@ public enum GuildInformationType {
     RAFFLE_CHANNEL_ID ("raffle_channel_id"),
     BIRTHDAY_CHANNEL_ID ("birthday_channel_id"),
     WELCOME_CHANNEL_ID ("welcome_channel_id"),
+    GOODBYE_CHANNEL_ID ("goodbye_channel_id"),
     LOG_CHANNEL_ID ("log_channel_id"),
     VENTING_CHANNEL_ID ("venting_channel_id"),
     AI_RESPONSE ("ai_response"),
