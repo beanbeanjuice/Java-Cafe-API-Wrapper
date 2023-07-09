@@ -39,7 +39,17 @@ public enum InteractionType {
     DIE ("die_amount", false, null),
     WELCOME ("welcome_amount", false, null),
     LICK ("lick_amount", true, "lick"),
-    SHUSH ("shush_amount", false, null);
+    SHUSH ("shush_amount", false, null),
+    WAVE ("wave_amount", true, "wave"),
+    SHOOT ("shoot_amount", true, "shoot"),
+    AMAZED ("amazed_amount", true, "amazing"),
+    ASK ("ask_amount", true, "ask"),
+    BOOP ("boop_amount", true, "boop"),
+    LOVE ("love_amount", true, "love"),
+    NOSEBLEED ("nosebleed_amount", true, "nosebleed"),
+    OK ("ok_amount", true, "ok"),
+    UWU ("uwu_amount", true, "uwu"),
+    WINK ("wink_amount", true, "wink");
 
     private final String type;
     private final Boolean isKawaiiAPI;

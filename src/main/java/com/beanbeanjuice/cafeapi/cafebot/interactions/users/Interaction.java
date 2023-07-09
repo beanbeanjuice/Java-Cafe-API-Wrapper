@@ -37,6 +37,16 @@ public class Interaction {
     private final Integer welcomeAmount;
     private final Integer lickAmount;
     private final Integer shushAmount;
+    private final Integer waveAmount;
+    private final Integer shootAmount;
+    private final Integer amazedAmount;
+    private final Integer askAmount;
+    private final Integer boopAmount;
+    private final Integer loveAmount;
+    private final Integer nosebleedAmount;
+    private final Integer okAmount;
+    private final Integer uwuAmount;
+    private final Integer winkAmount;
 
     /**
      * Creates a new {@link Interaction object.}
@@ -68,6 +78,16 @@ public class Interaction {
      * @param welcomeAmount The {@link Integer welcomeAmount}.
      * @param lickAmount The {@link Integer lickAmount}.
      * @param shushAmount The {@link Integer shushAmount}.
+     * @param waveAmount The {@link Integer waveAmount}.
+     * @param shootAmount The {@link Integer shootAmount}.
+     * @param amazedAmount The {@link Integer amazedAmount}.
+     * @param askAmount The {@link Integer askAmount}.
+     * @param boopAmount The {@link Integer boopAmount}.
+     * @param loveAmount The {@link Integer loveAmount}.
+     * @param nosebleedAmount The {@link Integer nosebleedAmount}.
+     * @param okAmount The {@link Integer okAmount}.
+     * @param uwuAmount The {@link Integer uwuAmount}.
+     * @param winkAmount The {@link Integer winkAmount}.
      */
     public Interaction(Integer hugAmount, Integer punchAmount, Integer kissAmount,
                        Integer biteAmount, Integer blushAmount, Integer cuddleAmount,
@@ -78,7 +98,10 @@ public class Interaction {
                        Integer headpatAmount, Integer cryAmount, Integer danceAmount,
                        Integer dabAmount, Integer bonkAmount, Integer sleepAmount,
                        Integer dieAmount, Integer welcomeAmount, Integer lickAmount,
-                       Integer shushAmount) {
+                       Integer shushAmount, Integer waveAmount, Integer shootAmount,
+                       Integer amazedAmount, Integer askAmount, Integer boopAmount,
+                       Integer loveAmount, Integer nosebleedAmount, Integer okAmount,
+                       Integer uwuAmount, Integer winkAmount) {
         this.hugAmount = hugAmount;
         this.punchAmount = punchAmount;
         this.kissAmount = kissAmount;
@@ -107,6 +130,16 @@ public class Interaction {
         this.welcomeAmount = welcomeAmount;
         this.lickAmount = lickAmount;
         this.shushAmount = shushAmount;
+        this.waveAmount = waveAmount;
+        this.shootAmount = shootAmount;
+        this.amazedAmount = amazedAmount;
+        this.askAmount = askAmount;
+        this.boopAmount = boopAmount;
+        this.loveAmount = loveAmount;
+        this.nosebleedAmount = nosebleedAmount;
+        this.okAmount = okAmount;
+        this.uwuAmount = uwuAmount;
+        this.winkAmount = winkAmount;
     }
 
     /**
@@ -331,5 +364,85 @@ public class Interaction {
     @NotNull
     public Integer getShushAmount() {
         return shushAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer waveAmount}.
+     */
+    @NotNull
+    public Integer getWaveAmount() {
+        return waveAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer shootAmount}.
+     */
+    @NotNull
+    public Integer getShootAmount() {
+        return shootAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer amazedAmount}.
+     */
+    @NotNull
+    public Integer getAmazedAmount() {
+        return amazedAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer askAmount}.
+     */
+    @NotNull
+    public Integer getAskAmount() {
+        return askAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer boopAmount}.
+     */
+    @NotNull
+    public Integer getBoopAmount() {
+        return boopAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer loveAmount}.
+     */
+    @NotNull
+    public Integer getLoveAmount() {
+        return loveAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer nosebleedAmount}.
+     */
+    @NotNull
+    public Integer getNosebleedAmount() {
+        return nosebleedAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer okAmount}.
+     */
+    @NotNull
+    public Integer getOKAmount() {
+        return okAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer uwuAmount}.
+     */
+    @NotNull
+    public Integer getUWUAmount() {
+        return uwuAmount;
+    }
+
+    /**
+     * @return The {@link Interaction} {@link Integer winkAmount}.
+     */
+    @NotNull
+    public Integer getWinkAmount() {
+        return winkAmount;
     }
 }
