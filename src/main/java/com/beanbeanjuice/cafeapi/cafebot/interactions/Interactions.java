@@ -292,34 +292,44 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      */
     @NotNull
     private Interaction parseInteraction(@NotNull JsonNode jsonNode) {
-        Integer hugAmount = jsonNode.get("hug_amount").asInt();
-        Integer punchAmount = jsonNode.get("punch_amount").asInt();
-        Integer kissAmount = jsonNode.get("kiss_amount").asInt();
-        Integer biteAmount = jsonNode.get("bite_amount").asInt();
-        Integer blushAmount = jsonNode.get("blush_amount").asInt();
-        Integer cuddleAmount = jsonNode.get("cuddle_amount").asInt();
-        Integer nomAmount = jsonNode.get("nom_amount").asInt();
-        Integer pokeAmount = jsonNode.get("poke_amount").asInt();
-        Integer slapAmount = jsonNode.get("slap_amount").asInt();
-        Integer stabAmount = jsonNode.get("stab_amount").asInt();
-        Integer hmphAmount = jsonNode.get("hmph_amount").asInt();
-        Integer poutAmount = jsonNode.get("pout_amount").asInt();
-        Integer throwAmount = jsonNode.get("throw_amount").asInt();
-        Integer smileAmount = jsonNode.get("smile_amount").asInt();
-        Integer stareAmount = jsonNode.get("stare_amount").asInt();
-        Integer tickleAmount = jsonNode.get("tickle_amount").asInt();
-        Integer rageAmount = jsonNode.get("rage_amount").asInt();
-        Integer yellAmount = jsonNode.get("yell_amount").asInt();
-        Integer headpatAmount = jsonNode.get("headpat_amount").asInt();
-        Integer cryAmount = jsonNode.get("cry_amount").asInt();
-        Integer danceAmount = jsonNode.get("dance_amount").asInt();
-        Integer dabAmount = jsonNode.get("dab_amount").asInt();
-        Integer bonkAmount = jsonNode.get("bonk_amount").asInt();
-        Integer sleepAmount = jsonNode.get("sleep_amount").asInt();
-        Integer dieAmount = jsonNode.get("die_amount").asInt();
-        Integer welcomeAmount = jsonNode.get("welcome_amount").asInt();
-        Integer lickAmount = jsonNode.get("lick_amount").asInt();
-        Integer shushAmount = jsonNode.get("shush_amount").asInt();
+        Integer hugAmount = jsonNode.get(InteractionType.HUG.getType()).asInt();
+        Integer punchAmount = jsonNode.get(InteractionType.PUNCH.getType()).asInt();
+        Integer kissAmount = jsonNode.get(InteractionType.KISS.getType()).asInt();
+        Integer biteAmount = jsonNode.get(InteractionType.BITE.getType()).asInt();
+        Integer blushAmount = jsonNode.get(InteractionType.BLUSH.getType()).asInt();
+        Integer cuddleAmount = jsonNode.get(InteractionType.CUDDLE.getType()).asInt();
+        Integer nomAmount = jsonNode.get(InteractionType.NOM.getType()).asInt();
+        Integer pokeAmount = jsonNode.get(InteractionType.POKE.getType()).asInt();
+        Integer slapAmount = jsonNode.get(InteractionType.SLAP.getType()).asInt();
+        Integer stabAmount = jsonNode.get(InteractionType.STAB.getType()).asInt();
+        Integer hmphAmount = jsonNode.get(InteractionType.HMPH.getType()).asInt();
+        Integer poutAmount = jsonNode.get(InteractionType.POUT.getType()).asInt();
+        Integer throwAmount = jsonNode.get(InteractionType.THROW.getType()).asInt();
+        Integer smileAmount = jsonNode.get(InteractionType.SMILE.getType()).asInt();
+        Integer stareAmount = jsonNode.get(InteractionType.STARE.getType()).asInt();
+        Integer tickleAmount = jsonNode.get(InteractionType.TICKLE.getType()).asInt();
+        Integer rageAmount = jsonNode.get(InteractionType.RAGE.getType()).asInt();
+        Integer yellAmount = jsonNode.get(InteractionType.YELL.getType()).asInt();
+        Integer headpatAmount = jsonNode.get(InteractionType.HEADPAT.getType()).asInt();
+        Integer cryAmount = jsonNode.get(InteractionType.CRY.getType()).asInt();
+        Integer danceAmount = jsonNode.get(InteractionType.DANCE.getType()).asInt();
+        Integer dabAmount = jsonNode.get(InteractionType.DAB.getType()).asInt();
+        Integer bonkAmount = jsonNode.get(InteractionType.BONK.getType()).asInt();
+        Integer sleepAmount = jsonNode.get(InteractionType.SLEEP.getType()).asInt();
+        Integer dieAmount = jsonNode.get(InteractionType.DIE.getType()).asInt();
+        Integer welcomeAmount = jsonNode.get(InteractionType.WELCOME.getType()).asInt();
+        Integer lickAmount = jsonNode.get(InteractionType.LICK.getType()).asInt();
+        Integer shushAmount = jsonNode.get(InteractionType.SHUSH.getType()).asInt();
+        Integer waveAmount = jsonNode.get(InteractionType.WAVE.getType()).asInt();
+        Integer shootAmount = jsonNode.get(InteractionType.SHOOT.getType()).asInt();
+        Integer amazedAmount = jsonNode.get(InteractionType.AMAZED.getType()).asInt();
+        Integer askAmount = jsonNode.get(InteractionType.ASK.getType()).asInt();
+        Integer boopAmount = jsonNode.get(InteractionType.BOOP.getType()).asInt();
+        Integer loveAmount = jsonNode.get(InteractionType.LOVE.getType()).asInt();
+        Integer nosebleedAmount = jsonNode.get(InteractionType.NOSEBLEED.getType()).asInt();
+        Integer okAmount = jsonNode.get(InteractionType.OK.getType()).asInt();
+        Integer uwuAmount = jsonNode.get(InteractionType.UWU.getType()).asInt();
+        Integer winkAmount = jsonNode.get(InteractionType.WINK.getType()).asInt();
 
         return new Interaction(
                 hugAmount, punchAmount, kissAmount,
@@ -331,7 +341,10 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
                 headpatAmount, cryAmount, danceAmount,
                 dabAmount, bonkAmount, sleepAmount,
                 dieAmount, welcomeAmount, lickAmount,
-                shushAmount
+                shushAmount, waveAmount, shootAmount,
+                amazedAmount, askAmount, boopAmount,
+                loveAmount, nosebleedAmount, okAmount,
+                uwuAmount, winkAmount
         );
     }
 
