@@ -88,6 +88,11 @@ public class GuildInformationTest {
         Assertions.assertTrue(cafeAPI.GUILD.updateGuildInformation("816880157490675732", GuildInformationType.WELCOME_CHANNEL_ID, "877240864240443412"));
         Assertions.assertEquals("877240864240443412", cafeAPI.GUILD.getGuildInformation("816880157490675732").getWelcomeChannelID());
 
+        // Makes sure the goodbye channel ID is default and can be changed.
+        Assertions.assertEquals("0", cafeAPI.GUILD.getAllGuildInformation().get("816880157490675732").getGoodbyeChannelID());
+        Assertions.assertTrue(cafeAPI.GUILD.updateGuildInformation("816880157490675732", GuildInformationType.GOODBYE_CHANNEL_ID, "877240864240443412"));
+        Assertions.assertEquals("877240864240443412", cafeAPI.GUILD.getGuildInformation("816880157490675732").getGoodbyeChannelID());
+
         // Makes sure the log channel ID is default and can be changed.
         Assertions.assertEquals("0", cafeAPI.GUILD.getAllGuildInformation().get("816880157490675732").getLogChannelID());
         Assertions.assertTrue(cafeAPI.GUILD.updateGuildInformation("816880157490675732", GuildInformationType.LOG_CHANNEL_ID, "857024885968732181"));
