@@ -5,6 +5,9 @@ on:
     branches:
     - integration
     - master
+  push:
+    branches:
+    - integration
 
 # https://stackoverflow.com/questions/61096521/how-to-use-gpg-key-in-github-actions
 # https://github.com/actions/setup-java/issues/83
