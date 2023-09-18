@@ -168,6 +168,9 @@ public class GuildInformation {
         return welcomeChannelID;
     }
 
+    /**
+     * @return The {@link String goodbyeChannelID} for the {@link GuildInformation}.
+     */
     @NotNull
     public String getGoodbyeChannelID() {
         return goodbyeChannelID;
