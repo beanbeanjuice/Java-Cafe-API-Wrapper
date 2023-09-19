@@ -112,6 +112,36 @@ public class InteractionTest {
         Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.SHUSH, 37));
         Assertions.assertEquals(37, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getShushAmount());
 
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.WAVE, 38));
+        Assertions.assertEquals(38, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getWaveAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.SHOOT, 39));
+        Assertions.assertEquals(39, cafeAPI.INTERACTION.getSpecificUserInteractionSentAmount("879761226761109544", InteractionType.SHOOT));
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.AMAZED, 40));
+        Assertions.assertEquals(40, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getAmazedAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.ASK, 41));
+        Assertions.assertEquals(41, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getAskAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.BOOP, 42));
+        Assertions.assertEquals(42, cafeAPI.INTERACTION.getSpecificUserInteractionSentAmount("879761226761109544", InteractionType.BOOP));
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.LOVE, 43));
+        Assertions.assertEquals(43, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getLoveAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.NOSEBLEED, 44));
+        Assertions.assertEquals(44, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getNosebleedAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.OK, 45));
+        Assertions.assertEquals(45, cafeAPI.INTERACTION.getSpecificUserInteractionSentAmount("879761226761109544", InteractionType.OK));
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.UWU, 46));
+        Assertions.assertEquals(46, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getUWUAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionSentAmount("879761226761109544", InteractionType.WINK, 47));
+        Assertions.assertEquals(47, cafeAPI.INTERACTION.getAllInteractionSenders().get("879761226761109544").getWinkAmount());
+
         // Deletes the user from the database.
         Assertions.assertTrue(cafeAPI.INTERACTION.deleteUserInteractionsSent("879761226761109544"));
     }
@@ -216,6 +246,36 @@ public class InteractionTest {
 
         Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.SHUSH, 77));
         Assertions.assertEquals(77, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getShushAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.WAVE, 78));
+        Assertions.assertEquals(78, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getWaveAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.SHOOT, 79));
+        Assertions.assertEquals(79, cafeAPI.INTERACTION.getSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.SHOOT));
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.AMAZED, 60));
+        Assertions.assertEquals(60, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getAmazedAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.ASK, 61));
+        Assertions.assertEquals(61, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getAskAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.BOOP, 62));
+        Assertions.assertEquals(62, cafeAPI.INTERACTION.getSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.BOOP));
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.LOVE, 63));
+        Assertions.assertEquals(63, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getLoveAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.NOSEBLEED, 64));
+        Assertions.assertEquals(64, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getNosebleedAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.OK, 65));
+        Assertions.assertEquals(65, cafeAPI.INTERACTION.getSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.OK));
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.UWU, 66));
+        Assertions.assertEquals(66, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getUWUAmount());
+
+        Assertions.assertTrue(cafeAPI.INTERACTION.updateSpecificUserInteractionReceivedAmount("879761226761109544", InteractionType.WINK, 67));
+        Assertions.assertEquals(67, cafeAPI.INTERACTION.getAllInteractionReceivers().get("879761226761109544").getWinkAmount());
 
         // Deletes the user from the database.
         Assertions.assertTrue(cafeAPI.INTERACTION.deleteUserInteractionsReceived("879761226761109544"));
