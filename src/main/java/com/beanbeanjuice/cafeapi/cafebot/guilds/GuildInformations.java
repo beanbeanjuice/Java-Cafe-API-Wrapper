@@ -166,30 +166,31 @@ public class GuildInformations implements com.beanbeanjuice.cafeapi.api.CafeAPI 
      */
     @NotNull
     private GuildInformation parseGuildInformation(@NotNull JsonNode guild) {
-        String prefix = guild.get("prefix").asText();
-        String moderatorRoleID = guild.get("moderator_role_id").asText();
-        String twitchChannelID = guild.get("twitch_channel_id").asText();
-        String mutedRoleID = guild.get("muted_role_id").asText();
-        String liveNotificationsRoleID = guild.get("live_notifications_role_id").asText();
-        Boolean notifyOnUpdate = convertToBoolean(guild.get("notify_on_update").asText());
-        String updateChannelID = guild.get("update_channel_id").asText();
-        String countingChannelID = guild.get("counting_channel_id").asText();
-        String pollChannelID = guild.get("poll_channel_id").asText();
-        String raffleChannelID = guild.get("raffle_channel_id").asText();
-        String birthdayChannelID = guild.get("birthday_channel_id").asText();
-        String welcomeChannelID = guild.get("welcome_channel_id").asText();
-        String logChannelID = guild.get("log_channel_id").asText();
-        String ventingChannelID = guild.get("venting_channel_id").asText();
-        Boolean aiResponseStatus = convertToBoolean(guild.get("ai_response").asText());
-        String dailyChannelID = guild.get("daily_channel_id").asText();
+        String prefix = guild.get(GuildInformationType.PREFIX.getType()).asText();
+        String moderatorRoleID = guild.get(GuildInformationType.MODERATOR_ROLE_ID.getType()).asText();
+        String twitchChannelID = guild.get(GuildInformationType.TWITCH_CHANNEL_ID.getType()).asText();
+        String mutedRoleID = guild.get(GuildInformationType.MUTED_ROLE_ID.getType()).asText();
+        String liveNotificationsRoleID = guild.get(GuildInformationType.LIVE_NOTIFICATIONS_ROLE_ID.getType()).asText();
+        Boolean notifyOnUpdate = convertToBoolean(guild.get(GuildInformationType.NOTIFY_ON_UPDATE.getType()).asText());
+        String updateChannelID = guild.get(GuildInformationType.UPDATE_CHANNEL_ID.getType()).asText();
+        String countingChannelID = guild.get(GuildInformationType.COUNTING_CHANNEL_ID.getType()).asText();
+        String pollChannelID = guild.get(GuildInformationType.POLL_CHANNEL_ID.getType()).asText();
+        String raffleChannelID = guild.get(GuildInformationType.RAFFLE_CHANNEL_ID.getType()).asText();
+        String birthdayChannelID = guild.get(GuildInformationType.BIRTHDAY_CHANNEL_ID.getType()).asText();
+        String welcomeChannelID = guild.get(GuildInformationType.WELCOME_CHANNEL_ID.getType()).asText();
+        String goodbyeChannelID = guild.get(GuildInformationType.GOODBYE_CHANNEL_ID.getType()).asText();
+        String logChannelID = guild.get(GuildInformationType.LOG_CHANNEL_ID.getType()).asText();
+        String ventingChannelID = guild.get(GuildInformationType.VENTING_CHANNEL_ID.getType()).asText();
+        Boolean aiResponseStatus = convertToBoolean(guild.get(GuildInformationType.AI_RESPONSE.getType()).asText());
+        String dailyChannelID = guild.get(GuildInformationType.DAILY_CHANNEL_ID.getType()).asText();
 
         return new GuildInformation(
                 prefix, moderatorRoleID, twitchChannelID,
                 mutedRoleID, liveNotificationsRoleID, notifyOnUpdate,
                 updateChannelID, countingChannelID, pollChannelID,
                 raffleChannelID, birthdayChannelID, welcomeChannelID,
-                logChannelID, ventingChannelID, aiResponseStatus,
-                dailyChannelID
+                goodbyeChannelID, logChannelID, ventingChannelID,
+                aiResponseStatus, dailyChannelID
         );
     }
 

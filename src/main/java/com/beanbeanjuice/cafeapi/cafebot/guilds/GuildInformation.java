@@ -21,6 +21,7 @@ public class GuildInformation {
     private final String raffleChannelID;
     private final String birthdayChannelID;
     private final String welcomeChannelID;
+    private final String goodbyeChannelID;
     private final String logChannelID;
     private final String ventingChannelID;
     private final Boolean aiResponseStatus;
@@ -40,6 +41,7 @@ public class GuildInformation {
      * @param raffleChannelID The {@link String raffleChannelID} for the {@link String guildID}.
      * @param birthdayChannelID The {@link String birthdayChannelID} for the {@link String guildID}.
      * @param welcomeChannelID The {@link String welcomeChannelID} for the {@link String guildID}.
+     * @param goodbyeChannelID The {@link String goodbyeChannelID} for the {@link String guildID}.
      * @param logChannelID The {@link String logChannelID} for the {@link String guildID}.
      * @param ventingChannelID The {@link String ventingChannelID} for the {@link String guildID}.
      * @param aiResponseStatus The {@link Boolean aiResponseStatus} for the {@link String guildID}.
@@ -49,8 +51,8 @@ public class GuildInformation {
                             @NotNull String mutedRoleID, @NotNull String liveNotificationsRoleID, @NotNull Boolean notifyOnUpdate,
                             @NotNull String updateChannelID, @NotNull String countingChannelID, @NotNull String pollChannelID,
                             @NotNull String raffleChannelID, @NotNull String birthdayChannelID, @NotNull String welcomeChannelID,
-                            @NotNull String logChannelID, @NotNull String ventingChannelID, @NotNull Boolean aiResponseStatus,
-                            @NotNull String dailyChannelID) {
+                            @NotNull String goodbyeChannelID, @NotNull String logChannelID, @NotNull String ventingChannelID,
+                            @NotNull Boolean aiResponseStatus, @NotNull String dailyChannelID) {
         this.prefix = prefix;
         this.moderatorRoleID = moderatorRoleID;
         this.twitchChannelID = twitchChannelID;
@@ -63,6 +65,7 @@ public class GuildInformation {
         this.raffleChannelID = raffleChannelID;
         this.birthdayChannelID = birthdayChannelID;
         this.welcomeChannelID = welcomeChannelID;
+        this.goodbyeChannelID = goodbyeChannelID;
         this.logChannelID = logChannelID;
         this.ventingChannelID = ventingChannelID;
         this.aiResponseStatus = aiResponseStatus;
@@ -163,6 +166,14 @@ public class GuildInformation {
     @NotNull
     public String getWelcomeChannelID() {
         return welcomeChannelID;
+    }
+
+    /**
+     * @return The {@link String goodbyeChannelID} for the {@link GuildInformation}.
+     */
+    @NotNull
+    public String getGoodbyeChannelID() {
+        return goodbyeChannelID;
     }
 
     /**

@@ -1,4 +1,4 @@
-[![wakatime](https://wakatime.com/badge/user/beeb4317-977b-4b19-878a-21e9aa8e43ed/project/da9ac356-721a-40dd-a76a-19c3ff0d57d5.svg?style=for-the-badge)](https://wakatime.com/badge/user/beeb4317-977b-4b19-878a-21e9aa8e43ed/project/da9ac356-721a-40dd-a76a-19c3ff0d57d5)
+[![wakatime](https://wakatime.com/badge/github/beanbeanjuice/Java-Cafe-API-Wrapper.svg?style=for-the-badge)](https://wakatime.com/badge/github/beanbeanjuice/Java-Cafe-API-Wrapper)
 [![CodeFactor](https://www.codefactor.io/repository/github/beanbeanjuice/java-cafe-api-wrapper/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/beanbeanjuice/java-cafe-api-wrapper)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/beanbeanjuice/Java-Cafe-API-Wrapper?style=for-the-badge)
 
@@ -60,9 +60,16 @@
 <!-- GETTING STARTED -->
 # Getting Started
 
-To add this bot to your server, follow these steps.
+## Usage
+
+```Java
+CafeAPI cafeAPI = new CafeAPI(USERNAME_HERE, PASSWORD_HERE, RequestLocation.RELEASE);
+cafeAPI.BIRTHDAY.getUserBirthday(USER_ID_HERE);
+```
 
 ## Installation
+
+![Maven Central](https://img.shields.io/maven-central/v/com.beanbeanjuice/cafe-api-wrapper?color=%23CBC3E3)
 
 For `Maven`, paste this into your `dependencies` section of your `pom.xml` file.
 ```XML

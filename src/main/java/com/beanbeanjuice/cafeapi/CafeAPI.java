@@ -1,6 +1,7 @@
 package com.beanbeanjuice.cafeapi;
 
 import com.beanbeanjuice.KawaiiAPI;
+import com.beanbeanjuice.cafeapi.cafebot.goodbyes.Goodbyes;
 import com.beanbeanjuice.cafeapi.requests.*;
 import com.beanbeanjuice.cafeapi.user.Users;
 import com.beanbeanjuice.cafeapi.cafebot.beancoins.users.DonationUsers;
@@ -34,6 +35,7 @@ public class CafeAPI {
 
     public Words WORD;
     public Welcomes WELCOME;
+    public Goodbyes GOODBYE;
     public VoiceChannelBinds VOICE_CHANNEL_BIND;
     public Raffles RAFFLE;
     public Polls POLL;
@@ -71,6 +73,7 @@ public class CafeAPI {
         // cafeBot
         WORD = new Words(apiKey);
         WELCOME = new Welcomes(apiKey);
+        GOODBYE = new Goodbyes(apiKey);
         VOICE_CHANNEL_BIND = new VoiceChannelBinds(apiKey);
         RAFFLE = new Raffles(apiKey);
         POLL = new Polls(apiKey);
