@@ -149,12 +149,19 @@
         </repository>
     </distributionManagement>
 
+    <repositories>
+        <repository>
+            <id>ossrh-snapshots</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Kawaii API -->
         <dependency>
             <groupId>com.beanbeanjuice</groupId>
             <artifactId>kawaii-api-wrapper</artifactId>
-            <version>1.2.0</version>
+            <version>1.3.1-SNAPSHOT</version>
         </dependency>
 
         <!-- GPG Plugin -->
