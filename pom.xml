@@ -6,40 +6,39 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
-    <version>${version.number.final}</version>
+    <version>1.5.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <version.number>1.5.0</version.number>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>snapshot-version</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>snapshot-version</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
 
-            <properties>
-                <version.number.final>${version.number}-SNAPSHOT</version.number.final>
-            </properties>
-        </profile>
+<!--            <build>-->
+<!--                <finalName>${artifactId}-${version}-SNAPSHOT</finalName>-->
+<!--            </build>-->
+<!--        </profile>-->
 
-        <profile>
-            <id>release-version</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
+<!--        <profile>-->
+<!--            <id>release-version</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>false</activeByDefault>-->
+<!--            </activation>-->
 
-            <properties>
-                <version.number.final>${version.number}</version.number.final>
-            </properties>
-        </profile>
-    </profiles>
+<!--            <build>-->
+<!--                <finalName>${artifactId}-${version}</finalName>-->
+<!--            </build>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
