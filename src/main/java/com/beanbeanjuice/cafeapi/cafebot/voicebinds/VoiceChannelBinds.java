@@ -11,7 +11,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.beanbeanjuice.cafeapi.exception.api.CafeException;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +28,7 @@ public class VoiceChannelBinds implements com.beanbeanjuice.cafeapi.api.CafeAPI 
      * Creates a new {@link VoiceChannelBinds} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public VoiceChannelBinds(@NotNull String apiKey) {
+    public VoiceChannelBinds(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -39,13 +38,12 @@ public class VoiceChannelBinds implements com.beanbeanjuice.cafeapi.api.CafeAPI 
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
     public HashMap<String, ArrayList<VoiceChannelBind>> getAllVoiceChannelBinds()
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/voice_binds")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         HashMap<String, ArrayList<VoiceChannelBind>> voiceBinds = new HashMap<>();
 
@@ -71,13 +69,12 @@ public class VoiceChannelBinds implements com.beanbeanjuice.cafeapi.api.CafeAPI 
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
-    public ArrayList<VoiceChannelBind> getGuildVoiceChannelBinds(@NotNull String guildID)
+    public ArrayList<VoiceChannelBind> getGuildVoiceChannelBinds(String guildID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/voice_binds/" + guildID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         ArrayList<VoiceChannelBind> voiceChannelBinds = new ArrayList<>();
 
@@ -101,15 +98,14 @@ public class VoiceChannelBinds implements com.beanbeanjuice.cafeapi.api.CafeAPI 
      * @throws ConflictException Thrown when the {@link VoiceChannelBind} already exists for that Discord server.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean addVoiceChannelBind(@NotNull String guildID, @NotNull VoiceChannelBind voiceChannelBind)
+    public boolean addVoiceChannelBind(String guildID, VoiceChannelBind voiceChannelBind)
     throws AuthorizationException, ResponseException, ConflictException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/voice_binds/" + guildID)
                 .addParameter("voice_channel_id", voiceChannelBind.getVoiceChannelID())
                 .addParameter("role_id", voiceChannelBind.getRoleID())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -123,21 +119,21 @@ public class VoiceChannelBinds implements com.beanbeanjuice.cafeapi.api.CafeAPI 
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean deleteVoiceChannelBind(@NotNull String guildID, @NotNull VoiceChannelBind voiceChannelBind)
+    public boolean deleteVoiceChannelBind(String guildID, VoiceChannelBind voiceChannelBind)
     throws AuthorizationException, ResponseException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/voice_binds/" + guildID)
                 .addParameter("voice_channel_id", voiceChannelBind.getVoiceChannelID())
                 .addParameter("role_id", voiceChannelBind.getRoleID())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
 
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

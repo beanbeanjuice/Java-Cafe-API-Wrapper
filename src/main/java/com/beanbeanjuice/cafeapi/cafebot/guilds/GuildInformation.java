@@ -1,7 +1,5 @@
 package com.beanbeanjuice.cafeapi.cafebot.guilds;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A class used for {@link GuildInformation}.
  *
@@ -14,7 +12,7 @@ public class GuildInformation {
     private final String twitchChannelID;
     private final String mutedRoleID;
     private final String liveNotificationsRoleID;
-    private final Boolean notifyOnUpdate;
+    private final boolean notifyOnUpdate;
     private final String updateChannelID;
     private final String countingChannelID;
     private final String pollChannelID;
@@ -24,7 +22,7 @@ public class GuildInformation {
     private final String goodbyeChannelID;
     private final String logChannelID;
     private final String ventingChannelID;
-    private final Boolean aiResponseStatus;
+    private final boolean aiResponseStatus;
     private final String dailyChannelID;
 
     /**
@@ -47,12 +45,12 @@ public class GuildInformation {
      * @param aiResponseStatus The {@link Boolean aiResponseStatus} for the {@link String guildID}.
      * @param dailyChannelID The {@link String dailyChannelID} for the {@link String guildID}.
      */
-    public GuildInformation(@NotNull String prefix, @NotNull String moderatorRoleID, @NotNull String twitchChannelID,
-                            @NotNull String mutedRoleID, @NotNull String liveNotificationsRoleID, @NotNull Boolean notifyOnUpdate,
-                            @NotNull String updateChannelID, @NotNull String countingChannelID, @NotNull String pollChannelID,
-                            @NotNull String raffleChannelID, @NotNull String birthdayChannelID, @NotNull String welcomeChannelID,
-                            @NotNull String goodbyeChannelID, @NotNull String logChannelID, @NotNull String ventingChannelID,
-                            @NotNull Boolean aiResponseStatus, @NotNull String dailyChannelID) {
+    public GuildInformation(String prefix, String moderatorRoleID, String twitchChannelID,
+                            String mutedRoleID, String liveNotificationsRoleID, Boolean notifyOnUpdate,
+                            String updateChannelID, String countingChannelID, String pollChannelID,
+                            String raffleChannelID, String birthdayChannelID, String welcomeChannelID,
+                            String goodbyeChannelID, String logChannelID, String ventingChannelID,
+                            boolean aiResponseStatus, String dailyChannelID) {
         this.prefix = prefix;
         this.moderatorRoleID = moderatorRoleID;
         this.twitchChannelID = twitchChannelID;
@@ -75,7 +73,6 @@ public class GuildInformation {
     /**
      * @return The {@link String prefix} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getPrefix() {
         return prefix;
     }
@@ -83,7 +80,6 @@ public class GuildInformation {
     /**
      * @return The {@link String moderatorRoleID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getModeratorRoleID() {
         return moderatorRoleID;
     }
@@ -91,7 +87,6 @@ public class GuildInformation {
     /**
      * @return The {@link String twitchChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getTwitchChannelID() {
         return twitchChannelID;
     }
@@ -99,7 +94,6 @@ public class GuildInformation {
     /**
      * @return The {@link String mutedRoleID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getMutedRoleID() {
         return mutedRoleID;
     }
@@ -107,7 +101,6 @@ public class GuildInformation {
     /**
      * @return The {@link String liveNotificationsRoleID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getLiveNotificationsRoleID() {
         return liveNotificationsRoleID;
     }
@@ -115,7 +108,6 @@ public class GuildInformation {
     /**
      * @return The {@link Boolean notifyOnUpdate} for the {@link GuildInformation}.
      */
-    @NotNull
     public Boolean getNotifyOnUpdate() {
         return notifyOnUpdate;
     }
@@ -123,7 +115,6 @@ public class GuildInformation {
     /**
      * @return The {@link String updateChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getUpdateChannelID() {
         return updateChannelID;
     }
@@ -131,7 +122,6 @@ public class GuildInformation {
     /**
      * @return The {@link String countingChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getCountingChannelID() {
         return countingChannelID;
     }
@@ -139,7 +129,6 @@ public class GuildInformation {
     /**
      * @return The {@link String pollChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getPollChannelID() {
         return pollChannelID;
     }
@@ -147,7 +136,6 @@ public class GuildInformation {
     /**
      * @return The {@link String raffleChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getRaffleChannelID() {
         return raffleChannelID;
     }
@@ -155,7 +143,6 @@ public class GuildInformation {
     /**
      * @return The {@link String birthdayChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getBirthdayChannelID() {
         return birthdayChannelID;
     }
@@ -163,7 +150,6 @@ public class GuildInformation {
     /**
      * @return The {@link String welcomeChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getWelcomeChannelID() {
         return welcomeChannelID;
     }
@@ -171,7 +157,6 @@ public class GuildInformation {
     /**
      * @return The {@link String goodbyeChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getGoodbyeChannelID() {
         return goodbyeChannelID;
     }
@@ -179,7 +164,6 @@ public class GuildInformation {
     /**
      * @return The {@link String logChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getLogChannelID() {
         return logChannelID;
     }
@@ -187,7 +171,6 @@ public class GuildInformation {
     /**
      * @return The {@link String ventingChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getVentingChannelID() {
         return ventingChannelID;
     }
@@ -195,7 +178,6 @@ public class GuildInformation {
     /**
      * @return The {@link Boolean aiResponseStatus} for the {@link GuildInformation}.
      */
-    @NotNull
     public Boolean getAiResponseStatus() {
         return aiResponseStatus;
     }
@@ -203,8 +185,8 @@ public class GuildInformation {
     /**
      * @return The {@link String dailyChannelID} for the {@link GuildInformation}.
      */
-    @NotNull
     public String getDailyChannelID() {
         return dailyChannelID;
     }
+
 }

@@ -13,7 +13,6 @@ import com.beanbeanjuice.cafeapi.exception.api.ConflictException;
 import com.beanbeanjuice.cafeapi.exception.api.ResponseException;
 import com.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
 import com.beanbeanjuice.cafeapi.exception.api.CafeException;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ public class GuildTwitches implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates a new {@link GuildTwitches} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public GuildTwitches(@NotNull String apiKey) {
+    public GuildTwitches(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -41,7 +40,6 @@ public class GuildTwitches implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
     public HashMap<String, ArrayList<String>> getAllTwitches()
     throws AuthorizationException, ResponseException {
         HashMap<String, ArrayList<String>> twitches = new HashMap<>();
@@ -49,7 +47,7 @@ public class GuildTwitches implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/guilds/twitch")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode guildTwitch : request.getData().get("guilds_twitch")) {
             String guildID = guildTwitch.get("guild_id").asText();
@@ -72,13 +70,12 @@ public class GuildTwitches implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
-    public ArrayList<String> getGuildTwitches(@NotNull String guildID)
+    public ArrayList<String> getGuildTwitches(String guildID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/guilds/twitch/" + guildID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         try {
             return new ObjectMapper().readValue(request.getData().get("twitch_channels").toString(), ArrayList.class);
@@ -98,14 +95,13 @@ public class GuildTwitches implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ConflictException Thrown when the {@link String twitchChannelName} already exists for the specified {@link String guildID}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean addGuildTwitch(@NotNull String guildID, @NotNull String twitchChannelName)
+    public boolean addGuildTwitch(String guildID, String twitchChannelName)
     throws AuthorizationException, ResponseException, ConflictException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/guilds/twitch/" + guildID)
                 .addParameter("twitch_channel", twitchChannelName)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -119,14 +115,13 @@ public class GuildTwitches implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean removeGuildTwitch(@NotNull String guildID, @NotNull String twitchChannelName)
+    public boolean removeGuildTwitch(String guildID, String twitchChannelName)
     throws AuthorizationException, ResponseException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/guilds/twitch/" + guildID)
                 .addParameter("twitch_channel", twitchChannelName)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -136,7 +131,8 @@ public class GuildTwitches implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

@@ -1,8 +1,10 @@
 package com.beanbeanjuice.cafeapi.cafebot.interactions;
 
 import com.beanbeanjuice.cafeapi.cafebot.interactions.users.Interaction;
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 /**
  * An enum used for {@link Interaction Interaction} types.
@@ -11,82 +13,62 @@ import org.jetbrains.annotations.Nullable;
  * @since 1.3.1
  */
 public enum InteractionType {
+    HUG ("hug_amount", "hug"),
+    PUNCH ("punch_amount", "punch"),
+    KISS ("kiss_amount", "kiss"),
+    BITE ("bite_amount", "bite"),
+    BLUSH ("blush_amount", "blush"),
+    CUDDLE ("cuddle_amount", "cuddle"),
+    NOM ("nom_amount", "nom"),
+    POKE ("poke_amount", "poke"),
+    SLAP ("slap_amount", "slap"),
+    STAB ("stab_amount", null),
+    HMPH ("hmph_amount", null),
+    POUT ("pout_amount", "pout"),
+    THROW ("throw_amount", null),
+    SMILE ("smile_amount", "smile"),
+    STARE ("stare_amount", "stare"),
+    TICKLE ("tickle_amount", "tickle"),
+    RAGE ("rage_amount", null),
+    YELL ("yell_amount", "scream"),
+    HEADPAT ("headpat_amount", "pat"),
+    CRY ("cry_amount", "cry"),
+    DANCE ("dance_amount", "dance"),
+    DAB ("dab_amount", null),
+    BONK ("bonk_amount", null),
+    SLEEP ("sleep_amount", "sleepy"),
+    DIE ("die_amount", "die"),
+    WELCOME ("welcome_amount", null),
+    LICK ("lick_amount", "lick"),
+    SHUSH ("shush_amount", null),
+    WAVE ("wave_amount", "wave"),
+    SHOOT ("shoot_amount", "shoot"),
+    AMAZED ("amazed_amount", "amazing"),
+    ASK ("ask_amount", "ask"),
+    BOOP ("boop_amount", "boop"),
+    LOVE ("love_amount", "love"),
+    NOSEBLEED ("nosebleed_amount", "nosebleed"),
+    OK ("ok_amount", "ok"),
+    UWU ("uwu_amount", "uwu"),
+    WINK ("wink_amount", "wink");
 
-    HUG ("hug_amount", true, "hug"),
-    PUNCH ("punch_amount", true, "punch"),
-    KISS ("kiss_amount", true, "kiss"),
-    BITE ("bite_amount", true, "bite"),
-    BLUSH ("blush_amount", true, "blush"),
-    CUDDLE ("cuddle_amount", true, "cuddle"),
-    NOM ("nom_amount", true, "nom"),
-    POKE ("poke_amount", true, "poke"),
-    SLAP ("slap_amount", true, "slap"),
-    STAB ("stab_amount", false, null),
-    HMPH ("hmph_amount", false, null),
-    POUT ("pout_amount", true, "pout"),
-    THROW ("throw_amount", false, null),
-    SMILE ("smile_amount", true, "smile"),
-    STARE ("stare_amount", true, "stare"),
-    TICKLE ("tickle_amount", true, "tickle"),
-    RAGE ("rage_amount", false, null),
-    YELL ("yell_amount", true, "scream"),
-    HEADPAT ("headpat_amount", true, "pat"),
-    CRY ("cry_amount", true, "cry"),
-    DANCE ("dance_amount", true, "dance"),
-    DAB ("dab_amount", false, null),
-    BONK ("bonk_amount", false, null),
-    SLEEP ("sleep_amount", true, "sleepy"),
-    DIE ("die_amount", false, null),
-    WELCOME ("welcome_amount", false, null),
-    LICK ("lick_amount", true, "lick"),
-    SHUSH ("shush_amount", false, null),
-    WAVE ("wave_amount", true, "wave"),
-    SHOOT ("shoot_amount", true, "shoot"),
-    AMAZED ("amazed_amount", true, "amazing"),
-    ASK ("ask_amount", true, "ask"),
-    BOOP ("boop_amount", true, "boop"),
-    LOVE ("love_amount", true, "love"),
-    NOSEBLEED ("nosebleed_amount", true, "nosebleed"),
-    OK ("ok_amount", true, "ok"),
-    UWU ("uwu_amount", true, "uwu"),
-    WINK ("wink_amount", true, "wink");
-
-    private final String type;
-    private final Boolean isKawaiiAPI;
+    @Getter private final String type;
     private final String kawaiiAPIString;
 
     /**
      * Creates a new {@link InteractionType} static object.
      * @param type The {@link String type} of {@link Interaction Interaction}.
      */
-    InteractionType(@NotNull String type, @NotNull Boolean isKawaiiAPI, @Nullable String kawaiiAPIString) {
+    InteractionType(String type, @Nullable String kawaiiAPIString) {
         this.type = type;
-        this.isKawaiiAPI = isKawaiiAPI;
         this.kawaiiAPIString = kawaiiAPIString;
-    }
-
-    /**
-     * @return Retrieves the {@link Interaction Interaction} type as a {@link String}.
-     */
-    @NotNull
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @return True, if the image should be returned from the {@link com.beanbeanjuice.KawaiiAPI KawaiiAPI}.
-     */
-    @NotNull
-    public Boolean isKawaiiAPI() {
-        return isKawaiiAPI;
     }
 
     /**
      * @return The {@link String} for retrieving the {@link com.beanbeanjuice.KawaiiAPI KawaiiAPI} image.
      */
-    @Nullable
-    public String getKawaiiAPIString() {
-        return kawaiiAPIString;
+    public Optional<String> getKawaiiAPIString() {
+        return Optional.ofNullable(kawaiiAPIString);
     }
 
 }

@@ -10,7 +10,6 @@ import com.beanbeanjuice.cafeapi.exception.api.ResponseException;
 import com.beanbeanjuice.cafeapi.exception.api.TeaPotException;
 import com.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
 import com.beanbeanjuice.cafeapi.exception.api.CafeException;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A class used for handling CafeBot {@link Versions} in the {@link CafeAPI CafeAPI}.
@@ -25,7 +24,7 @@ public class Versions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates a new {@link Versions} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public Versions(@NotNull String apiKey) {
+    public Versions(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -35,13 +34,12 @@ public class Versions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
     public String getCurrentCafeBotVersion()
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/cafeBot")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return  request.getData().get("bot_information").get("version").asText();
     }
@@ -55,8 +53,7 @@ public class Versions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      * @throws TeaPotException Thrown when you forget to add "v" to the beginning of the version number.
      */
-    @NotNull
-    public Boolean updateCurrentCafeBotVersion(@NotNull String versionNumber)
+    public boolean updateCurrentCafeBotVersion(String versionNumber)
     throws AuthorizationException, ResponseException, UndefinedVariableException, TeaPotException {
         if (!versionNumber.startsWith("v")) {
             throw new TeaPotException("Version Number Must Start with 'v'.");
@@ -66,7 +63,7 @@ public class Versions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
                 .setRoute("/cafeBot")
                 .addParameter("version", versionNumber)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -76,7 +73,8 @@ public class Versions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }
