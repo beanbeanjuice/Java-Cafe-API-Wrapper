@@ -2,7 +2,6 @@ package com.beanbeanjuice.cafeapi.cafebot.cafe;
 
 import com.beanbeanjuice.cafeapi.CafeAPI;
 import com.beanbeanjuice.cafeapi.requests.Request;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A static {@link CafeType} used for the {@link CafeUsers} API.
@@ -22,15 +21,15 @@ public enum CafeType {
      * Creates a new {@link CafeType} static object.
      * @param type The {@link String type} used for the {@link CafeAPI CafeAPI}.
      */
-    CafeType(@NotNull String type) {
+    CafeType(String type) {
         this.type = type;
     }
 
     /**
      * @return The {@link String type} used for {@link CafeAPI CafeAPI} {@link Request Requests}.
      */
-    @NotNull
     public String getType() {
         return type;
     }
+
 }

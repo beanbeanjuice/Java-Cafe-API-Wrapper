@@ -39,7 +39,7 @@ public class GuildGoodbyeTest {
         // Makes sure that the description of the retrieved guild is "test description"
         Assertions.assertEquals(
                 "Goodbye... {user}... thanks for joining!",
-                cafeAPI.GOODBYE.getGuildGoodbye("798830792938881024").getDescription());
+                cafeAPI.GOODBYE.getGuildGoodbye("798830792938881024").getDescription().orElse(null));
 
         // Makes sure that this throws a NotFoundException as the guild "bruhmoment" does not exist.
         Assertions.assertThrows(NotFoundException.class, () -> {
@@ -52,9 +52,9 @@ public class GuildGoodbyeTest {
 
             GuildGoodbye newGuildGoodbye = new GuildGoodbye(
                     currentGuildGoodbye.getGuildID(),
-                    currentGuildGoodbye.getDescription(),
-                    currentGuildGoodbye.getThumbnailURL(),
-                    currentGuildGoodbye.getImageURL(),
+                    currentGuildGoodbye.getDescription().orElse(null),
+                    currentGuildGoodbye.getThumbnailURL().orElse(null),
+                    currentGuildGoodbye.getImageURL().orElse(null),
                     "cool message!!!!"
             );
 

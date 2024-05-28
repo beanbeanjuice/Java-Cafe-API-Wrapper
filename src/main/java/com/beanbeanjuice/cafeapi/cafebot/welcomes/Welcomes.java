@@ -7,7 +7,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class Welcomes {
      * Creates a new class used for {@link Welcomes} API requests.
      * @param apiKey The API key used for authorization.
      */
-    public Welcomes(@NotNull String apiKey) {
+    public Welcomes(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -32,14 +31,13 @@ public class Welcomes {
      * @throws AuthorizationException Thrown when the api key is unauthorized.
      * @throws ResponseException Thrown when there is a generic server-side exception.
      */
-    @NotNull
     public ArrayList<GuildWelcome> getAllGuildWelcomes() throws AuthorizationException, ResponseException {
         ArrayList<GuildWelcome> guildWelcomes = new ArrayList<>();
 
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/welcomes")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode guildWelcome : request.getData().get("welcomes")) {
             guildWelcomes.add(parseGuildWelcome(guildWelcome));
@@ -56,13 +54,12 @@ public class Welcomes {
      * @throws ResponseException Thrown when there is a generic server-side exception.
      * @throws NotFoundException Thrown when the guild ID is not found.
      */
-    @NotNull
-    public GuildWelcome getGuildWelcome(@NotNull String guildID)
+    public GuildWelcome getGuildWelcome(String guildID)
     throws AuthorizationException, ResponseException, NotFoundException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/welcomes/" + guildID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         JsonNode guildWelcome = request.getData().get("welcome");
 
@@ -77,17 +74,16 @@ public class Welcomes {
      * @throws NotFoundException Thrown when the guild ID is not found.
      * @throws ResponseException Thrown when there is a generic server-side exception.
      */
-    @NotNull
-    public Boolean updateGuildWelcome(@NotNull GuildWelcome guildWelcome)
+    public boolean updateGuildWelcome(GuildWelcome guildWelcome)
     throws AuthorizationException, NotFoundException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/welcomes/" + guildWelcome.getGuildID())
-                .addParameter("description", guildWelcome.getDescription())
-                .addParameter("thumbnail_url", guildWelcome.getThumbnailURL())
-                .addParameter("image_url", guildWelcome.getImageURL())
-                .addParameter("message", guildWelcome.getMessage())
+                .addParameter("description", guildWelcome.getDescription().orElse(null))
+                .addParameter("thumbnail_url", guildWelcome.getThumbnailURL().orElse(null))
+                .addParameter("image_url", guildWelcome.getImageURL().orElse(null))
+                .addParameter("message", guildWelcome.getMessage().orElse(null))
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -101,17 +97,16 @@ public class Welcomes {
      * @throws ResponseException Thrown when there is a generic server-side exception.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean createGuildWelcome(@NotNull GuildWelcome guildWelcome)
+    public boolean createGuildWelcome(GuildWelcome guildWelcome)
     throws AuthorizationException, ConflictException, ResponseException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/welcomes/" + guildWelcome.getGuildID())
-                .addParameter("description", guildWelcome.getDescription())
-                .addParameter("thumbnail_url", guildWelcome.getThumbnailURL())
-                .addParameter("image_url", guildWelcome.getImageURL())
-                .addParameter("message", guildWelcome.getMessage())
+                .addParameter("description", guildWelcome.getDescription().orElse(null))
+                .addParameter("thumbnail_url", guildWelcome.getThumbnailURL().orElse(null))
+                .addParameter("image_url", guildWelcome.getImageURL().orElse(null))
+                .addParameter("message", guildWelcome.getMessage().orElse(null))
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -123,13 +118,12 @@ public class Welcomes {
      * @throws AuthorizationException Thrown when the API key is invalid.
      * @throws ResponseException Thrown when there is a generic server-side exception.
      */
-    @NotNull
-    public Boolean deleteGuildWelcome(@NotNull String guildID)
+    public boolean deleteGuildWelcome(String guildID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/welcomes/" + guildID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -139,8 +133,7 @@ public class Welcomes {
      * @param node The {@link JsonNode} to parse.
      * @return The parsed {@link GuildWelcome}.
      */
-    @NotNull
-    private GuildWelcome parseGuildWelcome(@NotNull JsonNode node) {
+    private GuildWelcome parseGuildWelcome(JsonNode node) {
         String guildID = node.get("guild_id").asText();
 
         String description = node.get("description").asText();
@@ -148,21 +141,10 @@ public class Welcomes {
         String imageURL = node.get("image_url").asText();
         String message = node.get("message").asText();
 
-        if (description.equals("null")) {
-            description = null;
-        }
-
-        if (thumbnailURL.equals("null")) {
-            thumbnailURL = null;
-        }
-
-        if (imageURL.equals("null")) {
-            imageURL = null;
-        }
-
-        if (message.equals("null")) {
-            message = null;
-        }
+        if (description.equals("null")) description = null;
+        if (thumbnailURL.equals("null")) thumbnailURL = null;
+        if (imageURL.equals("null")) imageURL = null;
+        if (message.equals("null")) message = null;
 
         return new GuildWelcome(
                 guildID,

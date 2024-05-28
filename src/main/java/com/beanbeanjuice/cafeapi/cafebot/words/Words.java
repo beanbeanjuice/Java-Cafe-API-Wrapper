@@ -10,7 +10,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class Words implements CafeAPI {
      * Creates a new {@link Words} API.
      * @param apiKey The API key to use for connection and verification to the {@link com.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      */
-    public Words(@NotNull String apiKey) {
+    public Words(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -36,12 +35,11 @@ public class Words implements CafeAPI {
      * @return The {@link ArrayList} of {@link Word} from the {@link com.beanbeanjuice.cafeapi.CafeAPI CafeAPI}.
      * @throws ResponseException Thrown when there is a generic server-side exception.
      */
-    @NotNull
     public ArrayList<Word> getAllWords() throws ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/words")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         ArrayList<Word> wordList = new ArrayList<>();
 
@@ -59,12 +57,11 @@ public class Words implements CafeAPI {
      * @throws NotFoundException Thrown when the word is not found.
      * @throws ResponseException Thrown when there is a generic server-side exception.
      */
-    @NotNull
-    public Word getWord(@NotNull String word) throws NotFoundException, ResponseException {
+    public Word getWord(String word) throws NotFoundException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/words/" + word)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return new Word(word, request.getData().get("word").get("uses").asInt());
     }
@@ -79,20 +76,20 @@ public class Words implements CafeAPI {
      * @throws AuthorizationException Thrown when the current API key is invalid.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean updateWord(@NotNull String word, @NotNull Integer uses)
+    public boolean updateWord(String word, int uses)
     throws NotFoundException, ResponseException, AuthorizationException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/words/" + word)
-                .addParameter("uses", uses.toString())
+                .addParameter("uses", String.valueOf(uses))
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
 
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

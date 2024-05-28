@@ -11,20 +11,19 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.util.HashMap;
 
 /**
- * A class used for {@link GuildInformations} requests to the {@link CafeAPI CafeAPI}.
+ * A class used for {@link GlobalGuildInformation} requests to the {@link CafeAPI CafeAPI}.
  *
  * @author beanbeanjuice
- * @deprecated Since v1.5.0. Replaced by {@link GlobalGuildInformation}.
  */
-public class GuildInformations implements com.beanbeanjuice.cafeapi.api.CafeAPI {
+public class GlobalGuildInformation implements com.beanbeanjuice.cafeapi.api.CafeAPI {
 
     private String apiKey;
 
     /**
-     * Creates a new {@link GuildInformations} object.
+     * Creates a new {@link GlobalGuildInformation} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public GuildInformations(String apiKey) {
+    public GlobalGuildInformation(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -72,7 +71,7 @@ public class GuildInformations implements com.beanbeanjuice.cafeapi.api.CafeAPI 
     /**
      * Creates a new {@link GuildInformation} in the {@link CafeAPI CafeAPI}.
      * @param guildID The {@link String guildID} to create.
-     * @return True, if the {@link GuildInformations} was successfully created for the specified {@link String guildID}.
+     * @return True, if the {@link GlobalGuildInformation} was successfully created for the specified {@link String guildID}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws ConflictException Thrown when the specified {@link String guildID} already exists in the {@link CafeAPI CafeAPI}.
@@ -165,7 +164,7 @@ public class GuildInformations implements com.beanbeanjuice.cafeapi.api.CafeAPI 
         String twitchChannelID = guild.get(GuildInformationType.TWITCH_CHANNEL_ID.getType()).asText();
         String mutedRoleID = guild.get(GuildInformationType.MUTED_ROLE_ID.getType()).asText();
         String liveNotificationsRoleID = guild.get(GuildInformationType.LIVE_NOTIFICATIONS_ROLE_ID.getType()).asText();
-        Boolean notifyOnUpdate = convertToBoolean(guild.get(GuildInformationType.NOTIFY_ON_UPDATE.getType()).asText());
+        boolean notifyOnUpdate = convertToBoolean(guild.get(GuildInformationType.NOTIFY_ON_UPDATE.getType()).asText());
         String updateChannelID = guild.get(GuildInformationType.UPDATE_CHANNEL_ID.getType()).asText();
         String countingChannelID = guild.get(GuildInformationType.COUNTING_CHANNEL_ID.getType()).asText();
         String pollChannelID = guild.get(GuildInformationType.POLL_CHANNEL_ID.getType()).asText();
@@ -175,7 +174,7 @@ public class GuildInformations implements com.beanbeanjuice.cafeapi.api.CafeAPI 
         String goodbyeChannelID = guild.get(GuildInformationType.GOODBYE_CHANNEL_ID.getType()).asText();
         String logChannelID = guild.get(GuildInformationType.LOG_CHANNEL_ID.getType()).asText();
         String ventingChannelID = guild.get(GuildInformationType.VENTING_CHANNEL_ID.getType()).asText();
-        Boolean aiResponseStatus = convertToBoolean(guild.get(GuildInformationType.AI_RESPONSE.getType()).asText());
+        boolean aiResponseStatus = convertToBoolean(guild.get(GuildInformationType.AI_RESPONSE.getType()).asText());
         String dailyChannelID = guild.get(GuildInformationType.DAILY_CHANNEL_ID.getType()).asText();
 
         return new GuildInformation(

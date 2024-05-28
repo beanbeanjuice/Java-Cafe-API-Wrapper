@@ -1,6 +1,6 @@
 package com.beanbeanjuice.cafeapi.requests;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 /**
  * A class used for {@link RequestRoute} objects.
@@ -12,21 +12,14 @@ public enum RequestRoute {
     CAFE("/cafe/api/v1"),
     CAFEBOT("/cafeBot/api/v1");
 
-    private final String route;
+    @Getter private final String route;
 
     /**
      * Creates a new {@link RequestRoute} static object.
      * @param route The {@link String route} of the {@link Request}.
      */
-    RequestRoute(@NotNull String route) {
+    RequestRoute(String route) {
         this.route = route;
     }
 
-    /**
-     * @return The route {@link String url} for the {@link Request}.
-     */
-    @NotNull
-    public String getRoute() {
-        return route;
-    }
 }

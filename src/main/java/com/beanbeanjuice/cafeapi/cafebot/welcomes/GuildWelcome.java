@@ -1,7 +1,9 @@
 package com.beanbeanjuice.cafeapi.cafebot.welcomes;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 /**
  * A class used for Welcome Information for a Discord Guild.
@@ -10,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class GuildWelcome {
 
-    private final String guildID;
+    @Getter private final String guildID;
     private final String description;
     private final String thumbnailURL;
     private final String imageURL;
@@ -24,7 +26,7 @@ public class GuildWelcome {
      * @param imageURL The {@link String imageURL} of the {@link GuildWelcome}.
      * @param message The {@link String message} of the {@link GuildWelcome}.
      */
-    public GuildWelcome(@NotNull String guildID, @Nullable String description, @Nullable String thumbnailURL,
+    public GuildWelcome(String guildID, @Nullable String description, @Nullable String thumbnailURL,
                         @Nullable String imageURL, @Nullable String message) {
         this.guildID = guildID;
         this.description = description;
@@ -34,42 +36,31 @@ public class GuildWelcome {
     }
 
     /**
-     * @return The {@link String guildID} of the {@link GuildWelcome}.
-     */
-    @NotNull
-    public String getGuildID() {
-        return guildID;
-    }
-
-    /**
      * @return The {@link String description} of the {@link GuildWelcome}.
      */
-    @Nullable
-    public String getDescription() {
-        return description;
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     /**
      * @return The {@link String thumbnailURL} of the {@link GuildWelcome}.
      */
-    @Nullable
-    public String getThumbnailURL() {
-        return thumbnailURL;
+    public Optional<String> getThumbnailURL() {
+        return Optional.ofNullable(thumbnailURL);
     }
 
     /**
      * @return The {@link String imageURL} of the {@link GuildWelcome}.
      */
-    @Nullable
-    public String getImageURL() {
-        return imageURL;
+    public Optional<String> getImageURL() {
+        return Optional.ofNullable(imageURL);
     }
 
     /**
      * @return The {@link String message} of the {@link GuildWelcome}.
      */
-    @Nullable
-    public String getMessage() {
-        return message;
+    public Optional<String> getMessage() {
+        return Optional.ofNullable(message);
     }
+
 }
