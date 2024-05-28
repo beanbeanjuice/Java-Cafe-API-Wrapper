@@ -20,7 +20,7 @@ public class RaffleTest {
         CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"), RequestLocation.BETA);
 
         long currentTime = System.currentTimeMillis();
-        Timestamp currentTimestamp = CafeGeneric.parseTimestamp(new Timestamp(currentTime).toString());
+        Timestamp currentTimestamp = CafeGeneric.parseTimestamp(new Timestamp(currentTime).toString()).orElse(null);
 
         // Makes sure the raffle is deleted beforehand.
         Assertions.assertTrue(cafeAPI.RAFFLE.deleteRaffle("798830792938881024", "878895791081676831"));

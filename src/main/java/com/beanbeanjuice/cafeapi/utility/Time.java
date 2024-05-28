@@ -1,7 +1,5 @@
 package com.beanbeanjuice.cafeapi.utility;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +24,7 @@ public class Time {
      * @param timezone The {@link String} of the specified {@link TimeZone}.
      * @param defaultFormat The {@link String} for the specified default {@link String format}.
      */
-    public Time(@NotNull String timezone, @NotNull String defaultFormat) {
+    public Time(String timezone, String defaultFormat) {
         TIME_ZONE = TimeZone.getTimeZone(timezone);
         setDefaultFormat(defaultFormat);
     }
@@ -36,7 +34,7 @@ public class Time {
      * {@link TimeZone}.
      * @param timezone The {@link String} of the specified {@link TimeZone}.
      */
-    public Time(@NotNull String timezone) {
+    public Time(String timezone) {
         TIME_ZONE = TimeZone.getTimeZone(timezone);
     }
 
@@ -52,7 +50,7 @@ public class Time {
      * Sets the default {@link String format} for the specified {@link Time} object.
      * @param format The {@link String format} to be set.
      */
-    public void setDefaultFormat(@NotNull String format) {
+    public void setDefaultFormat(String format) {
         defaultFormat = format;
     }
 
@@ -61,8 +59,7 @@ public class Time {
      * @param format The {@link String format} to return.
      * @return The {@link String formatted} {@link Time}.
      */
-    @NotNull
-    public String format(@NotNull String format) {
+    public String format(String format) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         simpleDateFormat.setTimeZone(TIME_ZONE);
         return simpleDateFormat.format(new Date());
@@ -73,7 +70,6 @@ public class Time {
      * @return The {@link String formatted} {@link Time}.
      * @throws NullPointerException Thrown when there is no default {@link String format}.
      */
-    @NotNull
     public String format() throws NullPointerException {
         if (defaultFormat == null)
             throw new NullPointerException("Default format is not specified!");
@@ -90,8 +86,7 @@ public class Time {
      * @param timestampDifference The {@link TimestampDifference} to choose.
      * @return The difference in time as a {@link Long}.
      */
-    @NotNull
-    public static Long compareTwoTimeStamps(@NotNull Timestamp oldTime, @NotNull Timestamp currentTime, @NotNull TimestampDifference timestampDifference) {
+    public static Long compareTwoTimeStamps(Timestamp oldTime, Timestamp currentTime, TimestampDifference timestampDifference) {
         long milliseconds1 = oldTime.getTime();
         long milliseconds2 = currentTime.getTime();
         long diff = milliseconds2 - milliseconds1;
@@ -111,21 +106,19 @@ public class Time {
      * @param format The formatting {@link String}.
      * @return The formatted {@link String}.
      */
-    @NotNull
-    public static String format(@NotNull Timestamp timestamp, @NotNull String format) {
+    public static String format(Timestamp timestamp, String format) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(timestamp);
     }
 
     /**
      *
-     * @param dateString The {@link String} of the {@link Date}.
+     * @param dateString The {@link String} of the {@link Date}. (MM-dd-yyyy)
      * @param timeZone The {@link TimeZone} of the {@link Date}.
      * @return The formatted {@link Date}.
      * @throws ParseException Thrown if there was an error parsing the {@link Date}.
      */
-    @NotNull
-    public static Date getFullDate(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
+    public static Date getFullDate(String dateString, TimeZone timeZone) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
         format.setTimeZone(timeZone);
         return format.parse(dateString);
@@ -136,8 +129,7 @@ public class Time {
      * @param timezoneString The {@link String timeZoneString} to check.
      * @return True, if the specified {@link String timeZoneString} is a valid {@link TimeZone}.
      */
-    @NotNull
-    public static Boolean isValidTimeZone(@NotNull String timezoneString) {
+    public static boolean isValidTimeZone(String timezoneString) {
         return Set.of(TimeZone.getAvailableIDs()).contains(timezoneString);
     }
 
@@ -147,8 +139,7 @@ public class Time {
      * @return True, if the {@link Date} has passed the current {@link Date}.
      * @throws ParseException Thrown if there was an error parsing the {@link Date}.
      */
-    @NotNull
-    public static Boolean dateHasPassed(@NotNull Date date) throws ParseException {
+    public static boolean dateHasPassed(Date date) throws ParseException {
         Calendar checkCalendar = Calendar.getInstance();
         Calendar calendar = Calendar.getInstance();
 
@@ -169,8 +160,7 @@ public class Time {
      * @return True, if the input {@link String} of a {@link Date} has passed.
      * @throws ParseException Thrown if there was an error parsing the {@link String} of the {@link Date}.
      */
-    @NotNull
-    public static Boolean dateHasPassed(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
+    public static boolean dateHasPassed(String dateString, TimeZone timeZone) throws ParseException {
         return dateHasPassed(getFullDate(dateString, timeZone));
     }
 
@@ -180,8 +170,7 @@ public class Time {
      * @return True, if the {@link Date} is the current {@link Date}.
      * @throws ParseException Thrown if there was an error parsing the {@link Date}.
      */
-    @NotNull
-    public static Boolean isSameDay(@NotNull Date date) throws ParseException {
+    public static boolean isSameDay(Date date) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("MM-dd");
         SimpleDateFormat yearFormat = new SimpleDateFormat("MM-dd-yyyy");
         Date currentDate = new Date();
@@ -201,8 +190,7 @@ public class Time {
      * @return True, if the input {@link String} of a {@link Date} is the date.
      * @throws ParseException Thrown if there was an error parsing the {@link String} of the {@link Date}.
      */
-    @NotNull
-    public static Boolean isSameDay(@NotNull String dateString, @NotNull TimeZone timeZone) throws ParseException {
+    public static boolean isSameDay(String dateString, TimeZone timeZone) throws ParseException {
         return isSameDay(getFullDate(dateString, timeZone));
     }
 

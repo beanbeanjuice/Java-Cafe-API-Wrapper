@@ -7,7 +7,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -24,7 +23,7 @@ public class WinStreaks implements CafeAPI {
      * Creates a new {@link WinStreaks} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public WinStreaks(@NotNull String apiKey) {
+    public WinStreaks(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -41,7 +40,7 @@ public class WinStreaks implements CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/minigames/win_streaks")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode winStreak : request.getData().get("win_streaks")) {
             String userID = winStreak.get("user_id").asText();
@@ -61,17 +60,16 @@ public class WinStreaks implements CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when the specified {@link String userID}'s {@link WinStreak} does not exist.
      */
-    @NotNull
-    public WinStreak getUserWinStreak(@NotNull String userID)
+    public WinStreak getUserWinStreak(String userID)
     throws AuthorizationException, ResponseException, NotFoundException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/minigames/win_streaks/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         JsonNode winStreak = request.getData().get("win_streaks");
-        Integer ticTacToeWins = winStreak.get("tic_tac_toe").asInt();
-        Integer connectFourWins = winStreak.get("connect_four").asInt();
+        int ticTacToeWins = winStreak.get("tic_tac_toe").asInt();
+        int connectFourWins = winStreak.get("connect_four").asInt();
 
         return new WinStreak(ticTacToeWins, connectFourWins);
     }
@@ -80,22 +78,21 @@ public class WinStreaks implements CafeAPI {
      * Updates a Discord user's {@link WinStreak}.
      * @param userID The {@link String userID} of the Discord user.
      * @param type The {@link MinigameType type} of {@link WinStreak} to update.
-     * @param value The {@link Integer value} of {@link MinigameType type} to set the {@link WinStreak} to.
+     * @param winstreak The {@link Integer winstreak} of {@link MinigameType type} to set the {@link WinStreak} to.
      * @return True, if the {@link WinStreak} was successfully updated.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when the {@link WinStreak} for the specified {@link String userID} does not exist.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean updateUserWinStreak(@NotNull String userID, @NotNull MinigameType type, @NotNull Integer value)
+    public boolean updateUserWinStreak(String userID, MinigameType type, int winstreak)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/minigames/win_streaks/" + userID)
                 .addParameter("type", type.getType())
-                .addParameter("value", value.toString())
+                .addParameter("value", String.valueOf(winstreak))
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -109,13 +106,12 @@ public class WinStreaks implements CafeAPI {
      * @throws ConflictException Thrown when the specified {@link String userID} already exists.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean createUserWinStreak(@NotNull String userID)
+    public boolean createUserWinStreak(String userID)
     throws AuthorizationException, ResponseException, ConflictException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/minigames/win_streaks/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -127,13 +123,12 @@ public class WinStreaks implements CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
-    public Boolean deleteUserWinStreak(@NotNull String userID)
+    public boolean deleteUserWinStreak(String userID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/minigames/win_streaks/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -143,7 +138,8 @@ public class WinStreaks implements CafeAPI {
      * @param apiKey The new {@link String apikey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

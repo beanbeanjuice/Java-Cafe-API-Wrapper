@@ -11,7 +11,8 @@ import com.beanbeanjuice.cafeapi.exception.api.AuthorizationException;
 import com.beanbeanjuice.cafeapi.exception.api.ResponseException;
 import com.beanbeanjuice.cafeapi.exception.api.TeaPotException;
 import com.beanbeanjuice.cafeapi.exception.api.CafeException;
-import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 /**
  * A class used to retrieve random pictures from the {@link CafeAPI CafeAPI}.
@@ -28,7 +29,7 @@ public class InteractionPictures implements com.beanbeanjuice.cafeapi.api.CafeAP
      * Creates a new {@link InteractionPictures} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public InteractionPictures(@NotNull String apiKey, @NotNull CafeAPI cafeAPI) {
+    public InteractionPictures(String apiKey, CafeAPI cafeAPI) {
         this.apiKey = apiKey;
         this.cafeAPI = cafeAPI;
     }
@@ -41,19 +42,18 @@ public class InteractionPictures implements com.beanbeanjuice.cafeapi.api.CafeAP
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws TeaPotException Thrown when an invalid {@link InteractionType} is entered.
      */
-    @NotNull
-    public String getRandomInteractionPicture(@NotNull InteractionType type)
+    public String getRandomInteractionPicture(InteractionType type)
     throws AuthorizationException, ResponseException, TeaPotException {
-        if (type.isKawaiiAPI()) {
-            return cafeAPI.KAWAII_API.GIF.getGIF(type.getKawaiiAPIString());
-        } else {
-            Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
-                    .setRoute("/interaction_pictures/" + type)
-                    .setAuthorization(apiKey)
-                    .build();
+        Optional<String> potentialString = type.getKawaiiAPIString();
 
-            return request.getData().get("url").asText();
-        }
+        if (potentialString.isPresent()) return cafeAPI.KAWAII_API.GIF.getGIF(potentialString.get());
+
+        Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
+                .setRoute("/interaction_pictures/" + type)
+                .setAuthorization(apiKey)
+                .build().orElseThrow();
+
+        return request.getData().get("url").asText();
     }
 
     /**
@@ -61,7 +61,8 @@ public class InteractionPictures implements com.beanbeanjuice.cafeapi.api.CafeAP
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }
