@@ -12,7 +12,6 @@ import com.beanbeanjuice.cafeapi.exception.api.ConflictException;
 import com.beanbeanjuice.cafeapi.exception.api.ResponseException;
 import com.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
 import com.beanbeanjuice.cafeapi.exception.api.CafeException;
-import org.jetbrains.annotations.NotNull;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates a new {@link Polls} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public Polls(@NotNull String apiKey) {
+    public Polls(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -41,7 +40,6 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
     public HashMap<String, ArrayList<Poll>> getAllPolls()
     throws AuthorizationException, ResponseException {
         HashMap<String, ArrayList<Poll>> polls = new HashMap<>();
@@ -49,12 +47,12 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/polls")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode poll : request.getData().get("polls")) {
             String guildID = poll.get("guild_id").asText();
             String messageID = poll.get("message_id").asText();
-            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(poll.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(poll.get("ending_time").asText()).orElse(null);
 
             if (!polls.containsKey(guildID)) {
                 polls.put(guildID, new ArrayList<>());
@@ -73,19 +71,18 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
-    public ArrayList<Poll> getGuildPolls(@NotNull String guildID)
+    public ArrayList<Poll> getGuildPolls(String guildID)
     throws AuthorizationException, ResponseException {
         ArrayList<Poll> polls = new ArrayList<>();
 
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/polls/" + guildID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode poll : request.getData().get("polls")) {
             String messageID = poll.get("message_id").asText();
-            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(poll.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(poll.get("ending_time").asText()).orElse(null);
 
             polls.add(new Poll(messageID, endingTime));
         }
@@ -103,15 +100,14 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ConflictException Thrown when the {@link Poll} already exists for the specified {@link String guildID}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean createPoll(@NotNull String guildID, @NotNull Poll poll)
+    public boolean createPoll(String guildID, Poll poll)
     throws AuthorizationException, ResponseException, ConflictException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/polls/" + guildID)
                 .addParameter("message_id", poll.getMessageID())
                 .addParameter("ending_time", poll.getEndingTime().toString())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -122,8 +118,7 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param poll The {@link Poll} to remove from the {@link CafeAPI CafeAPI}.
      * @return True, if the {@link Poll} was successfully removed from the {@link CafeAPI CafeAPI}.
      */
-    @NotNull
-    public Boolean deletePoll(@NotNull String guildID, @NotNull Poll poll) {
+    public boolean deletePoll(String guildID, Poll poll) {
         return deletePoll(guildID, poll.getMessageID());
     }
 
@@ -136,14 +131,13 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean deletePoll(@NotNull String guildID, @NotNull String messageID)
+    public boolean deletePoll(String guildID, String messageID)
     throws AuthorizationException, ResponseException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/polls/" + guildID)
                 .addParameter("message_id", messageID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -153,7 +147,8 @@ public class Polls implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

@@ -3,7 +3,6 @@ package com.beanbeanjuice.cafeapi.cafebot.birthdays;
 import com.beanbeanjuice.cafeapi.exception.program.BirthdayOverfillException;
 import com.beanbeanjuice.cafeapi.exception.program.InvalidTimeZoneException;
 import com.beanbeanjuice.cafeapi.utility.Time;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -17,9 +16,9 @@ import java.util.TimeZone;
 public class Birthday {
 
     private final BirthdayMonth month;
-    private final Integer day;
+    private final int day;
     private final TimeZone timeZone;
-    private final Boolean alreadyMentioned;
+    private final boolean alreadyMentioned;
 
     /**
      * Creates a new {@link Birthday} object.
@@ -27,8 +26,8 @@ public class Birthday {
      * @param day The {@link Integer day} of the {@link Birthday}.
      * @param alreadyMentioned False, if the user's birthday has not been mentioned by cafeBot.
      */
-    public Birthday(@NotNull BirthdayMonth month, @NotNull Integer day, @NotNull String timeZone,
-                    @NotNull Boolean alreadyMentioned) throws InvalidTimeZoneException, BirthdayOverfillException {
+    public Birthday(BirthdayMonth month, int day, String timeZone,
+                    boolean alreadyMentioned) throws InvalidTimeZoneException, BirthdayOverfillException {
         this.month = month;
         this.day = day;
 
@@ -45,7 +44,6 @@ public class Birthday {
     /**
      * @return The {@link BirthdayMonth month} of the {@link Birthday}.
      */
-    @NotNull
     public BirthdayMonth getMonth() {
         return month;
     }
@@ -53,16 +51,14 @@ public class Birthday {
     /**
      * @return The {@link Integer day} of the {@link Birthday}.
      */
-    @NotNull
-    public Integer getDay() {
+    public int getDay() {
         return day;
     }
 
     /**
      * @return False, if the user's birthday has not been mentioned by cafeBot.
      */
-    @NotNull
-    public Boolean alreadyMentioned() {
+    public boolean alreadyMentioned() {
         return alreadyMentioned;
     }
 
@@ -70,7 +66,6 @@ public class Birthday {
      * @return The {@link Date} of the {@link Birthday} in {@link TimeZone UTC} time.
      * @throws ParseException Thrown when the {@link Birthday} was unable to be parsed.
      */
-    @NotNull
     public Date getUTCDate() throws ParseException {
         return Time.getFullDate(month.getMonthNumber() + "-" + day + "-2020", timeZone);
     }
@@ -78,7 +73,6 @@ public class Birthday {
     /**
      * @return The {@link TimeZone} for the {@link Birthday}.
      */
-    @NotNull
     public TimeZone getTimeZone() {
         return timeZone;
     }

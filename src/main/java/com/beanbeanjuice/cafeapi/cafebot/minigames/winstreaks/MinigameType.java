@@ -1,7 +1,5 @@
 package com.beanbeanjuice.cafeapi.cafebot.minigames.winstreaks;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * An enum used for Minigame {@link WinStreak} types.
  *
@@ -18,14 +16,13 @@ public enum MinigameType {
      * Creates a {@link MinigameType} enum.
      * @param type The {@link String type} of enum.
      */
-    MinigameType(@NotNull String type) {
+    MinigameType(String type) {
         this.type = type;
     }
 
     /**
      * @return The {@link String type} of {@link MinigameType}.
      */
-    @NotNull
     public String getType() {
         return type;
     }

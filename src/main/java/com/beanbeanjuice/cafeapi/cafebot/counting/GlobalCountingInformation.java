@@ -14,17 +14,16 @@ import java.util.HashMap;
  * A class used for {@link CountingInformation} requests for the {@link CafeAPI CafeAPI}.
  *
  * @author beanbeanjuice
- * @deprecated Since v1.5.0. Replaced by {@link GlobalCountingInformation}.
  */
-public class CountingInformations implements com.beanbeanjuice.cafeapi.api.CafeAPI {
+public class GlobalCountingInformation implements com.beanbeanjuice.cafeapi.api.CafeAPI {
 
     private String apiKey;
 
     /**
-     * Creates a new {@link CountingInformations object}.
+     * Creates a new {@link GlobalCountingInformation object}.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public CountingInformations(String apiKey) {
+    public GlobalCountingInformation(String apiKey) {
         this.apiKey = apiKey;
     }
 

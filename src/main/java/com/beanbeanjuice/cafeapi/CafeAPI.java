@@ -8,8 +8,8 @@ import com.beanbeanjuice.cafeapi.cafebot.beancoins.users.DonationUsers;
 import com.beanbeanjuice.cafeapi.cafebot.birthdays.Birthdays;
 import com.beanbeanjuice.cafeapi.cafebot.cafe.CafeUsers;
 import com.beanbeanjuice.cafeapi.cafebot.codes.GeneratedCodes;
-import com.beanbeanjuice.cafeapi.cafebot.counting.CountingInformations;
-import com.beanbeanjuice.cafeapi.cafebot.guilds.GuildInformations;
+import com.beanbeanjuice.cafeapi.cafebot.counting.GlobalCountingInformation;
+import com.beanbeanjuice.cafeapi.cafebot.guilds.GlobalGuildInformation;
 import com.beanbeanjuice.cafeapi.cafebot.interactions.Interactions;
 import com.beanbeanjuice.cafeapi.cafebot.interactions.pictures.InteractionPictures;
 import com.beanbeanjuice.cafeapi.cafebot.minigames.winstreaks.WinStreaks;
@@ -20,7 +20,7 @@ import com.beanbeanjuice.cafeapi.cafebot.version.Versions;
 import com.beanbeanjuice.cafeapi.cafebot.voicebinds.VoiceChannelBinds;
 import com.beanbeanjuice.cafeapi.cafebot.welcomes.Welcomes;
 import com.beanbeanjuice.cafeapi.cafebot.words.Words;
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 import java.util.TimeZone;
 
@@ -28,7 +28,7 @@ public class CafeAPI {
 
     private String apiKey;
     private String userAgent;
-    private static RequestLocation requestLocation;
+    @Getter private static RequestLocation requestLocation;
     public KawaiiAPI KAWAII_API;
 
     public Users USER;
@@ -42,10 +42,10 @@ public class CafeAPI {
     public WinStreaks WIN_STREAK;
     public Interactions INTERACTION;
     public GuildTwitches TWITCH;
-    public GuildInformations GUILD;
+    public GlobalGuildInformation GUILD;
     public GeneratedCodes GENERATED_CODE;
     public Versions VERSION;
-    public CountingInformations COUNTING_INFORMATION;
+    public GlobalCountingInformation COUNTING_INFORMATION;
     public CafeUsers CAFE_USER;
     public Birthdays BIRTHDAY;
     public DonationUsers DONATION_USER;
@@ -57,7 +57,7 @@ public class CafeAPI {
      * @param password The {@link String password}.
      * @param requestLocation The {@link RequestLocation requestLocation}.
      */
-    public CafeAPI(@NotNull String username, @NotNull String password, @NotNull RequestLocation requestLocation) {
+    public CafeAPI(String username, String password, RequestLocation requestLocation) {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         this.userAgent = username;
         CafeAPI.requestLocation = requestLocation;
@@ -80,10 +80,10 @@ public class CafeAPI {
         WIN_STREAK = new WinStreaks(apiKey);
         INTERACTION = new Interactions(apiKey);
         TWITCH = new GuildTwitches(apiKey);
-        GUILD = new GuildInformations(apiKey);
+        GUILD = new GlobalGuildInformation(apiKey);
         GENERATED_CODE = new GeneratedCodes(apiKey);
         VERSION = new Versions(apiKey);
-        COUNTING_INFORMATION = new CountingInformations(apiKey);
+        COUNTING_INFORMATION = new GlobalCountingInformation(apiKey);
         CAFE_USER = new CafeUsers(apiKey);
         BIRTHDAY = new Birthdays(apiKey);
         DONATION_USER = new DonationUsers(apiKey);
@@ -93,27 +93,19 @@ public class CafeAPI {
     }
 
     /**
-     * @return The {@link RequestLocation} for the {@link CafeAPI}.
-     */
-    @NotNull
-    public static RequestLocation getRequestLocation() {
-        return requestLocation;
-    }
-
-    /**
      * Sets the {@link KawaiiAPI} token.
      * @param token The {@link String} token for the {@link KawaiiAPI}.
      */
-    public void setKawaiiAPI(@NotNull String token) {
+    public void setKawaiiAPI(String token) {
         KAWAII_API = new KawaiiAPI(token);
     }
 
-    private String getToken(@NotNull String username, @NotNull String password) {
+    private String getToken(String username, String password) {
         Request request = new RequestBuilder(RequestRoute.CAFE, RequestType.POST)
                 .setRoute("/user/login")
                 .addParameter("username", username)
                 .addParameter("password", password)
-                .build();
+                .build().orElseThrow();
 
         return request.getData().get("api_key").textValue();
     }

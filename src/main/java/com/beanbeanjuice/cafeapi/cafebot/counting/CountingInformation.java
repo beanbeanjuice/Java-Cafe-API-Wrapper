@@ -1,7 +1,5 @@
 package com.beanbeanjuice.cafeapi.cafebot.counting;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A class used for {@link CountingInformation}.
  *
@@ -9,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class CountingInformation {
 
-    private final Integer highestNumber;
-    private final Integer lastNumber;
+    private final int highestNumber;
+    private final int lastNumber;
     private final String lastUserID;
     private final String failureRoleID;
 
@@ -21,8 +19,7 @@ public class CountingInformation {
      * @param lastUserID The {@link String lastUserID}.
      * @param failureRoleID The {@link String failureRoleID}.
      */
-    public CountingInformation(@NotNull Integer highestNumber, @NotNull Integer lastNumber, @NotNull String lastUserID,
-                               @NotNull String failureRoleID) {
+    public CountingInformation(int highestNumber, int lastNumber, String lastUserID, String failureRoleID) {
         this.highestNumber = highestNumber;
         this.lastNumber = lastNumber;
         this.lastUserID = lastUserID;
@@ -32,23 +29,20 @@ public class CountingInformation {
     /**
      * @return The {@link Integer highestNumber}.
      */
-    @NotNull
-    public Integer getHighestNumber() {
+    public int getHighestNumber() {
         return highestNumber;
     }
 
     /**
      * @return The {@link Integer lastNumber}.
      */
-    @NotNull
-    public Integer getLastNumber() {
+    public int getLastNumber() {
         return lastNumber;
     }
 
     /**
      * @return The {@link String lastUserID}.
      */
-    @NotNull
     public String getLastUserID() {
         return lastUserID;
     }
@@ -56,7 +50,6 @@ public class CountingInformation {
     /**
      * @return The {@link String failureRoleID}.
      */
-    @NotNull
     public String getFailureRoleID() {
         return failureRoleID;
     }

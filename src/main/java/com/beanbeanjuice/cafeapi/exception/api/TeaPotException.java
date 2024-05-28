@@ -1,7 +1,6 @@
 package com.beanbeanjuice.cafeapi.exception.api;
 
 import com.beanbeanjuice.cafeapi.requests.Request;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * An {@link CafeException} that is thrown when mismatched variables are present.
@@ -16,7 +15,7 @@ public class TeaPotException extends CafeException {
      * Creates a new {@link TeaPotException}.
      * @param request The {@link Request} that threw the {@link CafeException}.
      */
-    public TeaPotException(@NotNull Request request) {
+    public TeaPotException(Request request) {
         super(request);
     }
 
@@ -24,7 +23,7 @@ public class TeaPotException extends CafeException {
      * Creates a new {@link TeaPotException}.
      * @param message The {@link String} message to send.
      */
-    public TeaPotException(@NotNull String message) {
+    public TeaPotException(String message) {
         super(413, message);
     }
 

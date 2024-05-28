@@ -12,7 +12,6 @@ import com.beanbeanjuice.cafeapi.exception.api.ConflictException;
 import com.beanbeanjuice.cafeapi.exception.api.ResponseException;
 import com.beanbeanjuice.cafeapi.exception.api.UndefinedVariableException;
 import com.beanbeanjuice.cafeapi.exception.api.CafeException;
-import org.jetbrains.annotations.NotNull;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates the {@link Raffles} module for the {@link CafeAPI CafeAPI}.
      * @param apiKey The authorization {@link String apiKey}.
      */
-    public Raffles(@NotNull String apiKey) {
+    public Raffles(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -41,7 +40,6 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
     public HashMap<String, ArrayList<Raffle>> getAllRaffles()
     throws AuthorizationException, ResponseException {
         HashMap<String, ArrayList<Raffle>> raffles = new HashMap<>();
@@ -49,12 +47,12 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/raffles")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode raffle : request.getData().get("raffles")) {
             String guildID = raffle.get("guild_id").asText();
             String messageID = raffle.get("message_id").asText();
-            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(raffle.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(raffle.get("ending_time").asText()).orElse(null);
             Integer winnerAmount = raffle.get("winner_amount").asInt();
 
             if (!raffles.containsKey(guildID)) {
@@ -74,19 +72,18 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      */
-    @NotNull
-    public ArrayList<Raffle> getGuildRaffles(@NotNull String guildID)
+    public ArrayList<Raffle> getGuildRaffles(String guildID)
     throws AuthorizationException, ResponseException {
         ArrayList<Raffle> raffles = new ArrayList<>();
 
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/raffles/" + guildID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode raffle : request.getData().get("raffles")) {
             String messageID = raffle.get("message_id").asText();
-            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(raffle.get("ending_time").asText());
+            Timestamp endingTime = CafeGeneric.parseTimestampFromAPI(raffle.get("ending_time").asText()).orElse(null);
             Integer winnerAmount = raffle.get("winner_amount").asInt();
 
             raffles.add(new Raffle(messageID, endingTime, winnerAmount));
@@ -105,8 +102,7 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      * @throws ConflictException Thrown when the {@link Raffle} already exists for the specified {@link String guildID}.
      */
-    @NotNull
-    public Boolean createRaffle(@NotNull String guildID, @NotNull Raffle raffle)
+    public boolean createRaffle(String guildID, Raffle raffle)
     throws AuthorizationException, ResponseException, UndefinedVariableException, ConflictException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/raffles/" + guildID)
@@ -114,7 +110,7 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
                 .addParameter("ending_time", raffle.getEndingTime().toString())
                 .addParameter("winner_amount", raffle.getWinnerAmount().toString())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -128,8 +124,7 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean deleteRaffle(@NotNull String guildID, @NotNull Raffle raffle)
+    public boolean deleteRaffle(String guildID, Raffle raffle)
     throws AuthorizationException, ResponseException, UndefinedVariableException {
         return deleteRaffle(guildID, raffle.getMessageID());
     }
@@ -143,14 +138,13 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException CafeException}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean deleteRaffle(@NotNull String guildID, @NotNull String messageID)
+    public boolean deleteRaffle(String guildID, String messageID)
     throws AuthorizationException, ResponseException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/raffles/" + guildID)
                 .addParameter("message_id", messageID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -160,7 +154,8 @@ public class Raffles implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The {@link String apiKey} to update the current one to.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

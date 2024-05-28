@@ -1,13 +1,11 @@
 package com.beanbeanjuice.cafeapi.generic;
 
 import com.beanbeanjuice.cafeapi.CafeAPI;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 import java.util.TimeZone;
 
 /**
@@ -24,15 +22,14 @@ public class CafeGeneric {
      * Null if timestamp was incorrectly entered.
      * @throws IllegalArgumentException - Thrown when the pattern given is invalid.
      */
-    @Nullable
-    public static Timestamp parseTimestamp(@NotNull String timestampString) throws IllegalArgumentException {
+    public static Optional<Timestamp> parseTimestamp(String timestampString) throws IllegalArgumentException {
         timestampString = timestampString.replace("T", " ").replace("Z", "");
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC")); // Sets the timezone to UTC.
-            return new Timestamp(simpleDateFormat.parse(timestampString).getTime());
+            return Optional.of(new Timestamp(simpleDateFormat.parse(timestampString).getTime()));
         } catch (ParseException e) {
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -43,14 +40,13 @@ public class CafeGeneric {
      * Null if timestamp was incorrectly entered.
      * @throws IllegalArgumentException - Thrown when the pattern given is invalid.
      */
-    @Nullable
-    public static Timestamp parseTimestampFromAPI(@NotNull String timestampString) throws IllegalArgumentException {
+    public static Optional<Timestamp> parseTimestampFromAPI(String timestampString) throws IllegalArgumentException {
         timestampString = timestampString.replace("T", " ").replace("Z", "");
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            return new Timestamp(simpleDateFormat.parse(timestampString).getTime());
+            return Optional.of(new Timestamp(simpleDateFormat.parse(timestampString).getTime()));
         } catch (ParseException e) {
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -61,14 +57,13 @@ public class CafeGeneric {
      * Null if the date was incorrectly entered.
      * @throws IllegalArgumentException - Thrown when the pattern given is invalid.
      */
-    @Nullable
-    public static Date parseDateFromAPI(@NotNull String dateString) throws IllegalArgumentException {
+    public static Optional<Date> parseDateFromAPI(String dateString) throws IllegalArgumentException {
         dateString = dateString.replace("T", " ").replace("Z", "");
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            return new Date(simpleDateFormat.parse(dateString).getTime());
+            return Optional.of(new Date(simpleDateFormat.parse(dateString).getTime()));
         } catch (ParseException e) {
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -77,12 +72,8 @@ public class CafeGeneric {
      * @param bool The {@link Boolean} to parse.
      * @return "1", if true. If there was an error, it will be "0" by default.
      */
-    @NotNull
-    public static String parseBoolean(@NotNull Boolean bool) {
-        if (bool.equals(true)) {
-            return "1";
-        }
-        return "0";
+    public static String parseBoolean(boolean bool) {
+        return (bool) ? "1" : "0";
     }
 
 }

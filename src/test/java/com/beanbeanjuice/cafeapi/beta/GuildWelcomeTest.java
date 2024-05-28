@@ -40,7 +40,7 @@ public class GuildWelcomeTest {
         // Makes sure that the description of the retrieved guild is "test description"
         Assertions.assertEquals(
                 "Welcome, {user} to the bot testing server!\\nI hope you enjoy your stay! :heart:\\nMake sure to...\\n Check out #polls,\\nCheck out #logger,\\n and Check out #cafebot-beta-log!",
-                cafeAPI.WELCOME.getGuildWelcome("798830792938881024").getDescription());
+                cafeAPI.WELCOME.getGuildWelcome("798830792938881024").getDescription().orElse(null));
 
         // Makes sure that this throws a NotFoundException as the guild "bruhmoment" does not exist.
         Assertions.assertThrows(NotFoundException.class, () -> {
@@ -53,9 +53,9 @@ public class GuildWelcomeTest {
 
             GuildWelcome newGuildWelcome = new GuildWelcome(
                     currentGuildWelcome.getGuildID(),
-                    currentGuildWelcome.getDescription(),
-                    currentGuildWelcome.getThumbnailURL(),
-                    currentGuildWelcome.getImageURL(),
+                    currentGuildWelcome.getDescription().orElse(null),
+                    currentGuildWelcome.getThumbnailURL().orElse(null),
+                    currentGuildWelcome.getImageURL().orElse(null),
                     "cool message!!!!"
             );
 
