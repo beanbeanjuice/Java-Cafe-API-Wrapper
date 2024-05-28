@@ -20,7 +20,7 @@ public class PollTest {
         CafeAPI cafeAPI = new CafeAPI("beanbeanjuice", System.getenv("API_PASSWORD"), RequestLocation.BETA);
 
         long currentTime = System.currentTimeMillis();
-        Timestamp currentTimestamp = CafeGeneric.parseTimestamp(new Timestamp(currentTime).toString());
+        Timestamp currentTimestamp = CafeGeneric.parseTimestamp(new Timestamp(currentTime).toString()).orElse(null);
 
         // Makes sure the poll doesn't exist before starting the test.
         Assertions.assertTrue(() -> cafeAPI.POLL.deletePoll("798830792938881024", "879519824424890438"));

@@ -1,7 +1,6 @@
 package com.beanbeanjuice.cafeapi.exception.program;
 
 import com.beanbeanjuice.cafeapi.cafebot.birthdays.BirthdayMonth;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A {@link RuntimeException} that deals with incorrect days in a {@link BirthdayMonth BirthdayMonth}.
@@ -14,7 +13,7 @@ public class BirthdayOverfillException extends RuntimeException {
      * Creates a new {@link BirthdayOverfillException}.
      * @param message The message to send to the {@link RuntimeException}.
      */
-    public BirthdayOverfillException(@NotNull String message) {
+    public BirthdayOverfillException(String message) {
         super(message);
     }
 

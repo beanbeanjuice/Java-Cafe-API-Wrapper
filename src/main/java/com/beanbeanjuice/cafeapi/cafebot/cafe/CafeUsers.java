@@ -8,7 +8,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.Timestamp;
@@ -27,7 +26,7 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates a new {@link CafeUsers} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public CafeUsers(@NotNull String apiKey) {
+    public CafeUsers(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -37,7 +36,6 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
     public ArrayList<CafeUser> getAllCafeUsers()
     throws AuthorizationException, ResponseException {
         ArrayList<CafeUser> cafeUsers = new ArrayList<>();
@@ -45,7 +43,7 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/cafe/users")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode cafeUser : request.getData().get("users")) {
             cafeUsers.add(parseCafeUser(cafeUser));
@@ -62,13 +60,12 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when the {@link CafeUser} does not exist for the specified {@link String userID}.
      */
-    @NotNull
-    public CafeUser getCafeUser(@NotNull String userID)
+    public CafeUser getCafeUser(String userID)
     throws AuthorizationException, ResponseException, NotFoundException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/cafe/users/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return parseCafeUser(request.getData().get("cafe_user"));
     }
@@ -85,8 +82,7 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws TeaPotException Thrown when the {@link Object value} entered is not compatible with the specified {@link CafeType type}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean updateCafeUser(@NotNull String userID, @NotNull CafeType type, @Nullable Object value)
+    public boolean updateCafeUser(String userID, CafeType type, @Nullable Object value)
     throws AuthorizationException, ResponseException, NotFoundException, TeaPotException, UndefinedVariableException {
 
         if (!(type.equals(CafeType.LAST_SERVING_TIME) && value == null)) {
@@ -122,7 +118,7 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
             requestBuilder.addParameter("value", value.toString());
         }
 
-        Request request = requestBuilder.build();
+        Request request = requestBuilder.build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -135,13 +131,12 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws ConflictException Thrown when the {@link CafeUser} already exists for the specified {@link String userID}.
      */
-    @NotNull
-    public Boolean createCafeUser(@NotNull String userID)
+    public boolean createCafeUser(String userID)
     throws AuthorizationException, ResponseException, ConflictException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/cafe/users/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -153,13 +148,12 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
-    public Boolean deleteCafeUser(@NotNull String userID)
+    public boolean deleteCafeUser(String userID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/cafe/users/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -169,11 +163,10 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param node The {@link JsonNode node} to parse.
      * @return The parsed {@link CafeUser}.
      */
-    @NotNull
-    private CafeUser parseCafeUser(@NotNull JsonNode node) {
+    private CafeUser parseCafeUser(JsonNode node) {
         String userID = node.get("user_id").asText();
         Double beanCoins = node.get("bean_coins").asDouble();
-        Timestamp timestamp = CafeGeneric.parseTimestampFromAPI(node.get("last_serving_time").asText());
+        Timestamp timestamp = CafeGeneric.parseTimestampFromAPI(node.get("last_serving_time").asText()).orElse(null);
         Integer ordersBought = node.get("orders_bought").asInt();
         Integer ordersReceived = node.get("orders_received").asInt();
 
@@ -185,7 +178,8 @@ public class CafeUsers implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

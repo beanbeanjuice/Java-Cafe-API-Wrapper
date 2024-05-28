@@ -1,9 +1,8 @@
 package com.beanbeanjuice.cafeapi.cafebot.cafe;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.sql.Timestamp;
+import java.util.Optional;
 
 /**
  * A class used for {@link CafeUser} objects.
@@ -13,10 +12,10 @@ import java.sql.Timestamp;
 public class CafeUser {
 
     private final String userID;
-    private final Double beanCoins;
+    private final double beanCoins;
     private final Timestamp lastServingTime;
-    private final Integer ordersBought;
-    private final Integer ordersReceived;
+    private final int ordersBought;
+    private final int ordersReceived;
 
     /**
      * Creates a new {@link CafeUser} object.
@@ -26,8 +25,8 @@ public class CafeUser {
      * @param ordersBought The {@link Integer ordersBought}.
      * @param ordersReceived The {@link Integer ordersReceived}.
      */
-    public CafeUser(@NotNull String userID, @NotNull Double beanCoins, @Nullable Timestamp lastServingTime,
-                    @NotNull Integer ordersBought, @NotNull Integer ordersReceived) {
+    public CafeUser(String userID, double beanCoins, @Nullable Timestamp lastServingTime,
+                    int ordersBought, int ordersReceived) {
         this.userID = userID;
         this.beanCoins = beanCoins;
         this.lastServingTime = lastServingTime;
@@ -38,7 +37,6 @@ public class CafeUser {
     /**
      * @return The {@link String lastUserID}.
      */
-    @NotNull
     public String getUserID() {
         return userID;
     }
@@ -46,32 +44,29 @@ public class CafeUser {
     /**
      * @return The {@link Double beanCoins}.
      */
-    @NotNull
-    public Double getBeanCoins() {
+    public double getBeanCoins() {
         return beanCoins;
     }
 
     /**
      * @return The {@link Timestamp lastServingTime}.
      */
-    @Nullable
-    public Timestamp getLastServingTime() {
-        return lastServingTime;
+    public Optional<Timestamp> getLastServingTime() {
+        return Optional.ofNullable(lastServingTime);
     }
 
     /**
      * @return The {@link Integer ordersBought}.
      */
-    @NotNull
-    public Integer getOrdersBought() {
+    public int getOrdersBought() {
         return ordersBought;
     }
 
     /**
      * @return The {@link Integer ordersReceived}.
      */
-    @NotNull
-    public Integer getOrdersReceived() {
+    public int getOrdersReceived() {
         return ordersReceived;
     }
+
 }

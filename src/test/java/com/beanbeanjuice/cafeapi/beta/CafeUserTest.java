@@ -48,7 +48,7 @@ public class CafeUserTest {
 
         // Makes sure all settings are default when first created.
         Assertions.assertEquals(0, cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getBeanCoins());
-        Assertions.assertNull(cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getLastServingTime());
+        Assertions.assertNull(cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getLastServingTime().orElse(null));
         Assertions.assertEquals(0, cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getOrdersBought());
         Assertions.assertEquals(0, cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getOrdersReceived());
 
@@ -57,13 +57,13 @@ public class CafeUserTest {
         Assertions.assertEquals(100.0, cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getBeanCoins());
 
         // Makes sure the timestamp can be changed.
-        Timestamp currentTimeStamp = CafeGeneric.parseTimestamp(new Timestamp(System.currentTimeMillis()).toString());
+        Timestamp currentTimeStamp = CafeGeneric.parseTimestamp(new Timestamp(System.currentTimeMillis()).toString()).orElse(null);
         Assertions.assertTrue(cafeAPI.CAFE_USER.updateCafeUser("236654580300120064", CafeType.LAST_SERVING_TIME, currentTimeStamp));
-        Assertions.assertEquals(currentTimeStamp, cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getLastServingTime());
+        Assertions.assertEquals(currentTimeStamp, cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getLastServingTime().orElse(null));
 
         // Makes sure the timestamp can be changed to null.
         Assertions.assertTrue(cafeAPI.CAFE_USER.updateCafeUser("236654580300120064", CafeType.LAST_SERVING_TIME, null));
-        Assertions.assertNull(cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getLastServingTime());
+        Assertions.assertNull(cafeAPI.CAFE_USER.getCafeUser("236654580300120064").getLastServingTime().orElse(null));
 
         // Makes sure the orders bought can be updated.
         Assertions.assertTrue(cafeAPI.CAFE_USER.updateCafeUser("236654580300120064", CafeType.ORDERS_BOUGHT, 10));

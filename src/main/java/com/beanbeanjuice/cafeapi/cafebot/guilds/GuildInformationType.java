@@ -1,7 +1,5 @@
 package com.beanbeanjuice.cafeapi.cafebot.guilds;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A static class for {@link GuildInformationType}.
  *
@@ -33,14 +31,13 @@ public enum GuildInformationType {
      * Creates a new {@link GuildInformationType} static object.
      * @param type The {@link String type} of object.
      */
-    GuildInformationType(@NotNull String type) {
+    GuildInformationType(String type) {
         this.type = type;
     }
 
     /**
      * @return The {@link GuildInformationType} as a {@link String}.
      */
-    @NotNull
     public String getType() {
         return type;
     }

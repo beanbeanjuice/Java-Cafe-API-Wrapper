@@ -1,7 +1,8 @@
 package com.beanbeanjuice.cafeapi.cafebot.goodbyes;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 /**
  * A class used for Goodbye Information for a Discord Guild.
@@ -24,7 +25,7 @@ public class GuildGoodbye {
      * @param imageURL The {@link String imageURL} of the {@link GuildGoodbye}.
      * @param message The {@link String message} of the {@link GuildGoodbye}.
      */
-    public GuildGoodbye(@NotNull String guildID, @Nullable String description, @Nullable String thumbnailURL,
+    public GuildGoodbye(String guildID, @Nullable String description, @Nullable String thumbnailURL,
                         @Nullable String imageURL, @Nullable String message) {
         this.guildID = guildID;
         this.description = description;
@@ -36,7 +37,6 @@ public class GuildGoodbye {
     /**
      * @return The {@link String guildID} of the {@link GuildGoodbye}.
      */
-    @NotNull
     public String getGuildID() {
         return guildID;
     }
@@ -44,32 +44,29 @@ public class GuildGoodbye {
     /**
      * @return The {@link String description} of the {@link GuildGoodbye}.
      */
-    @Nullable
-    public String getDescription() {
-        return description;
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     /**
      * @return The {@link String thumbnailURL} of the {@link GuildGoodbye}.
      */
-    @Nullable
-    public String getThumbnailURL() {
-        return thumbnailURL;
+    public Optional<String> getThumbnailURL() {
+        return Optional.ofNullable(thumbnailURL);
     }
 
     /**
      * @return The {@link String imageURL} of the {@link GuildGoodbye}.
      */
-    @Nullable
-    public String getImageURL() {
-        return imageURL;
+    public Optional<String> getImageURL() {
+        return Optional.ofNullable(imageURL);
     }
 
     /**
      * @return The {@link String message} of the {@link GuildGoodbye}.
      */
-    @Nullable
-    public String getMessage() {
-        return message;
+    public Optional<String> getMessage() {
+        return Optional.ofNullable(message);
     }
+
 }

@@ -8,7 +8,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -25,7 +24,7 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates a new {@link Interactions} API module.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public Interactions(@NotNull String apiKey) {
+    public Interactions(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -35,7 +34,6 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
     public HashMap<String, Interaction> getAllInteractionSenders()
     throws AuthorizationException, ResponseException {
         HashMap<String, Interaction> senders = new HashMap<>();
@@ -43,7 +41,7 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/interactions/senders")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode interactionSender : request.getData().get("interactions_sent")) {
             String userID = interactionSender.get("user_id").asText();
@@ -61,13 +59,12 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when the specified {@link String userID} is not found in the {@link CafeAPI CafeAPI}.
      */
-    @NotNull
-    public Interaction getUserInteractionsSent(@NotNull String userID)
+    public Interaction getUserInteractionsSent(String userID)
     throws AuthorizationException, ResponseException, NotFoundException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/interactions/senders/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return parseInteraction(request.getData().get("interactions_sent"));
     }
@@ -82,14 +79,13 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws NotFoundException Thrown when the {@link String userID} is not found in the {@link CafeAPI CafeAPI}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Integer getSpecificUserInteractionSentAmount(@NotNull String userID, @NotNull InteractionType type)
+    public Integer getSpecificUserInteractionSentAmount(String userID, InteractionType type)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/interactions/senders/" + userID)
                 .addParameter("type", type.toString().toLowerCase())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getData().get(type.getType()).asInt();
     }
@@ -98,22 +94,21 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Updates the {@link Interaction} sent amount of a specified {@link InteractionType} for a specified {@link String userID}.
      * @param userID The specified {@link String userID}.
      * @param type The specified {@link InteractionType type}.
-     * @param value The specified {@link Integer value} for the {@link InteractionType}.
+     * @param amount The specified {@link Integer amount} for the {@link InteractionType}.
      * @return True, if the {@link Interaction} was successfully updated for the {@link String userID}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when the specified {@link String userID} is not found in the {@link CafeAPI CafeAPI}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean updateSpecificUserInteractionSentAmount(@NotNull String userID, @NotNull InteractionType type, @NotNull Integer value)
+    public Boolean updateSpecificUserInteractionSentAmount(String userID, InteractionType type, int amount)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/interactions/senders/" + userID)
                 .addParameter("type", type.toString().toLowerCase())
-                .addParameter("value", value.toString())
+                .addParameter("value", String.valueOf(amount))
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -126,13 +121,12 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws ConflictException Thrown when the specified {@link String userID} already exists in the {@link CafeAPI CafeAPI}.
      */
-    @NotNull
-    public Boolean createUserInteractionsSent(@NotNull String userID)
+    public boolean createUserInteractionsSent(String userID)
     throws AuthorizationException, ResponseException, ConflictException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/interactions/senders/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -144,13 +138,12 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
-    public Boolean deleteUserInteractionsSent(@NotNull String userID)
+    public boolean deleteUserInteractionsSent(String userID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/interactions/senders/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return  request.getStatusCode() == 200;
     }
@@ -165,7 +158,6 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
     public HashMap<String, Interaction> getAllInteractionReceivers()
     throws AuthorizationException, ResponseException {
         HashMap<String, Interaction> receivers = new HashMap<>();
@@ -173,7 +165,7 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/interactions/receivers")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode interactionReceiver : request.getData().get("interactions_received")) {
             String userID = interactionReceiver.get("user_id").asText();
@@ -191,13 +183,12 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when the specified {@link String userID} is not found in the {@link CafeAPI CafeAPI}.
      */
-    @NotNull
-    public Interaction getUserInteractionsReceived(@NotNull String userID)
+    public Interaction getUserInteractionsReceived(String userID)
     throws AuthorizationException, ResponseException, NotFoundException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/interactions/receivers/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return parseInteraction(request.getData().get("interactions_received"));
     }
@@ -212,14 +203,13 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws NotFoundException Thrown when the {@link String userID} is not found in the {@link CafeAPI CafeAPI}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Integer getSpecificUserInteractionReceivedAmount(@NotNull String userID, @NotNull InteractionType type)
+    public Integer getSpecificUserInteractionReceivedAmount(String userID, InteractionType type)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/interactions/receivers/" + userID)
                 .addParameter("type", type.toString().toLowerCase())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getData().get(type.getType()).asInt();
     }
@@ -228,22 +218,21 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Updates the {@link Interaction} received amount of a specified {@link InteractionType} for a specified {@link String userID}.
      * @param userID The specified {@link String userID}.
      * @param type The specified {@link InteractionType type}.
-     * @param value The specified {@link Integer value} for the {@link InteractionType}.
+     * @param amount The specified {@link Integer amount} for the {@link InteractionType}.
      * @return True, if the {@link Interaction} was successfully updated for the {@link String userID}.
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when the specified {@link String userID} is not found in the {@link CafeAPI CafeAPI}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean updateSpecificUserInteractionReceivedAmount(@NotNull String userID, @NotNull InteractionType type, @NotNull Integer value)
+    public Boolean updateSpecificUserInteractionReceivedAmount(String userID, InteractionType type, int amount)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/interactions/receivers/" + userID)
                 .addParameter("type", type.toString().toLowerCase())
-                .addParameter("value", value.toString())
+                .addParameter("value", String.valueOf(amount))
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -256,13 +245,12 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws ConflictException Thrown when the specified {@link String userID} already exists in the {@link CafeAPI CafeAPI}.
      */
-    @NotNull
-    public Boolean createUserInteractionsReceived(@NotNull String userID)
+    public boolean createUserInteractionsReceived(String userID)
     throws AuthorizationException, ResponseException, ConflictException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/interactions/receivers/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -274,13 +262,12 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
-    public Boolean deleteUserInteractionsReceived(@NotNull String userID)
+    public boolean deleteUserInteractionsReceived(String userID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/interactions/receivers/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return  request.getStatusCode() == 200;
     }
@@ -290,46 +277,45 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param jsonNode The {@link JsonNode} to parse into an {@link Interaction}.
      * @return The parsed {@link Interaction}.
      */
-    @NotNull
-    private Interaction parseInteraction(@NotNull JsonNode jsonNode) {
-        Integer hugAmount = jsonNode.get(InteractionType.HUG.getType()).asInt();
-        Integer punchAmount = jsonNode.get(InteractionType.PUNCH.getType()).asInt();
-        Integer kissAmount = jsonNode.get(InteractionType.KISS.getType()).asInt();
-        Integer biteAmount = jsonNode.get(InteractionType.BITE.getType()).asInt();
-        Integer blushAmount = jsonNode.get(InteractionType.BLUSH.getType()).asInt();
-        Integer cuddleAmount = jsonNode.get(InteractionType.CUDDLE.getType()).asInt();
-        Integer nomAmount = jsonNode.get(InteractionType.NOM.getType()).asInt();
-        Integer pokeAmount = jsonNode.get(InteractionType.POKE.getType()).asInt();
-        Integer slapAmount = jsonNode.get(InteractionType.SLAP.getType()).asInt();
-        Integer stabAmount = jsonNode.get(InteractionType.STAB.getType()).asInt();
-        Integer hmphAmount = jsonNode.get(InteractionType.HMPH.getType()).asInt();
-        Integer poutAmount = jsonNode.get(InteractionType.POUT.getType()).asInt();
-        Integer throwAmount = jsonNode.get(InteractionType.THROW.getType()).asInt();
-        Integer smileAmount = jsonNode.get(InteractionType.SMILE.getType()).asInt();
-        Integer stareAmount = jsonNode.get(InteractionType.STARE.getType()).asInt();
-        Integer tickleAmount = jsonNode.get(InteractionType.TICKLE.getType()).asInt();
-        Integer rageAmount = jsonNode.get(InteractionType.RAGE.getType()).asInt();
-        Integer yellAmount = jsonNode.get(InteractionType.YELL.getType()).asInt();
-        Integer headpatAmount = jsonNode.get(InteractionType.HEADPAT.getType()).asInt();
-        Integer cryAmount = jsonNode.get(InteractionType.CRY.getType()).asInt();
-        Integer danceAmount = jsonNode.get(InteractionType.DANCE.getType()).asInt();
-        Integer dabAmount = jsonNode.get(InteractionType.DAB.getType()).asInt();
-        Integer bonkAmount = jsonNode.get(InteractionType.BONK.getType()).asInt();
-        Integer sleepAmount = jsonNode.get(InteractionType.SLEEP.getType()).asInt();
-        Integer dieAmount = jsonNode.get(InteractionType.DIE.getType()).asInt();
-        Integer welcomeAmount = jsonNode.get(InteractionType.WELCOME.getType()).asInt();
-        Integer lickAmount = jsonNode.get(InteractionType.LICK.getType()).asInt();
-        Integer shushAmount = jsonNode.get(InteractionType.SHUSH.getType()).asInt();
-        Integer waveAmount = jsonNode.get(InteractionType.WAVE.getType()).asInt();
-        Integer shootAmount = jsonNode.get(InteractionType.SHOOT.getType()).asInt();
-        Integer amazedAmount = jsonNode.get(InteractionType.AMAZED.getType()).asInt();
-        Integer askAmount = jsonNode.get(InteractionType.ASK.getType()).asInt();
-        Integer boopAmount = jsonNode.get(InteractionType.BOOP.getType()).asInt();
-        Integer loveAmount = jsonNode.get(InteractionType.LOVE.getType()).asInt();
-        Integer nosebleedAmount = jsonNode.get(InteractionType.NOSEBLEED.getType()).asInt();
-        Integer okAmount = jsonNode.get(InteractionType.OK.getType()).asInt();
-        Integer uwuAmount = jsonNode.get(InteractionType.UWU.getType()).asInt();
-        Integer winkAmount = jsonNode.get(InteractionType.WINK.getType()).asInt();
+    private Interaction parseInteraction(JsonNode jsonNode) {
+        int hugAmount = jsonNode.get(InteractionType.HUG.getType()).asInt();
+        int punchAmount = jsonNode.get(InteractionType.PUNCH.getType()).asInt();
+        int kissAmount = jsonNode.get(InteractionType.KISS.getType()).asInt();
+        int biteAmount = jsonNode.get(InteractionType.BITE.getType()).asInt();
+        int blushAmount = jsonNode.get(InteractionType.BLUSH.getType()).asInt();
+        int cuddleAmount = jsonNode.get(InteractionType.CUDDLE.getType()).asInt();
+        int nomAmount = jsonNode.get(InteractionType.NOM.getType()).asInt();
+        int pokeAmount = jsonNode.get(InteractionType.POKE.getType()).asInt();
+        int slapAmount = jsonNode.get(InteractionType.SLAP.getType()).asInt();
+        int stabAmount = jsonNode.get(InteractionType.STAB.getType()).asInt();
+        int hmphAmount = jsonNode.get(InteractionType.HMPH.getType()).asInt();
+        int poutAmount = jsonNode.get(InteractionType.POUT.getType()).asInt();
+        int throwAmount = jsonNode.get(InteractionType.THROW.getType()).asInt();
+        int smileAmount = jsonNode.get(InteractionType.SMILE.getType()).asInt();
+        int stareAmount = jsonNode.get(InteractionType.STARE.getType()).asInt();
+        int tickleAmount = jsonNode.get(InteractionType.TICKLE.getType()).asInt();
+        int rageAmount = jsonNode.get(InteractionType.RAGE.getType()).asInt();
+        int yellAmount = jsonNode.get(InteractionType.YELL.getType()).asInt();
+        int headpatAmount = jsonNode.get(InteractionType.HEADPAT.getType()).asInt();
+        int cryAmount = jsonNode.get(InteractionType.CRY.getType()).asInt();
+        int danceAmount = jsonNode.get(InteractionType.DANCE.getType()).asInt();
+        int dabAmount = jsonNode.get(InteractionType.DAB.getType()).asInt();
+        int bonkAmount = jsonNode.get(InteractionType.BONK.getType()).asInt();
+        int sleepAmount = jsonNode.get(InteractionType.SLEEP.getType()).asInt();
+        int dieAmount = jsonNode.get(InteractionType.DIE.getType()).asInt();
+        int welcomeAmount = jsonNode.get(InteractionType.WELCOME.getType()).asInt();
+        int lickAmount = jsonNode.get(InteractionType.LICK.getType()).asInt();
+        int shushAmount = jsonNode.get(InteractionType.SHUSH.getType()).asInt();
+        int waveAmount = jsonNode.get(InteractionType.WAVE.getType()).asInt();
+        int shootAmount = jsonNode.get(InteractionType.SHOOT.getType()).asInt();
+        int amazedAmount = jsonNode.get(InteractionType.AMAZED.getType()).asInt();
+        int askAmount = jsonNode.get(InteractionType.ASK.getType()).asInt();
+        int boopAmount = jsonNode.get(InteractionType.BOOP.getType()).asInt();
+        int loveAmount = jsonNode.get(InteractionType.LOVE.getType()).asInt();
+        int nosebleedAmount = jsonNode.get(InteractionType.NOSEBLEED.getType()).asInt();
+        int okAmount = jsonNode.get(InteractionType.OK.getType()).asInt();
+        int uwuAmount = jsonNode.get(InteractionType.UWU.getType()).asInt();
+        int winkAmount = jsonNode.get(InteractionType.WINK.getType()).asInt();
 
         return new Interaction(
                 hugAmount, punchAmount, kissAmount,
@@ -353,7 +339,8 @@ public class Interactions implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

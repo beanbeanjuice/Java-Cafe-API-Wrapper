@@ -1,7 +1,5 @@
 package com.beanbeanjuice.cafeapi.cafebot.birthdays;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A static {@link BirthdayMonth} class used for {@link Birthday} months.
  *
@@ -23,15 +21,15 @@ public enum BirthdayMonth {
     DECEMBER (12, 31),
     ERROR (13, 31);
 
-    private final Integer monthNumber;
-    private final Integer daysInMonth;
+    private final int monthNumber;
+    private final int daysInMonth;
 
     /**
      * Creates a new {@link BirthdayMonth} static class.
      * @param monthNumber The {@link Integer monthNumber}.
      * @param daysInMonth The amount of {@link Integer daysInMonth}.
      */
-    BirthdayMonth(@NotNull Integer monthNumber, @NotNull Integer daysInMonth) {
+    BirthdayMonth(int monthNumber, int daysInMonth) {
         this.monthNumber = monthNumber;
         this.daysInMonth = daysInMonth;
     }
@@ -39,16 +37,14 @@ public enum BirthdayMonth {
     /**
      * @return The {@link Integer monthNumber}.
      */
-    @NotNull
-    public Integer getMonthNumber() {
+    public int getMonthNumber() {
         return monthNumber;
     }
 
     /**
      * @return The amount of {@link Integer daysInMonth}.
      */
-    @NotNull
-    public Integer getDaysInMonth() {
+    public int getDaysInMonth() {
         return daysInMonth;
     }
 }

@@ -14,13 +14,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.Optional;
 
 /**
  * A {@link RequestBuilder} used to build {@link Request} objects.
@@ -46,7 +46,7 @@ public class RequestBuilder {
      * @param requestType The {@link RequestType type} of {@link Request}.
      * @param requestRoute The {@link RequestRoute} of the {@link Request}.
      */
-    public RequestBuilder(@NotNull RequestRoute requestRoute, @NotNull RequestType requestType) {
+    public RequestBuilder(RequestRoute requestRoute, RequestType requestType) {
         this.requestType = requestType;
         parameters = new HashMap<>();
 
@@ -58,8 +58,7 @@ public class RequestBuilder {
      * @param route The {@link String route} for the {@link RequestBuilder}.
      * @return The new {@link RequestBuilder}.
      */
-    @NotNull
-    public RequestBuilder setRoute(@NotNull String route) {
+    public RequestBuilder setRoute(String route) {
         this.route = route;
         return this;
     }
@@ -70,8 +69,7 @@ public class RequestBuilder {
      * @param value The {@link String value} for the {@link String key} in the {@link RequestBuilder}.
      * @return The new {@link RequestBuilder}.
      */
-    @NotNull
-    public RequestBuilder addParameter(@NotNull String key, @Nullable String value) {
+    public RequestBuilder addParameter(String key, @Nullable String value) {
         parameters.put(key, value);
         return this;
     }
@@ -81,8 +79,7 @@ public class RequestBuilder {
      * @param apiKey The {@link String api key} for the {@link RequestBuilder}.
      * @return The new {@link RequestBuilder}.
      */
-    @NotNull
-    public RequestBuilder setAuthorization(@NotNull String apiKey) {
+    public RequestBuilder setAuthorization(String apiKey) {
         this.apiKey = apiKey;
         return this;
     }
@@ -91,8 +88,7 @@ public class RequestBuilder {
      * Builds the {@link RequestBuilder}.
      * @return Null, if there is an error with the route. The resulting {@link Request}.
      */
-    @Nullable
-    public Request build() {
+    public Optional<Request> build() {
         try {
             httpClient = HttpClients.createDefault();
             uriBuilder = new URIBuilder(apiURL + route);
@@ -102,59 +98,29 @@ public class RequestBuilder {
             authorization = new BasicHeader("Authorization", apiKey);
 
             switch (requestType) {
-                case GET -> {
-                    httpResponse = get();
-                }
-
-                case POST -> {
-                    httpResponse = post();
-                }
-
-                case PATCH -> {
-                    httpResponse = patch();
-                }
-
-                case DELETE -> {
-                    httpResponse = delete();
-                }
+                case GET -> httpResponse = get();
+                case POST -> httpResponse = post();
+                case PATCH -> httpResponse = patch();
+                case DELETE -> httpResponse = delete();
             }
 
-            Integer statusCode = httpResponse.getStatusLine().getStatusCode();
+            int statusCode = httpResponse.getStatusLine().getStatusCode();
             HttpEntity httpEntity = httpResponse.getEntity();
             try (InputStream inputStream = httpEntity.getContent()) {
                 Request request = new Request(statusCode, new ObjectMapper().readTree(inputStream));
 
                 // Catching Status Codes
-                if (request.getStatusCode() == 400) {
-                    throw new UndefinedVariableException(request);
-                }
+                if (request.getStatusCode() == 400) throw new UndefinedVariableException(request);
+                if (request.getStatusCode() == 401) throw new AuthorizationException(request);
+                if (request.getStatusCode() == 404) throw new NotFoundException(request);
+                if (request.getStatusCode() == 409) throw new ConflictException(request);
+                if (request.getStatusCode() == 418) throw new TeaPotException(request);
+                if (request.getStatusCode() == 500) throw new ResponseException(request);
 
-                if (request.getStatusCode() == 401) {
-                    throw new AuthorizationException(request);
-                }
-
-                if (request.getStatusCode() == 404) {
-                    throw new NotFoundException(request);
-                }
-
-                if (request.getStatusCode() == 409) {
-                    throw new ConflictException(request);
-                }
-
-                if (request.getStatusCode() == 418) {
-                    throw new TeaPotException(request);
-                }
-
-                if (request.getStatusCode() == 500) {
-                    throw new ResponseException(request);
-                }
-
-
-                return request;
+                return Optional.of(request);
             }
         } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -164,7 +130,6 @@ public class RequestBuilder {
      * @throws URISyntaxException Thrown if there is an issue with the route syntax.
      * @throws IOException Thrown if there is an issue with the data returned.
      */
-    @NotNull
     private HttpResponse get() throws URISyntaxException, IOException {
         HttpGet httpGet = new HttpGet(uriBuilder.build());
         httpGet.addHeader(authorization);
@@ -178,7 +143,6 @@ public class RequestBuilder {
      * @throws URISyntaxException Thrown if there is an issue with the route syntax.
      * @throws IOException Thrown if there is an issue with the data returned.
      */
-    @NotNull
     private HttpResponse post() throws URISyntaxException, IOException {
         HttpPost httpPost = new HttpPost(uriBuilder.build());
         httpPost.addHeader(authorization);
@@ -192,7 +156,6 @@ public class RequestBuilder {
      * @throws URISyntaxException Thrown if there is an issue with the route syntax.
      * @throws IOException Thrown if there is an issue with the data returned.
      */
-    @NotNull
     private HttpResponse patch() throws URISyntaxException, IOException {
         HttpPatch httpPatch = new HttpPatch(uriBuilder.build());
         httpPatch.addHeader(authorization);
@@ -206,7 +169,6 @@ public class RequestBuilder {
      * @throws URISyntaxException Thrown if there is an issue with the route syntax.
      * @throws IOException Thrown if there is an issue with the data returned.
      */
-    @NotNull
     private HttpResponse delete() throws URISyntaxException, IOException {
         HttpDelete httpDelete = new HttpDelete(uriBuilder.build());
         httpDelete.addHeader(authorization);
@@ -217,9 +179,8 @@ public class RequestBuilder {
     /**
      * @return The {@link String route} for the {@link RequestBuilder}.
      */
-    @Nullable
-    public String getRoute() {
-        return route;
+    public Optional<String> getRoute() {
+        return Optional.ofNullable(route);
     }
 
 }
