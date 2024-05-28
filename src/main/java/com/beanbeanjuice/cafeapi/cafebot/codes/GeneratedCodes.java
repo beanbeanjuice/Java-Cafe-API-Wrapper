@@ -7,7 +7,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestBuilder;
 import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -24,7 +23,7 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates a new {@link GeneratedCodes} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public GeneratedCodes(@NotNull String apiKey) {
+    public GeneratedCodes(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -34,7 +33,6 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
     public HashMap<String, String> getAllGeneratedCodes()
     throws AuthorizationException, ResponseException {
         HashMap<String, String> codes = new HashMap<>();
@@ -42,7 +40,7 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/codes")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode user : request.getData().get("users")) {
             codes.put(user.get("user_id").asText(), user.get("generated_code").asText());
@@ -59,13 +57,12 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws NotFoundException Thrown when a {@link String generatedCode} for the specified {@link String userID} does not exist.
      */
-    @NotNull
-    public String getUserGeneratedCode(@NotNull String userID)
+    public String getUserGeneratedCode(String userID)
     throws AuthorizationException, ResponseException, NotFoundException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/codes/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getData().get("generated_code").asText();
     }
@@ -80,14 +77,13 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws NotFoundException Thrown when a {@link String generatedCode} does not exist for the specified {@link String userID}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean updateUserGeneratedCode(@NotNull String userID, @NotNull String newCode)
+    public boolean updateUserGeneratedCode(String userID, String newCode)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/codes/" + userID)
                 .addParameter("generated_code", newCode)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -102,14 +98,13 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ConflictException Thrown when the {@link String generatedCode} already exists for the specified {@link String userID}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean createUserGeneratedCode(@NotNull String userID, @NotNull String newCode)
+    public Boolean createUserGeneratedCode(String userID, String newCode)
     throws AuthorizationException, ResponseException, ConflictException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.POST)
                 .setRoute("/codes/" + userID)
                 .addParameter("generated_code", newCode)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -121,13 +116,12 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
-    public Boolean deleteUserGeneratedCode(@NotNull String userID)
+    public Boolean deleteUserGeneratedCode(String userID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/codes/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -137,7 +131,8 @@ public class GeneratedCodes implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
+
 }

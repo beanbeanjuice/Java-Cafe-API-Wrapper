@@ -1,6 +1,6 @@
 package com.beanbeanjuice.cafeapi.cafebot.polls;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 import java.sql.Timestamp;
 
@@ -11,32 +11,17 @@ import java.sql.Timestamp;
  */
 public class Poll {
 
-    private final String messageID;
-    private final Timestamp endingTime;
+    @Getter private final String messageID;
+    @Getter private final Timestamp endingTime;
 
     /**
      * Creates a new {@link Poll} object.
      * @param messageID The {@link String messageID} of the {@link Poll}.
      * @param endingTime The {@link Timestamp endingTime} of the {@link Poll}. UTC Timezone.
      */
-    public Poll(@NotNull String messageID, @NotNull Timestamp endingTime) {
+    public Poll(String messageID, Timestamp endingTime) {
         this.messageID = messageID;
         this.endingTime = endingTime;
     }
 
-    /**
-     * @return The {@link String messageID} of the {@link Poll}.
-     */
-    @NotNull
-    public String getMessageID() {
-        return messageID;
-    }
-
-    /**
-     * @return The {@link Timestamp endingTime} of the {@link Poll}. UTC Timezone.
-     */
-    @NotNull
-    public Timestamp getEndingTime() {
-        return endingTime;
-    }
 }

@@ -1,52 +1,54 @@
 package com.beanbeanjuice.cafeapi.cafebot.interactions.users;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 /**
  * A class used to hold {@link Interaction} information.
  *
  * @author beanbeanjuice
  */
+@Getter
 public class Interaction {
 
-    private final Integer hugAmount;
-    private final Integer punchAmount;
-    private final Integer kissAmount;
-    private final Integer biteAmount;
-    private final Integer blushAmount;
-    private final Integer cuddleAmount;
-    private final Integer nomAmount;
-    private final Integer pokeAmount;
-    private final Integer slapAmount;
-    private final Integer stabAmount;
-    private final Integer hmphAmount;
-    private final Integer poutAmount;
-    private final Integer throwAmount;
-    private final Integer smileAmount;
-    private final Integer stareAmount;
-    private final Integer tickleAmount;
-    private final Integer rageAmount;
-    private final Integer yellAmount;
-    private final Integer headpatAmount;
-    private final Integer cryAmount;
-    private final Integer danceAmount;
-    private final Integer dabAmount;
-    private final Integer bonkAmount;
-    private final Integer sleepAmount;
-    private final Integer dieAmount;
-    private final Integer welcomeAmount;
-    private final Integer lickAmount;
-    private final Integer shushAmount;
-    private final Integer waveAmount;
-    private final Integer shootAmount;
-    private final Integer amazedAmount;
-    private final Integer askAmount;
-    private final Integer boopAmount;
-    private final Integer loveAmount;
-    private final Integer nosebleedAmount;
-    private final Integer okAmount;
-    private final Integer uwuAmount;
-    private final Integer winkAmount;
+    // TODO: Switch to a hash map jesus christ.
+    private final int hugAmount;
+    private final int punchAmount;
+    private final int kissAmount;
+    private final int biteAmount;
+    private final int blushAmount;
+    private final int cuddleAmount;
+    private final int nomAmount;
+    private final int pokeAmount;
+    private final int slapAmount;
+    private final int stabAmount;
+    private final int hmphAmount;
+    private final int poutAmount;
+    private final int throwAmount;
+    private final int smileAmount;
+    private final int stareAmount;
+    private final int tickleAmount;
+    private final int rageAmount;
+    private final int yellAmount;
+    private final int headpatAmount;
+    private final int cryAmount;
+    private final int danceAmount;
+    private final int dabAmount;
+    private final int bonkAmount;
+    private final int sleepAmount;
+    private final int dieAmount;
+    private final int welcomeAmount;
+    private final int lickAmount;
+    private final int shushAmount;
+    private final int waveAmount;
+    private final int shootAmount;
+    private final int amazedAmount;
+    private final int askAmount;
+    private final int boopAmount;
+    private final int loveAmount;
+    private final int nosebleedAmount;
+    private final int okAmount;
+    private final int UWUAmount;
+    private final int winkAmount;
 
     /**
      * Creates a new {@link Interaction object.}
@@ -86,22 +88,22 @@ public class Interaction {
      * @param loveAmount The {@link Integer loveAmount}.
      * @param nosebleedAmount The {@link Integer nosebleedAmount}.
      * @param okAmount The {@link Integer okAmount}.
-     * @param uwuAmount The {@link Integer uwuAmount}.
+     * @param UWUAmount The {@link Integer uwuAmount}.
      * @param winkAmount The {@link Integer winkAmount}.
      */
-    public Interaction(Integer hugAmount, Integer punchAmount, Integer kissAmount,
-                       Integer biteAmount, Integer blushAmount, Integer cuddleAmount,
-                       Integer nomAmount, Integer pokeAmount, Integer slapAmount,
-                       Integer stabAmount, Integer hmphAmount, Integer poutAmount,
-                       Integer throwAmount, Integer smileAmount, Integer stareAmount,
-                       Integer tickleAmount, Integer rageAmount, Integer yellAmount,
-                       Integer headpatAmount, Integer cryAmount, Integer danceAmount,
-                       Integer dabAmount, Integer bonkAmount, Integer sleepAmount,
-                       Integer dieAmount, Integer welcomeAmount, Integer lickAmount,
-                       Integer shushAmount, Integer waveAmount, Integer shootAmount,
-                       Integer amazedAmount, Integer askAmount, Integer boopAmount,
-                       Integer loveAmount, Integer nosebleedAmount, Integer okAmount,
-                       Integer uwuAmount, Integer winkAmount) {
+    public Interaction(int hugAmount, int punchAmount, int kissAmount,
+                       int biteAmount, int blushAmount, int cuddleAmount,
+                       int nomAmount, int pokeAmount, int slapAmount,
+                       int stabAmount, int hmphAmount, int poutAmount,
+                       int throwAmount, int smileAmount, int stareAmount,
+                       int tickleAmount, int rageAmount, int yellAmount,
+                       int headpatAmount, int cryAmount, int danceAmount,
+                       int dabAmount, int bonkAmount, int sleepAmount,
+                       int dieAmount, int welcomeAmount, int lickAmount,
+                       int shushAmount, int waveAmount, int shootAmount,
+                       int amazedAmount, int askAmount, int boopAmount,
+                       int loveAmount, int nosebleedAmount, int okAmount,
+                       int UWUAmount, int winkAmount) {
         this.hugAmount = hugAmount;
         this.punchAmount = punchAmount;
         this.kissAmount = kissAmount;
@@ -138,311 +140,8 @@ public class Interaction {
         this.loveAmount = loveAmount;
         this.nosebleedAmount = nosebleedAmount;
         this.okAmount = okAmount;
-        this.uwuAmount = uwuAmount;
+        this.UWUAmount = UWUAmount;
         this.winkAmount = winkAmount;
     }
 
-    /**
-     * @return The {@link Interaction} {@link Integer hugAmount}.
-     */
-    @NotNull
-    public Integer getHugAmount() {
-        return hugAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer punchAmount}.
-     */
-    @NotNull
-    public Integer getPunchAmount() {
-        return punchAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer kissAmount}.
-     */
-    @NotNull
-    public Integer getKissAmount() {
-        return kissAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer biteAmount}.
-     */
-    @NotNull
-    public Integer getBiteAmount() {
-        return biteAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer blushAmount}.
-     */
-    @NotNull
-    public Integer getBlushAmount() {
-        return blushAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer cuddleAmount}.
-     */
-    @NotNull
-    public Integer getCuddleAmount() {
-        return cuddleAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer nomAmount}.
-     */
-    @NotNull
-    public Integer getNomAmount() {
-        return nomAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer pokeAmount}.
-     */
-    @NotNull
-    public Integer getPokeAmount() {
-        return pokeAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer slapAmount}.
-     */
-    @NotNull
-    public Integer getSlapAmount() {
-        return slapAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer stabAmount}.
-     */
-    @NotNull
-    public Integer getStabAmount() {
-        return stabAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer hmphAmount}.
-     */
-    @NotNull
-    public Integer getHmphAmount() {
-        return hmphAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer poutAmount}.
-     */
-    @NotNull
-    public Integer getPoutAmount() {
-        return poutAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer throwAmount}.
-     */
-    @NotNull
-    public Integer getThrowAmount() {
-        return throwAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer smileAmount}.
-     */
-    @NotNull
-    public Integer getSmileAmount() {
-        return smileAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer stareAmount}.
-     */
-    @NotNull
-    public Integer getStareAmount() {
-        return stareAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer tickleAmount}.
-     */
-    @NotNull
-    public Integer getTickleAmount() {
-        return tickleAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer rageAmount}.
-     */
-    @NotNull
-    public Integer getRageAmount() {
-        return rageAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer yellAmount}.
-     */
-    @NotNull
-    public Integer getYellAmount() {
-        return yellAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer headpatAmount}.
-     */
-    @NotNull
-    public Integer getHeadpatAmount() {
-        return headpatAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer cryAmount}.
-     */
-    @NotNull
-    public Integer getCryAmount() {
-        return cryAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer danceAmount}.
-     */
-    @NotNull
-    public Integer getDanceAmount() {
-        return danceAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer dabAmount}.
-     */
-    @NotNull
-    public Integer getDabAmount() {
-        return dabAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer bonkAmount}.
-     */
-    @NotNull
-    public Integer getBonkAmount() {
-        return bonkAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer sleepAmount}.
-     */
-    @NotNull
-    public Integer getSleepAmount() {
-        return sleepAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer dieAmount}.
-     */
-    @NotNull
-    public Integer getDieAmount() {
-        return dieAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer welcomeAmount}.
-     */
-    @NotNull
-    public Integer getWelcomeAmount() {
-        return welcomeAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer lickAmount}.
-     */
-    @NotNull
-    public Integer getLickAmount() {
-        return lickAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer shushAmount}.
-     */
-    @NotNull
-    public Integer getShushAmount() {
-        return shushAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer waveAmount}.
-     */
-    @NotNull
-    public Integer getWaveAmount() {
-        return waveAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer shootAmount}.
-     */
-    @NotNull
-    public Integer getShootAmount() {
-        return shootAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer amazedAmount}.
-     */
-    @NotNull
-    public Integer getAmazedAmount() {
-        return amazedAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer askAmount}.
-     */
-    @NotNull
-    public Integer getAskAmount() {
-        return askAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer boopAmount}.
-     */
-    @NotNull
-    public Integer getBoopAmount() {
-        return boopAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer loveAmount}.
-     */
-    @NotNull
-    public Integer getLoveAmount() {
-        return loveAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer nosebleedAmount}.
-     */
-    @NotNull
-    public Integer getNosebleedAmount() {
-        return nosebleedAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer okAmount}.
-     */
-    @NotNull
-    public Integer getOKAmount() {
-        return okAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer uwuAmount}.
-     */
-    @NotNull
-    public Integer getUWUAmount() {
-        return uwuAmount;
-    }
-
-    /**
-     * @return The {@link Interaction} {@link Integer winkAmount}.
-     */
-    @NotNull
-    public Integer getWinkAmount() {
-        return winkAmount;
-    }
 }

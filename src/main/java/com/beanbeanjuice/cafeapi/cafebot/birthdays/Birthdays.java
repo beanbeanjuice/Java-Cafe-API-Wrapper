@@ -8,7 +8,6 @@ import com.beanbeanjuice.cafeapi.requests.RequestRoute;
 import com.beanbeanjuice.cafeapi.requests.RequestType;
 import com.beanbeanjuice.cafeapi.utility.Time;
 import com.fasterxml.jackson.databind.JsonNode;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -29,7 +28,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * Creates a new {@link Birthdays} object.
      * @param apiKey The {@link String apiKey} used for authorization.
      */
-    public Birthdays(@NotNull String apiKey) {
+    public Birthdays(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -40,7 +39,6 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      * @throws ParseException Thrown when there is an error parsing the {@link Birthday}.
      */
-    @NotNull
     public HashMap<String, Birthday> getAllBirthdays()
             throws AuthorizationException, ResponseException, ParseException {
         HashMap<String, Birthday> birthdays = new HashMap<>();
@@ -48,7 +46,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/birthdays")
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         for (JsonNode birthday : request.getData().get("birthdays")) {
             String userID = birthday.get("user_id").asText();
@@ -67,13 +65,12 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws NotFoundException Thrown when the {@link Birthday} for the specified {@link String userID} does not exist.
      * @throws ParseException Thrown when there was an error parsing the {@link Birthday}.
      */
-    @NotNull
-    public Birthday getUserBirthday(@NotNull String userID)
+    public Birthday getUserBirthday(String userID)
             throws AuthorizationException, ResponseException, NotFoundException, ParseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.GET)
                 .setRoute("/birthdays/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return parseBirthday(request.getData().get("birthday"));
     }
@@ -89,8 +86,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      * @throws TeaPotException Thrown when the {@link BirthdayMonth month} or {@link Integer day} is invalid.
      */
-    @NotNull
-    public Boolean updateUserBirthday(@NotNull String userID, @NotNull Birthday birthday)
+    public Boolean updateUserBirthday(String userID, Birthday birthday)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException, TeaPotException {
         BirthdayMonth month = birthday.getMonth();
         int day = birthday.getDay();
@@ -110,7 +106,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
                 .addParameter("birthday", getBirthdayString(month, day))
                 .addParameter("time_zone", birthday.getTimeZone().getID())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -125,14 +121,13 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws NotFoundException Thrown when the {@link Birthday} does not exist for the specified {@link String userID}.
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      */
-    @NotNull
-    public Boolean updateUserBirthdayMention(@NotNull String userID, @NotNull Boolean alreadyMentioned)
+    public Boolean updateUserBirthdayMention(String userID, boolean alreadyMentioned)
     throws AuthorizationException, ResponseException, NotFoundException, UndefinedVariableException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.PATCH)
                 .setRoute("/birthdays/" + userID + "/mention")
-                .addParameter("already_mentioned", alreadyMentioned.toString())
+                .addParameter("already_mentioned", String.valueOf(alreadyMentioned))
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -148,8 +143,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws UndefinedVariableException Thrown when a variable is undefined.
      * @throws TeaPotException Thrown when the {@link BirthdayMonth month} or {@link Integer day} is invalid.
      */
-    @NotNull
-    public Boolean createUserBirthday(@NotNull String userID, @NotNull Birthday birthday)
+    public Boolean createUserBirthday(String userID, Birthday birthday)
     throws AuthorizationException, ResponseException, ConflictException, UndefinedVariableException, TeaPotException {
         BirthdayMonth month = birthday.getMonth();
         int day = birthday.getDay();
@@ -169,7 +163,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
                 .addParameter("birthday", getBirthdayString(month, day))
                 .addParameter("time_zone", birthday.getTimeZone().getID())
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 201;
     }
@@ -181,13 +175,12 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @throws AuthorizationException Thrown when the {@link String apiKey} is invalid.
      * @throws ResponseException Thrown when there is a generic server-side {@link CafeException}.
      */
-    @NotNull
-    public Boolean removeUserBirthday(@NotNull String userID)
+    public Boolean removeUserBirthday(String userID)
     throws AuthorizationException, ResponseException {
         Request request = new RequestBuilder(RequestRoute.CAFEBOT, RequestType.DELETE)
                 .setRoute("/birthdays/" + userID)
                 .setAuthorization(apiKey)
-                .build();
+                .build().orElseThrow();
 
         return request.getStatusCode() == 200;
     }
@@ -197,8 +190,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param birthday The {@link JsonNode} to parse.
      * @return The parsed {@link Birthday}.
      */
-    @NotNull
-    private Birthday parseBirthday(@NotNull JsonNode birthday) throws ParseException {
+    private Birthday parseBirthday(JsonNode birthday) throws ParseException {
         String unformattedDate = birthday.get("birth_date").asText();
         String timeZoneString = birthday.get("time_zone").asText();
         Boolean alreadyMentioned = birthday.get("already_mentioned").asBoolean();
@@ -217,10 +209,9 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param index The {@link Integer index} of the month. January is 0.
      * @return The {@link BirthdayMonth} from the {@link Integer index}.
      */
-    @NotNull
-    private BirthdayMonth getBirthdayMonth(@NotNull Integer index) {
+    private BirthdayMonth getBirthdayMonth(int index) {
         for (BirthdayMonth month : BirthdayMonth.values()) {
-            if (month.getMonthNumber().equals(index))
+            if (month.getMonthNumber() == index)
                 return month;
         }
 
@@ -232,13 +223,12 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param number The {@link Integer number} to parse.
      * @return The parsed {@link String number}. Double-digit numbers don't have a 0 added.
      */
-    @NotNull
-    private String parseNumber(@NotNull Integer number) {
+    private String parseNumber(int number) {  // TODO: There MUST be a better way to do this.
         if (number <= 9) {
             return "0" + number;
         }
 
-        return number.toString();
+        return String.valueOf(number);
     }
 
     /**
@@ -247,8 +237,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param day The {@link Integer day} in the {@link BirthdayMonth month} of the {@link Birthday}.
      * @return The birthday {@link String} to send to the {@link CafeAPI CafeAPI}.
      */
-    @NotNull
-    private String getBirthdayString(@NotNull BirthdayMonth month, @NotNull Integer day) {
+    private String getBirthdayString(BirthdayMonth month, int day) {
         return parseNumber(month.getMonthNumber()) + "-" + parseNumber(day);
     }
 
@@ -257,7 +246,7 @@ public class Birthdays implements com.beanbeanjuice.cafeapi.api.CafeAPI {
      * @param apiKey The new {@link String apiKey}.
      */
     @Override
-    public void updateAPIKey(@NotNull String apiKey) {
+    public void updateAPIKey(String apiKey) {
         this.apiKey = apiKey;
     }
 }

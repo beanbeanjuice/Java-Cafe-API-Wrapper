@@ -1,6 +1,6 @@
 package com.beanbeanjuice.cafeapi.requests;
 
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 public enum RequestLocation {
 
@@ -8,22 +8,14 @@ public enum RequestLocation {
     BETA ("http://beanbeanjuice.com:5101"),
     LOCAL ("http://localhost:5101");
 
-    private final String url;
+    @Getter private final String URL;
 
     /**
      * Creates a new static {@link RequestLocation}.
      * @param url The {@link String url} for the {@link RequestLocation}.
      */
-    RequestLocation(@NotNull String url) {
-        this.url = url;
-    }
-
-    /**
-     * @return The URL for the specified {@link RequestLocation}.
-     */
-    @NotNull
-    public String getURL() {
-        return url;
+    RequestLocation(String url) {
+        this.URL = url;
     }
 
 }

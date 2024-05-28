@@ -1,7 +1,7 @@
 package com.beanbeanjuice.cafeapi.cafebot.raffles;
 
 import com.beanbeanjuice.cafeapi.CafeAPI;
-import org.jetbrains.annotations.NotNull;
+import lombok.Getter;
 
 import java.sql.Timestamp;
 
@@ -12,9 +12,9 @@ import java.sql.Timestamp;
  */
 public class Raffle {
 
-    private final String messageID;
-    private final Timestamp endingTime;
-    private final Integer winnerAmount;
+    @Getter private final String messageID;
+    @Getter private final Timestamp endingTime;
+    @Getter private final Integer winnerAmount;
 
     /**
      * Creates a new {@link Raffle} object.
@@ -22,33 +22,10 @@ public class Raffle {
      * @param endingTime The {@link Timestamp endingTime} of the {@link Raffle}. UTC timezone.
      * @param winnerAmount The {@link Integer winnerAmount} of the {@link Raffle}.
      */
-    public Raffle(@NotNull String messageID, @NotNull Timestamp endingTime, @NotNull Integer winnerAmount) {
+    public Raffle(String messageID, Timestamp endingTime, Integer winnerAmount) {
         this.messageID = messageID;
         this.endingTime = endingTime;
         this.winnerAmount = winnerAmount;
     }
 
-    /**
-     * @return The {@link String messageID} of the {@link Raffle}.
-     */
-    @NotNull
-    public String getMessageID() {
-        return messageID;
-    }
-
-    /**
-     * @return The {@link Timestamp endingTime} of the {@link Raffle}. UTC timezone.
-     */
-    @NotNull
-    public Timestamp getEndingTime() {
-        return endingTime;
-    }
-
-    /**
-     * @return The {@link Integer winnerAmount} of the {@link Raffle}.
-     */
-    @NotNull
-    public Integer getWinnerAmount() {
-        return winnerAmount;
-    }
 }

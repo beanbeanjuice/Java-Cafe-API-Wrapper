@@ -24,12 +24,10 @@ public class InteractionPictureTest {
         // Goes through every interaction type.
         Assertions.assertDoesNotThrow(() -> {
             for (InteractionType type : InteractionType.values()) {
-
-                if (type.isKawaiiAPI())
-                    Assertions.assertTrue(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type).startsWith("https://api.kawaii.red/gif/"));
-
-                else
-                    Assertions.assertNotNull(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type));
+                type.getKawaiiAPIString().ifPresentOrElse(
+                        (kawaiiAPIString) -> Assertions.assertTrue(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type).startsWith("https://api.kawaii.red/gif/")),
+                        () -> Assertions.assertNotNull(cafeAPI.INTERACTION_PICTURE.getRandomInteractionPicture(type))
+                );
             }
         });
     }
