@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.beanbeanjuice</groupId>
     <artifactId>cafe-api-wrapper</artifactId>
-    <version>1.5.1</version>
+    <version>1.5.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -16,29 +16,29 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>snapshot-version</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>snapshot-version</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
 
-            <build>
-                <finalName>${artifactId}-${version}-SNAPSHOT</finalName>
-            </build>
-        </profile>
+<!--            <build>-->
+<!--                <finalName>${artifactId}-${version}-SNAPSHOT</finalName>-->
+<!--            </build>-->
+<!--        </profile>-->
 
-        <profile>
-            <id>release-version</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
+<!--        <profile>-->
+<!--            <id>release-version</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>false</activeByDefault>-->
+<!--            </activation>-->
 
-            <build>
-                <finalName>${artifactId}-${version}</finalName>
-            </build>
-        </profile>
-    </profiles>
+<!--            <build>-->
+<!--                <finalName>${artifactId}-${version}</finalName>-->
+<!--            </build>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 
     <name>cafe-api-wrapper</name>
     <description>An API Wrapper for the Cafe API</description>
